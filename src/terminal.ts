@@ -205,8 +205,10 @@ export class Terminal {
       }
     });
 
-    // Keep focus on input when clicking anywhere in the terminal
-    document.querySelector('.terminal-window')?.addEventListener('click', () => {
+    // Keep focus on input when clicking anywhere in the terminal, except links
+    document.querySelector('.terminal-window')?.addEventListener('click', (e: Event) => {
+      const target = e.target as HTMLElement;
+      if (target.closest('a')) return;
       this.inputEl.focus();
     });
   }
