@@ -75,14 +75,14 @@ Each handler reads from `data.ts` and returns formatted terminal output as a str
 | Command | Behavior |
 |---|---|
 | `fayzan` (no args) | Returns bio text |
-| `fayzan --help` | Returns help menu with all commands listed |
+| `fayzan --help` | Returns the exact help output below |
 | `fayzan --version` | Returns `fayzan-portfolio v3.8.0` |
 | `f projects` | Formatted table: name, stack, one-liner for all projects |
 | `f projects <name>` | Deep-dive: description, stack, role, links. Friendly error if not found |
 | `f experience` | Work experience, reverse chronological order |
 | `f skills` | Skills grouped by category with visual treatment |
 | `f education` | Education + certification |
-| `f contact` | Email, phone, citizenship with clickable `mailto:`/`tel:` links |
+| `f contact` | Email, phone, citizenship with clickable `mailto:`/`tel:` links. **Design decision:** Citizenship placed here (rather than bio) because recruiters checking contact info are the ones evaluating work eligibility. |
 | `f resume` | Print download message + trigger browser file download |
 | `f socials` | GitHub/LinkedIn as clickable links |
 | `clear` | Clears terminal output area |
@@ -95,7 +95,7 @@ Single file exporting typed objects. All portfolio content lives here — updati
 
 **Exports:**
 - `bio: string` — personal introduction
-- `projects: Project[]` — all 6 projects with slug, name, oneLiner, description, stack, github, npm?, live?
+- `projects: Project[]` — all 6 projects with slug, name, oneLiner, description, stack, role, github, npm?, live?
 - `experience: Experience[]` — 3 entries, reverse chronological
 - `skills: SkillCategory[]` — 4 categories (Languages, Frameworks & Libraries, AI / LLM, Platforms & Tools)
 - `education: { degree: Education, certification: Certification }`
@@ -137,6 +137,47 @@ Runs on page load before user gets control.
 **Edge cases:**
 - `sudo <anything else>` → `Nice try. But the only command I'll sudo is 'sudo hire fayzan'.`
 - Second run of `sudo hire fayzan` → `You already sent the offer! Check your inbox.`
+
+### Verbatim `--help` Output
+
+```
+Usage: fayzan <command> [options]
+
+Commands:
+  projects      See what I've built
+  experience    Where I've worked
+  skills        What I work with
+  education     Where I studied
+  contact       Get in touch with me
+  resume        Download my resume
+  socials       Find me online
+
+Options:
+  --help        Show this help message
+  --version     Show version info
+
+Run 'fayzan <command>' to explore. Or just click a button below.
+```
+
+The last line explicitly references the navigation chips — critical for non-technical visitors.
+
+### Command Accessibility Matrix
+
+| Command | Chip | Type-only | Notes |
+|---|---|---|---|
+| `fayzan --help` | `help` chip | Also typeable | Primary onboarding command |
+| `f projects` | `projects` chip | Also typeable | |
+| `f experience` | `experience` chip | Also typeable | |
+| `f skills` | `skills` chip | Also typeable | |
+| `f contact` | `contact` chip | Also typeable | |
+| `f resume` | `resume` chip | Also typeable | |
+| `f education` | No chip | Type only | Discoverable via `--help` |
+| `f socials` | No chip | Type only | Discoverable via `--help` |
+| `fayzan` (no args) | No chip | Type only | |
+| `fayzan --version` | No chip | Type only | |
+| `clear` | No chip | Type only | Standard terminal command |
+| `history` | No chip | Type only | Standard terminal command |
+| `sudo hire fayzan` | No chip | Type only | Easter egg — not advertised |
 
 ## Navigation Chips
 
@@ -201,9 +242,106 @@ All unrecognized input returns a warm, helpful message:
 
 Never jargon. Never condescending. Always redirect to `--help` or chips.
 
-## Content Source
+## Content (Verbatim — Use Exactly As Written)
 
-All real data is specified in the original spec (`fayzan-portfolio-spec (1).md`). The `data.ts` file will contain this content exactly as written — bio, 6 projects, 3 experience entries, 4 skill categories, education + certification, contact info, 2 social profiles, and the version string `fayzan-portfolio v3.8.0`.
+All content below goes into `data.ts`. This is the single source of truth for implementation.
+
+### Bio
+
+"Hey, I'm Fayzan — a Computer Science student at Western University, full stack developer, and builder. I'm into AI agents, CLI tools, and shipping things that actually work. Currently leading Western's Agentic Development Club and always working on something — whether it's a side project or something more serious."
+
+### Projects
+
+1. **claude-check** — slug: `claude-check`
+   - One-liner: A CLI tool that scores your prompt before you send it to Claude.
+   - Description: An npm CLI that analyses any Claude prompt for complexity, estimates how many messages it'll take, assesses interrupt risk, and returns a safe/caution/do-not-start verdict. It checks your real-time claude.ai usage so you don't burn your limit on a task that'll get cut off halfway. Built and published to npm.
+   - Stack: Node.js, TypeScript, Anthropic API, CLI Tooling
+   - Role: Solo developer
+   - GitHub: https://github.com/fayzan123/claude-check
+   - npm: https://www.npmjs.com/package/claude-check
+   - Live: N/A
+
+2. **ThisThenThat** — slug: `thisthenthat`
+   - One-liner: Upload your assignment PDF and get a step-by-step game plan with AI chat per step.
+   - Description: A web app that takes a PDF of a school or university assignment and breaks it down into an ordered checklist of actionable steps. Each step has its own AI chat that knows the full assignment context, so you can get unstuck on any specific part without re-explaining everything.
+   - Stack: Next.js, TypeScript, Supabase, Tailwind, Claude API
+   - Role: Solo developer
+   - GitHub: https://github.com/fayzan123/thisthenthat
+   - Live: https://thisthenthat.vercel.app
+
+3. **agency-agents (Open Source Contribution)** — slug: `agency-agents`
+   - One-liner: Merged a LinkedIn Content Creator agent into the #1 trending GitHub repo.
+   - Description: Contributed a LinkedIn Content Creator agent to the agency-agents repository (PR #129), which was the #1 trending repo on GitHub at the time with 30,000+ stars. The agent handles LinkedIn thought leadership content strategy, post drafting, and audience engagement workflows.
+   - Stack: Bash, Claude, GitHub
+   - Role: Open source contributor
+   - GitHub: https://github.com/msitarzewski/agency-agents
+   - Live: N/A
+
+4. **ClearCare** — slug: `clearcare`
+   - One-liner: A rural healthcare referral platform with AI voice follow-ups and SMS alerts.
+   - Description: A closed-loop referral management platform built for rural patients who are 110+ km from specialist care. Features AI-powered voice follow-up calls via Vapi, SMS alerts via Twilio, and escalation workflows to keep patients from falling through the cracks.
+   - Stack: React, TypeScript, FastAPI, PostgreSQL, Vapi, Twilio
+   - Role: Team member
+   - GitHub: https://github.com/Deogan7/ClearCare
+   - Live: N/A
+
+5. **Binary Tree Traversal Practice Tool** — slug: `binary-tree`
+   - One-liner: A gamified platform for practicing binary tree traversals with real-time visual feedback.
+   - Description: A React-based educational tool that helps students practice preorder, inorder, and postorder binary tree traversals. Features randomly generated trees, real-time visual feedback, and has been used by 100+ students.
+   - Stack: React, JavaScript, Firebase, Gemini, OpenAI
+   - Role: Solo developer
+   - GitHub: https://github.com/fayzan123/binary_iterating_practice
+   - Live: N/A
+
+6. **Titanic Survival Prediction** — slug: `titanic`
+   - One-liner: ML model comparison for Titanic survival classification.
+   - Description: Engineered features with Pandas and trained Decision Tree, XGBoost, and TensorFlow neural network models to predict Titanic survival. Compared accuracy metrics across all three approaches.
+   - Stack: Python, Jupyter Notebook, Pandas, Scikit-learn, TensorFlow, Seaborn, Matplotlib
+   - Role: Solo developer
+   - GitHub: https://github.com/fayzan123/Titanic-Survival-Prediction
+   - Live: N/A
+
+### Experience (reverse chronological)
+
+1. **President & Founder** — Western Agentic Development Club, Western University (London, ON) — March 2026 – Present
+   - Founded and currently lead a student-run agentic AI community for computer science students at Western University. Organize workshops, hackathons, and networking events on autonomous agent development using n8n, LangGraph, and MCP-based workflows. Oversee club-led projects where members collaborate across teams to build and ship practical AI agent solutions.
+
+2. **Backend Development Intern** — ICARO Media Group (Thornhill, ON) — July 2025 – September 2025
+   - Refactored and upgraded LAMP-based web applications, reducing production friction across internal workflows. Standardized AWS EC2 development environments for 5+ developers, improving release reliability and test consistency. Built Flask REST APIs and resolved latency bottlenecks via profiling, improving median API response time by 15% under peak load.
+
+3. **Data Analyst Intern** — Elite Life Financial (Toronto, ON) — June 2024 – September 2024
+   - Analyzed 500+ client records with SQL and Python, improving recommendation logic and advisor-client personalization. Automated repetitive workflows with optimized SQL queries and scripts, reducing manual processing time by 30%.
+
+### Skills
+
+- **Languages:** Python, Java, C, SQL (MySQL), JavaScript, TypeScript, HTML/CSS, R, Go
+- **Frameworks & Libraries:** React, Flask, Next.js, Tailwind CSS, NumPy, Pandas, Matplotlib, TensorFlow, Scikit-learn, PyTorch, Seaborn
+- **AI / LLM:** OpenAI, Claude, Gemini, LangGraph, CrewAI, AutoGen, MCP
+- **Platforms & Tools:** Git, Linux, Docker, AWS, Supabase, Firebase, Postman, VS Code, Jupyter, IntelliJ, PyCharm
+
+### Education
+
+- **Honours Specialization in Computer Science (HBSc)** — Western University (London, ON) — Expected May 2027
+  - GPA: 3.8
+  - Awards: Western Admission Scholarship; Dean's Honor List 2023, 2024
+  - Relevant Coursework: Data Structures and Algorithms, Machine Learning, Databases, Statistics, Operating Systems, Software Engineering
+
+- **Certification:** Machine Learning Specialization by Andrew Ng — Coursera, DeepLearning.AI — December 2025
+
+### Contact
+
+- Email: fayzanm786@gmail.com
+- Phone: 437-246-2116
+- Citizenship: Canadian Citizen
+
+### Socials
+
+- GitHub: https://github.com/fayzan123
+- LinkedIn: https://linkedin.com/in/fayzan-malik
+
+### Version
+
+`fayzan-portfolio v3.8.0` (a nod to Fayzan's 3.8 GPA)
 
 ## Deployment
 
