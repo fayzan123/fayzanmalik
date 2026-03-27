@@ -27,8 +27,7 @@ register('history', () => {
 
 // Easter egg commands
 register('sudo hire fayzan', async () => {
-  await handleSudoHire(terminal);
-  return '';
+  return await handleSudoHire(terminal);
 });
 
 register('sudo', () => {

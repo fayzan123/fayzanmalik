@@ -1,3 +1,7 @@
+function escapeHtml(str: string): string {
+  return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+}
+
 export class Terminal {
   private outputEl: HTMLElement;
   private inputEl: HTMLElement;
@@ -138,7 +142,7 @@ export class Terminal {
   }
 
   private executeCommand(command: string): void {
-    this.print(`<span class="prompt">$ </span><span class="input-echo">${command}</span>`);
+    this.print(`<span class="prompt">$ </span><span class="input-echo">${escapeHtml(command)}</span>`);
     this.commandHistory.push(command);
     this.historyIndex = -1;
     if (this.submitCallback) {
@@ -154,7 +158,7 @@ export class Terminal {
         ke.preventDefault();
         const input = this.getInput();
         if (!input) return;
-        this.print(`<span class="prompt">$ </span><span class="input-echo">${input}</span>`);
+        this.print(`<span class="prompt">$ </span><span class="input-echo">${escapeHtml(input)}</span>`);
         this.commandHistory.push(input);
         this.historyIndex = -1;
         this.clearInput();
