@@ -56,12 +56,13 @@ terminal.onSubmit(async (input: string) => {
 // Set up navigation chips
 const chipCommands = [
   { label: 'help', command: 'fayzan --help' },
-  { label: 'projects', command: 'fayzan projects' },
-  { label: 'experience', command: 'fayzan experience' },
+  { label: 'education', command: 'fayzan education' },
   { label: 'skills', command: 'fayzan skills' },
+  { label: 'experience', command: 'fayzan experience' },
+  { label: 'projects', command: 'fayzan projects' },
   { label: 'contact', command: 'fayzan contact' },
-  { label: 'resume', command: 'fayzan resume' },
   { label: 'socials', command: 'fayzan socials' },
+  { label: 'resume', command: 'fayzan resume' },
 ];
 chipCommands.forEach(({ label, command }) => terminal.addChip(label, command));
 
