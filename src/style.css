@@ -1,0 +1,274 @@
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --bg: #0a0a0a;
+  --text: #e0e0e0;
+  --text-muted: #888;
+  --green: #4ec970;
+  --red: #e06c75;
+  --cyan: #56b6c2;
+  --title-bar: #1a1a1a;
+  --chip-border: #444;
+  --chip-hover: #222;
+}
+
+html, body {
+  height: 100%;
+  background: var(--bg);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 14px;
+  color: var(--text);
+  overflow: hidden;
+}
+
+/* Terminal window */
+.terminal-window {
+  display: flex;
+  flex-direction: column;
+  max-width: 900px;
+  height: 100vh;
+  margin: 0 auto;
+  background: var(--bg);
+  border: 1px solid #333;
+  overflow: hidden;
+}
+
+@media (min-width: 641px) {
+  .terminal-window {
+    height: calc(100vh - 48px);
+    margin: 24px auto;
+    border-radius: 8px;
+  }
+}
+
+/* Title bar */
+.title-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  background: var(--title-bar);
+  border-bottom: 1px solid #333;
+  user-select: none;
+  flex-shrink: 0;
+}
+
+@media (min-width: 641px) {
+  .title-bar {
+    border-radius: 8px 8px 0 0;
+  }
+}
+
+.title-dots {
+  display: flex;
+  gap: 6px;
+}
+
+.dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+.dot-red { background: #ff5f57; }
+.dot-yellow { background: #febc2e; }
+.dot-green { background: #28c840; }
+
+.title-text {
+  color: var(--text-muted);
+  font-size: 13px;
+  margin-left: 8px;
+}
+
+/* Output area */
+.terminal-output {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px;
+  scrollbar-width: thin;
+  scrollbar-color: #333 transparent;
+}
+
+.output-line {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  line-height: 1.6;
+  min-height: 1.6em;
+}
+
+/* Input line */
+.input-line {
+  display: flex;
+  align-items: center;
+  padding: 8px 16px;
+  border-top: 1px solid #222;
+  flex-shrink: 0;
+}
+
+.prompt {
+  color: var(--green);
+  margin-right: 4px;
+  user-select: none;
+}
+
+.input-text {
+  flex: 1;
+  outline: none;
+  caret-color: var(--text);
+  color: var(--text);
+}
+
+.input-echo {
+  color: var(--text);
+}
+
+/* Navigation chips */
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 10px 16px;
+  border-top: 1px solid #222;
+  flex-shrink: 0;
+}
+
+.chip {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  color: var(--text-muted);
+  background: transparent;
+  border: 1px solid var(--chip-border);
+  border-radius: 14px;
+  padding: 4px 12px;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+}
+
+.chip:hover {
+  background: var(--chip-hover);
+  border-color: var(--text-muted);
+  color: var(--text);
+}
+
+.chip:active {
+  background: #333;
+}
+
+@media (max-width: 640px) {
+  .terminal-window {
+    height: 100vh;
+    height: 100dvh;
+    border: none;
+    border-radius: 0;
+  }
+
+  .title-bar {
+    border-radius: 0;
+  }
+
+  .terminal-output {
+    padding: 12px;
+    font-size: 13px;
+  }
+
+  .input-line {
+    padding: 8px 12px;
+  }
+
+  .chips {
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .chip {
+    font-size: 13px;
+    padding: 6px 14px;
+    flex-shrink: 0;
+  }
+}
+
+/* Utilities */
+.hidden {
+  display: none !important;
+}
+
+.fade-in {
+  animation: fadeIn 0.4s ease-in;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Semantic colors for output */
+.text-green { color: var(--green); }
+.text-red { color: var(--red); }
+.text-cyan { color: var(--cyan); }
+.text-muted { color: var(--text-muted); }
+
+.terminal-output a {
+  color: var(--cyan);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  cursor: pointer;
+  position: relative;
+  z-index: 1;
+}
+
+.terminal-output a:hover {
+  color: var(--text);
+}
+
+/* Confetti overlay */
+.confetti-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 1000;
+}
+
+/* Smooth scrollbar for output */
+.terminal-output::-webkit-scrollbar {
+  width: 6px;
+}
+
+.terminal-output::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.terminal-output::-webkit-scrollbar-thumb {
+  background: #333;
+  border-radius: 3px;
+}
+
+/* Cursor blink animation */
+.input-text:empty::after {
+  content: '\00a0';
+  animation: blink 1s step-end infinite;
+  border-left: 2px solid var(--text);
+  margin-left: -1px;
+}
+
+.input-text:focus:empty::after {
+  content: '';
+}
+
+@keyframes blink {
+  50% { border-color: transparent; }
+}
+
+/* Selection styling */
+::selection {
+  background: rgba(86, 182, 194, 0.3);
+}
