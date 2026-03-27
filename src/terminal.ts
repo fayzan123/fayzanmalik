@@ -6,6 +6,7 @@ export class Terminal {
   private commandHistory: string[] = [];
   private historyIndex = -1;
   private submitCallback: ((input: string) => void) | null = null;
+  private autocompleteCommands: string[] = [];
 
   constructor(container: HTMLElement) {
     // Build DOM structure
@@ -128,6 +129,10 @@ export class Terminal {
     return this.outputEl;
   }
 
+  setAutocompleteCommands(commands: string[]): void {
+    this.autocompleteCommands = commands;
+  }
+
   scrollToBottom(): void {
     this.outputEl.scrollTop = this.outputEl.scrollHeight;
   }
@@ -183,7 +188,16 @@ export class Terminal {
 
       if (ke.key === 'Tab') {
         ke.preventDefault();
-        // Tab autocomplete — will be wired up in Task 5
+        const current = this.getInput().trim().toLowerCase();
+        if (!current) return;
+
+        const matches = this.autocompleteCommands.filter(c => c.startsWith(current));
+
+        if (matches.length === 1) {
+          this.setInput(matches[0]);
+        } else if (matches.length > 1) {
+          this.print(`<span class="text-muted">${matches.join('  ')}</span>`);
+        }
       }
     });
 
