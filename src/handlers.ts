@@ -92,7 +92,7 @@ function projectList(): string {
   return data.projects.map(p => {
     return `<span class="text-cyan">${escapeHtml(p.name)}</span>  <span class="text-muted">${escapeHtml(p.stack)}</span>
   ${escapeHtml(p.oneLiner)}
-  ${p.github}`;
+  <span class="text-muted">GitHub:</span> ${p.github}`;
   }).join('\n\n');
 }
 
