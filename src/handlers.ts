@@ -11,13 +11,13 @@ export function registerAllHandlers(): void {
   register('help', () => `Usage: fayzan &lt;command&gt; [options]
 
 <span class="text-muted">Commands:</span>
-  <span class="text-cyan">projects</span>      See what I've built
-  <span class="text-cyan">experience</span>    Where I've worked
-  <span class="text-cyan">skills</span>        What I work with
   <span class="text-cyan">education</span>     Where I studied
+  <span class="text-cyan">skills</span>        What I work with
+  <span class="text-cyan">experience</span>    Where I've worked
+  <span class="text-cyan">projects</span>      See what I've built
   <span class="text-cyan">contact</span>       Get in touch with me
-  <span class="text-cyan">resume</span>        Download my resume
   <span class="text-cyan">socials</span>       Find me online
+  <span class="text-cyan">resume</span>        Download my resume
 
 <span class="text-muted">Options:</span>
   --help        Show this help message
