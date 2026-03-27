@@ -2,6 +2,7 @@ import './style.css';
 import { Terminal } from './terminal';
 import { execute, register } from './commands';
 import { registerAllHandlers } from './handlers';
+import { runAutoplay } from './autoplay';
 
 const container = document.getElementById('terminal');
 if (!container) throw new Error('Missing #terminal container');
@@ -42,6 +43,21 @@ terminal.onSubmit(async (input: string) => {
   }
 });
 
-// Make interactive immediately (autoplay will be added later)
-terminal.setInteractive(true);
-terminal.print("Type 'fayzan --help' to get started.");
+// Set up navigation chips
+const chipCommands = [
+  { label: 'help', command: 'fayzan --help' },
+  { label: 'projects', command: 'fayzan projects' },
+  { label: 'experience', command: 'fayzan experience' },
+  { label: 'skills', command: 'fayzan skills' },
+  { label: 'contact', command: 'fayzan contact' },
+  { label: 'resume', command: 'fayzan resume' },
+];
+chipCommands.forEach(({ label, command }) => terminal.addChip(label, command));
+
+// Boot sequence: run autoplay, then enable interactive mode
+async function boot() {
+  await runAutoplay(terminal);
+  terminal.setInteractive(true);
+  terminal.showChips();
+}
+boot();
