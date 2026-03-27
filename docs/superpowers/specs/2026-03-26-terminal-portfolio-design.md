@@ -98,7 +98,8 @@ Single file exporting typed objects. All portfolio content lives here — updati
 - `projects: Project[]` — all 6 projects with slug, name, oneLiner, description, stack, role, github, npm?, live?
 - `experience: Experience[]` — 3 entries, reverse chronological
 - `skills: SkillCategory[]` — 4 categories (Languages, Frameworks & Libraries, AI / LLM, Platforms & Tools)
-- `education: { degree: Education, certification: Certification }`
+- `education: Education` — degree info
+- `certification: Certification` — ML specialization cert
 - `contact: { email, phone, citizenship }`
 - `socials: Social[]` — GitHub, LinkedIn
 - `version: string` — `"fayzan-portfolio v3.8.0"`
