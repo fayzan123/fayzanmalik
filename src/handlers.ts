@@ -90,8 +90,9 @@ ${escapeHtml(cert.issuer)} — ${escapeHtml(cert.date)}`;
 
 function projectList(): string {
   return data.projects.map(p => {
-    return `<a href="${p.github}" target="_blank" rel="noopener"><span class="text-cyan">${escapeHtml(p.name)}</span></a>  <span class="text-muted">${escapeHtml(p.stack)}</span>
-  ${escapeHtml(p.oneLiner)}`;
+    return `<span class="text-cyan">${escapeHtml(p.name)}</span>  <span class="text-muted">${escapeHtml(p.stack)}</span>
+  ${escapeHtml(p.oneLiner)}
+  ${p.github}`;
   }).join('\n\n');
 }
 
