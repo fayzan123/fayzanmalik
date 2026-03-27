@@ -214,13 +214,16 @@ html, body {
 .text-cyan { color: var(--cyan); }
 .text-muted { color: var(--text-muted); }
 
-a {
+.terminal-output a {
   color: var(--cyan);
   text-decoration: underline;
   text-underline-offset: 2px;
+  cursor: pointer;
+  position: relative;
+  z-index: 1;
 }
 
-a:hover {
+.terminal-output a:hover {
   color: var(--text);
 }
 

@@ -61,6 +61,7 @@ const chipCommands = [
   { label: 'skills', command: 'fayzan skills' },
   { label: 'contact', command: 'fayzan contact' },
   { label: 'resume', command: 'fayzan resume' },
+  { label: 'socials', command: 'fayzan socials' },
 ];
 chipCommands.forEach(({ label, command }) => terminal.addChip(label, command));
 
