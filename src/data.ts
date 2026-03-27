@@ -161,6 +161,7 @@ export const contact = {
 export const socials: Social[] = [
   { platform: 'GitHub', url: 'https://github.com/fayzan123' },
   { platform: 'LinkedIn', url: 'https://linkedin.com/in/fayzan-malik' },
+  { platform: 'Twitter', url: 'https://x.com/fayzanm05' },
 ];
 
 export const version = 'fayzan-portfolio v3.8.0';
