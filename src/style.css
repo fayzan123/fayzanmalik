@@ -1,0 +1,28 @@
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --bg: #0a0a0a;
+  --text: #e0e0e0;
+  --text-muted: #888;
+  --green: #4ec970;
+  --red: #e06c75;
+  --cyan: #56b6c2;
+  --title-bar: #1a1a1a;
+  --chip-border: #444;
+  --chip-hover: #222;
+}
+
+html, body {
+  height: 100%;
+  background: var(--bg);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 14px;
+  color: var(--text);
+  overflow: hidden;
+}
