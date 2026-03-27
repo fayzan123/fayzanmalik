@@ -89,10 +89,8 @@ ${escapeHtml(cert.issuer)} — ${escapeHtml(cert.date)}`;
 }
 
 function projectList(): string {
-  const nameWidth = Math.max(...data.projects.map(p => p.name.length));
   return data.projects.map(p => {
-    const paddedName = escapeHtml(p.name).padEnd(nameWidth + 2);
-    return `<span class="text-cyan">${paddedName}</span><span class="text-muted">${escapeHtml(p.stack)}</span>
+    return `<a href="${p.github}" target="_blank" rel="noopener"><span class="text-cyan">${escapeHtml(p.name)}</span></a>  <span class="text-muted">${escapeHtml(p.stack)}</span>
   ${escapeHtml(p.oneLiner)}`;
   }).join('\n\n');
 }
