@@ -48,7 +48,20 @@ terminal.setAutocompleteCommands(autocompleteList);
 // Wire terminal input to command execution
 terminal.onSubmit(async (input: string) => {
   const output = await execute(input);
-  if (output) {
+  if (output === '__CONFIRM_DOWNLOAD__') {
+    const yes = await terminal.confirm('Download resume?');
+    if (yes) {
+      const a = document.createElement('a');
+      a.href = '/fayzan-resume.pdf';
+      a.download = 'fayzan-resume.pdf';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      terminal.print('<span class="text-green">✓ fayzan-resume.pdf saved.</span>');
+    } else {
+      terminal.print('<span class="text-muted">Cancelled.</span>');
+    }
+  } else if (output) {
     terminal.print(output);
   }
 });

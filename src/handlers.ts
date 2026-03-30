@@ -72,15 +72,7 @@ ${escapeHtml(cert.issuer)} — ${escapeHtml(cert.date)}`;
   });
 
   register('resume', () => {
-    const link = document.createElement('a');
-    link.href = '/fayzan-resume.pdf';
-    link.download = 'fayzan-resume.pdf';
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-
-    return `Downloading resume...
-<span class="text-green">✓ fayzan-resume.pdf saved.</span>`;
+    return '__CONFIRM_DOWNLOAD__';
   });
 
   register('socials', () => {

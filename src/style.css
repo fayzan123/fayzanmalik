@@ -252,6 +252,23 @@ html, body {
   padding-left: 4ch;
 }
 
+/* Confirm prompt */
+.confirm-option {
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: 1px 6px;
+  border-radius: 3px;
+}
+
+.confirm-option.confirm-selected {
+  background: var(--cyan);
+  color: var(--bg);
+}
+
+.confirm-option:hover {
+  text-decoration: underline;
+}
+
 /* Confetti overlay */
 .confetti-canvas {
   position: fixed;

@@ -13,11 +13,9 @@ export class Terminal {
   private autocompleteCommands: string[] = [];
 
   constructor(container: HTMLElement) {
-    // Build DOM structure
     const window = document.createElement('div');
     window.className = 'terminal-window';
 
-    // Title bar
     const titleBar = document.createElement('div');
     titleBar.className = 'title-bar';
     titleBar.innerHTML = `
@@ -30,12 +28,10 @@ export class Terminal {
     `;
     window.appendChild(titleBar);
 
-    // Output area
     this.outputEl = document.createElement('div');
     this.outputEl.className = 'terminal-output';
     window.appendChild(this.outputEl);
 
-    // Input line
     this.promptEl = document.createElement('div');
     this.promptEl.className = 'input-line hidden';
     this.promptEl.innerHTML = '<span class="prompt">$ </span>';
@@ -49,7 +45,6 @@ export class Terminal {
     this.promptEl.appendChild(this.inputEl);
     window.appendChild(this.promptEl);
 
-    // Navigation chips
     this.chipsEl = document.createElement('div');
     this.chipsEl.className = 'chips hidden';
     window.appendChild(this.chipsEl);
@@ -81,6 +76,92 @@ export class Terminal {
     });
     this.outputEl.appendChild(line);
     this.outputEl.scrollTop = this.outputEl.scrollHeight;
+  }
+
+  confirm(prompt: string): Promise<boolean> {
+    return new Promise((resolve) => {
+      let selected = 0; // 0 = Yes, 1 = No
+      let resolved = false;
+
+      // Hide normal input
+      this.promptEl.classList.add('hidden');
+
+      // Build the confirm UI
+      const container = document.createElement('div');
+      container.className = 'output-line confirm-prompt';
+
+      const label = document.createElement('span');
+      label.textContent = prompt + ' ';
+      container.appendChild(label);
+
+      const options = document.createElement('span');
+      options.className = 'confirm-options';
+
+      const yesEl = document.createElement('span');
+      yesEl.className = 'confirm-option confirm-selected';
+      yesEl.textContent = 'Yes';
+
+      const separator = document.createElement('span');
+      separator.className = 'text-muted';
+      separator.textContent = ' / ';
+
+      const noEl = document.createElement('span');
+      noEl.className = 'confirm-option';
+      noEl.textContent = 'No';
+
+      options.appendChild(yesEl);
+      options.appendChild(separator);
+      options.appendChild(noEl);
+      container.appendChild(options);
+
+      this.outputEl.appendChild(container);
+      this.scrollToBottom();
+
+      const render = () => {
+        yesEl.className = selected === 0 ? 'confirm-option confirm-selected' : 'confirm-option';
+        noEl.className = selected === 1 ? 'confirm-option confirm-selected' : 'confirm-option';
+      };
+
+      const finish = (result: boolean) => {
+        if (resolved) return;
+        resolved = true;
+        document.removeEventListener('keydown', keyHandler);
+        // Show final state
+        container.innerHTML = `${escapeHtml(prompt)} <span class="${result ? 'text-green' : 'text-muted'}">${result ? 'Yes' : 'No'}</span>`;
+        // Restore normal input
+        this.promptEl.classList.remove('hidden');
+        this.inputEl.focus();
+        resolve(result);
+      };
+
+      const keyHandler = (e: KeyboardEvent) => {
+        if (resolved) return;
+        if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+          e.preventDefault();
+          selected = 0;
+          render();
+        } else if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+          e.preventDefault();
+          selected = 1;
+          render();
+        } else if (e.key === 'Enter') {
+          e.preventDefault();
+          finish(selected === 0);
+        } else if (e.key === 'y' || e.key === 'Y') {
+          e.preventDefault();
+          finish(true);
+        } else if (e.key === 'n' || e.key === 'N') {
+          e.preventDefault();
+          finish(false);
+        }
+      };
+
+      document.addEventListener('keydown', keyHandler);
+
+      // Click support
+      yesEl.addEventListener('click', () => finish(true));
+      noEl.addEventListener('click', () => finish(false));
+    });
   }
 
   async printTyped(text: string, speed = 60): Promise<void> {
@@ -227,7 +308,7 @@ export class Terminal {
     // Skip if user has selected text (so copy works)
     document.querySelector('.terminal-window')?.addEventListener('click', (e: Event) => {
       const target = e.target as HTMLElement;
-      if (target.closest('a')) return;
+      if (target.closest('a') || target.closest('.confirm-prompt')) return;
       const selection = window.getSelection();
       if (selection && selection.toString().length > 0) return;
       this.inputEl.focus();
