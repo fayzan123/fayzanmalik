@@ -60,7 +60,7 @@ export const projects: Project[] = [
     slug: 'claude-check',
     name: 'claude-check',
     oneLiner: 'A CLI tool that scores your prompt before you send it to Claude.',
-    description: "An npm CLI that analyses any Claude prompt for complexity, estimates how many messages it'll take, assesses interrupt risk, and returns a safe/caution/do-not-start verdict. It checks your real-time claude.ai usage so you don't burn your limit on a task that'll get cut off halfway. Built and published to npm.",
+    description: "An npm CLI with 650+ downloads that analyses any Claude prompt for complexity, estimates how many messages it'll take, assesses interrupt risk, and returns a safe/caution/do-not-start verdict. It checks your real-time claude.ai usage so you don't burn your limit on a task that'll get cut off halfway.",
     stack: 'Node.js, TypeScript, Anthropic API, CLI Tooling',
     role: 'Solo developer',
     github: 'https://github.com/fayzan123/claude-check',
@@ -92,7 +92,7 @@ export const projects: Project[] = [
     description: 'A React-based educational tool that helps students practice preorder, inorder, and postorder binary tree traversals. Features randomly generated trees, real-time visual feedback, and has been used by 100+ students.',
     stack: 'React, JavaScript, Firebase, Gemini, OpenAI',
     role: 'Solo developer',
-    github: 'https://github.com/fayzan123/binary_iterating_practice',
+    github: 'https://binarytreelearner.net',
   },
   {
     slug: 'titanic',
