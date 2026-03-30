@@ -23,6 +23,8 @@ export function registerAllHandlers(): void {
   --help        Show this help message
   --version     Show version info
 
+<span class="text-muted">Type 'sudo hire fayzan' for a surprise.</span>
+
 Run 'fayzan &lt;command&gt;' to explore. Or just click a button below.`);
 
   register('version', () => `<span class="text-muted">${data.version}</span>`);
@@ -90,17 +92,26 @@ ${escapeHtml(cert.issuer)} — ${escapeHtml(cert.date)}`;
 
 function projectList(): string {
   return data.projects.map(p => {
-    let entry = `<span class="text-cyan">${escapeHtml(p.name)}</span>  <span class="text-muted">${escapeHtml(p.stack)}</span>
-  ${escapeHtml(p.oneLiner)}
-  <span class="text-muted">GitHub:</span> <a href="${p.github}" target="_blank" rel="noopener">${p.github}</a>`;
+    let links = `<span class="text-muted">GitHub:</span> <a href="${p.github}" target="_blank" rel="noopener">${p.github}</a>`;
     if (p.live) {
-      entry += `\n  <span class="text-muted">Live:</span>   <a href="${p.live}" target="_blank" rel="noopener">${p.live}</a>`;
+      links += `\n    <span class="text-muted">Live:</span>   <a href="${p.live}" target="_blank" rel="noopener">${p.live}</a>`;
     }
     if (p.npm) {
-      entry += `\n  <span class="text-muted">npm:</span>    <a href="${p.npm}" target="_blank" rel="noopener">${p.npm}</a>`;
+      links += `\n    <span class="text-muted">npm:</span>    <a href="${p.npm}" target="_blank" rel="noopener">${p.npm}</a>`;
     }
-    return entry;
-  }).join('\n\n');
+
+    const details = `${escapeHtml(p.description)}
+
+    <span class="text-muted">Stack:</span>  ${escapeHtml(p.stack)}
+    <span class="text-muted">Role:</span>   ${escapeHtml(p.role)}`;
+
+    return `<div class="project-entry"><span class="text-cyan">${escapeHtml(p.name)}</span>
+  ${escapeHtml(p.oneLiner)}
+    ${links}
+  <a href="#" class="detail-toggle">▶ More details</a><div class="detail-content hidden">
+    ${details}
+</div></div>`;
+  }).join('\n');
 }
 
 function projectDetail(slug: string): string {

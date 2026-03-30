@@ -61,6 +61,24 @@ export class Terminal {
     const line = document.createElement('div');
     line.className = 'output-line';
     line.innerHTML = html;
+    line.querySelectorAll<HTMLAnchorElement>('a[data-command]').forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const cmd = link.dataset.command;
+        if (cmd) this.executeCommand(cmd);
+      });
+    });
+    line.querySelectorAll<HTMLAnchorElement>('a.detail-toggle').forEach(toggle => {
+      toggle.addEventListener('click', (e) => {
+        e.preventDefault();
+        const entry = toggle.closest('.project-entry');
+        const content = entry?.querySelector('.detail-content');
+        if (!content) return;
+        const isHidden = content.classList.contains('hidden');
+        content.classList.toggle('hidden');
+        toggle.textContent = isHidden ? '▼ Less details' : '▶ More details';
+      });
+    });
     this.outputEl.appendChild(line);
     this.outputEl.scrollTop = this.outputEl.scrollHeight;
   }

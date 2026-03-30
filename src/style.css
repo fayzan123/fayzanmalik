@@ -228,6 +228,30 @@ html, body {
   color: var(--text);
 }
 
+.project-entry {
+  margin-bottom: 1em;
+}
+
+.project-entry:last-child {
+  margin-bottom: 0;
+}
+
+.terminal-output a.detail-toggle {
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 0.85em;
+  cursor: pointer;
+}
+
+.terminal-output a.detail-toggle:hover {
+  color: var(--cyan);
+}
+
+.detail-content {
+  margin-top: 0.3em;
+  padding-left: 4ch;
+}
+
 /* Confetti overlay */
 .confetti-canvas {
   position: fixed;
@@ -275,11 +299,11 @@ html, body {
   bottom: 16px;
   right: 16px;
   background: transparent;
-  color: var(--muted);
-  border: 1px solid var(--muted);
+  color: var(--text-muted);
+  border: 1px solid var(--text-muted);
   border-radius: 4px;
   padding: 4px 14px;
-  font-family: var(--font);
+  font-family: 'JetBrains Mono', monospace;
   font-size: 0.85rem;
   cursor: pointer;
   transition: color 0.2s, border-color 0.2s;
