@@ -48,6 +48,15 @@ export const bio = "Hey, I'm Fayzan \u2014 a Computer Science student at Western
 
 export const projects: Project[] = [
   {
+    slug: 'agency-agents',
+    name: 'agency-agents (Open Source Contribution)',
+    oneLiner: 'Merged a LinkedIn Content Creator agent into the #1 trending GitHub repo (30,000+ stars).',
+    description: 'Contributed a LinkedIn Content Creator agent to agency-agents (PR #129), the #1 trending repository on GitHub at the time with 30,000+ stars. Studied existing agents to match the format exactly, built the agent with real templates, tested it on a live use case, and navigated the full fork → branch → PR workflow. The agent handles LinkedIn thought leadership content strategy, post drafting, and audience engagement workflows.',
+    stack: 'Bash, Claude, GitHub',
+    role: 'Open source contributor',
+    github: 'https://github.com/msitarzewski/agency-agents',
+  },
+  {
     slug: 'claude-check',
     name: 'claude-check',
     oneLiner: 'A CLI tool that scores your prompt before you send it to Claude.',
@@ -66,15 +75,6 @@ export const projects: Project[] = [
     role: 'Solo developer',
     github: 'https://github.com/fayzan123/thisthenthat',
     live: 'https://thisthenthat.vercel.app',
-  },
-  {
-    slug: 'agency-agents',
-    name: 'agency-agents (Open Source Contribution)',
-    oneLiner: 'Merged a LinkedIn Content Creator agent into the #1 trending GitHub repo.',
-    description: 'Contributed a LinkedIn Content Creator agent to the agency-agents repository (PR #129), which was the #1 trending repo on GitHub at the time with 30,000+ stars. The agent handles LinkedIn thought leadership content strategy, post drafting, and audience engagement workflows.',
-    stack: 'Bash, Claude, GitHub',
-    role: 'Open source contributor',
-    github: 'https://github.com/msitarzewski/agency-agents',
   },
   {
     slug: 'clearcare',
