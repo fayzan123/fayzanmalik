@@ -59,7 +59,7 @@ export const projects: Project[] = [
   {
     slug: 'claude-check',
     name: 'claude-check',
-    oneLiner: 'A CLI tool that scores your prompt before you send it to Claude.',
+    oneLiner: 'A CLI tool with 650+ downloads that scores your prompt before you send it to Claude.',
     description: "An npm CLI with 650+ downloads that analyses any Claude prompt for complexity, estimates how many messages it'll take, assesses interrupt risk, and returns a safe/caution/do-not-start verdict. It checks your real-time claude.ai usage so you don't burn your limit on a task that'll get cut off halfway.",
     stack: 'Node.js, TypeScript, Anthropic API, CLI Tooling',
     role: 'Solo developer',
@@ -79,7 +79,7 @@ export const projects: Project[] = [
   {
     slug: 'clearcare',
     name: 'ClearCare',
-    oneLiner: 'A rural healthcare referral platform with AI voice follow-ups and SMS alerts.',
+    oneLiner: 'A rural healthcare referral platform that could save $15,000+ per avoided airlift.',
     description: 'Built a closed-loop rural referral platform with AI voice follow-ups (Vapi), SMS alerts (Twilio), and escalation workflows designed to reduce emergency transfer frequency and potentially avoid $15,000+ per airlift case.',
     stack: 'React, TypeScript, FastAPI, PostgreSQL, Vapi, Twilio',
     role: 'Team member',
@@ -88,7 +88,7 @@ export const projects: Project[] = [
   {
     slug: 'binary-tree',
     name: 'Binary Tree Traversal Practice Tool',
-    oneLiner: 'A gamified platform for practicing binary tree traversals with real-time visual feedback.',
+    oneLiner: 'A gamified platform used by 100+ students for practicing binary tree traversals.',
     description: 'A React-based educational tool that helps students practice preorder, inorder, and postorder binary tree traversals. Features randomly generated trees, real-time visual feedback, and has been used by 100+ students.',
     stack: 'React, JavaScript, Firebase, Gemini, OpenAI',
     role: 'Solo developer',
