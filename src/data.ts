@@ -80,7 +80,7 @@ export const projects: Project[] = [
     slug: 'clearcare',
     name: 'ClearCare',
     oneLiner: 'A rural healthcare referral platform with AI voice follow-ups and SMS alerts.',
-    description: 'A closed-loop referral management platform built for rural patients who are 110+ km from specialist care. Features AI-powered voice follow-up calls via Vapi, SMS alerts via Twilio, and escalation workflows to keep patients from falling through the cracks.',
+    description: 'Built a closed-loop rural referral platform with AI voice follow-ups (Vapi), SMS alerts (Twilio), and escalation workflows designed to reduce emergency transfer frequency and potentially avoid $15,000+ per airlift case.',
     stack: 'React, TypeScript, FastAPI, PostgreSQL, Vapi, Twilio',
     role: 'Team member',
     github: 'https://github.com/Deogan7/ClearCare',
