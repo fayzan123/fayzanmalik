@@ -7,7 +7,16 @@ export async function runAutoplay(terminal: Terminal): Promise<void> {
     skipped = true;
   };
 
-  document.addEventListener('click', skipHandler, { once: true });
+  // Create skip button
+  const skipBtn = document.createElement('button');
+  skipBtn.className = 'skip-btn';
+  skipBtn.textContent = 'Skip';
+  skipBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    skipHandler();
+  });
+  document.querySelector('.terminal-window')?.appendChild(skipBtn);
+
   document.addEventListener('keydown', skipHandler, { once: true });
 
   const delay = (ms: number) =>
@@ -68,7 +77,7 @@ export async function runAutoplay(terminal: Terminal): Promise<void> {
   cleanup();
 
   function cleanup() {
-    document.removeEventListener('click', skipHandler);
+    skipBtn.remove();
     document.removeEventListener('keydown', skipHandler);
   }
 }

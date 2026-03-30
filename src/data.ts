@@ -50,7 +50,7 @@ export const projects: Project[] = [
   {
     slug: 'agency-agents',
     name: 'agency-agents (Open Source Contribution)',
-    oneLiner: 'Merged a LinkedIn Content Creator agent into the #1 trending GitHub repo (30,000+ stars).',
+    oneLiner: 'Merged a LinkedIn Content Creator agent into the #1 trending GitHub repo (65,000+ stars).',
     description: 'Contributed a LinkedIn Content Creator agent to agency-agents (PR #129), the #1 trending repository on GitHub at the time with 30,000+ stars. Studied existing agents to match the format exactly, built the agent with real templates, tested it on a live use case, and navigated the full fork → branch → PR workflow. The agent handles LinkedIn thought leadership content strategy, post drafting, and audience engagement workflows.',
     stack: 'Bash, Claude, GitHub',
     role: 'Open source contributor',

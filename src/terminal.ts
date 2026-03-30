@@ -206,9 +206,12 @@ export class Terminal {
     });
 
     // Keep focus on input when clicking anywhere in the terminal, except links
+    // Skip if user has selected text (so copy works)
     document.querySelector('.terminal-window')?.addEventListener('click', (e: Event) => {
       const target = e.target as HTMLElement;
       if (target.closest('a')) return;
+      const selection = window.getSelection();
+      if (selection && selection.toString().length > 0) return;
       this.inputEl.focus();
     });
   }
