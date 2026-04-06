@@ -86,6 +86,24 @@ export const projects: Project[] = [
     github: 'https://github.com/Deogan7/ClearCare',
   },
   {
+    slug: 'chox-ai',
+    name: 'Chox AI',
+    oneLiner: 'An AI agent governance layer that classifies and risk-scores tool calls in real time.',
+    description: 'Built an AI agent governance layer that classifies and risk-scores agent tool calls, logs shadow verdicts (allow/block/escalate), and provides proxy and SDK integrations for policy enforcement.',
+    stack: 'Go, React, TypeScript, PostgreSQL, Docker',
+    role: 'Solo developer',
+    github: 'https://github.com/fayzan123/chox-ai',
+  },
+  {
+    slug: 'claude-skills',
+    name: 'Claude Skills',
+    oneLiner: 'Published Claude skills for reusable context handoff and evidence-backed product analysis.',
+    description: 'Built and published context transport, a Claude skill for reusable context handoff across workflows. Built and published brutal analysis, a Claude skill that performs evidence-backed product and market analysis via live competitive research and outputs build/pivot/kill recommendations.',
+    stack: 'Claude, Markdown',
+    role: 'Solo developer',
+    github: 'https://github.com/fayzan123/claude-skills',
+  },
+  {
     slug: 'binary-tree',
     name: 'Binary Tree Traversal Practice Tool',
     oneLiner: 'A gamified platform used by 100+ students for practicing binary tree traversals.',
@@ -131,8 +149,9 @@ export const experience: Experience[] = [
 
 export const skills: SkillCategory[] = [
   { category: 'Languages', items: ['Python', 'Java', 'C', 'SQL (MySQL)', 'JavaScript', 'TypeScript', 'HTML/CSS', 'R', 'Go'] },
-  { category: 'Frameworks & Libraries', items: ['React', 'Flask', 'Next.js', 'Tailwind CSS', 'NumPy', 'Pandas', 'Matplotlib', 'TensorFlow', 'Scikit-learn', 'PyTorch', 'Seaborn'] },
-  { category: 'AI / LLM', items: ['OpenAI', 'Claude', 'Gemini', 'LangGraph', 'CrewAI', 'AutoGen', 'MCP'] },
+  { category: 'Frameworks & Libraries', items: ['React', 'Flask', 'Next.js', 'Supabase', 'Tailwind CSS', 'Firebase', 'NumPy', 'Pandas', 'Matplotlib', 'TensorFlow', 'Scikit-learn', 'PyTorch', 'Seaborn'] },
+  { category: 'Databases', items: ['MySQL', 'PostgreSQL'] },
+  { category: 'AI / LLM', items: ['Codex', 'Claude Code', 'Gemini', 'OpenClaw', 'Nano Banana', 'LangGraph', 'CrewAI', 'AutoGen', 'MCP', 'OpenAI'] },
   { category: 'Platforms & Tools', items: ['Git', 'Linux', 'Docker', 'AWS', 'Supabase', 'Firebase', 'Postman', 'VS Code', 'Jupyter', 'IntelliJ', 'PyCharm'] },
 ];
 
