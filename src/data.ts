@@ -51,7 +51,7 @@ export const projects: Project[] = [
     slug: 'agency-agents',
     name: 'agency-agents (Open Source Contribution)',
     oneLiner: 'Merged a LinkedIn Content Creator agent into the #1 trending GitHub repo (65,000+ stars).',
-    description: 'Contributed a LinkedIn Content Creator agent to agency-agents (PR #129), the #1 trending repository on GitHub at the time with 30,000+ stars. Studied existing agents to match the format exactly, built the agent with real templates, tested it on a live use case, and navigated the full fork → branch → PR workflow. The agent handles LinkedIn thought leadership content strategy, post drafting, and audience engagement workflows.',
+    description: 'Contributed a LinkedIn Content Creator agent to agency-agents (PR #129), the #1 trending repository on GitHub at the time with 65,000+ stars. Studied existing agents to match the format exactly, built the agent with real templates, tested it on a live use case, and navigated the full fork → branch → PR workflow. The agent handles LinkedIn thought leadership content strategy, post drafting, and audience engagement workflows.',
     stack: 'Bash, Claude, GitHub',
     role: 'Open source contributor',
     github: 'https://github.com/msitarzewski/agency-agents',
@@ -125,6 +125,13 @@ export const projects: Project[] = [
 
 export const experience: Experience[] = [
   {
+    role: 'Co-Founder & CTO',
+    company: 'Chox AI',
+    location: 'Remote',
+    dates: 'January 2026 \u2013 Present',
+    description: 'Built a Go HTTP proxy that sits between AI agents and external APIs, intercepting requests to classify actions, extract structured signals, and enforce governance policies before forwarding traffic. Implemented an argument-aware risk scoring and shadow-verdict pipeline for agent tool calls, classifying actions such as read, write, delete, and financial operations before enforcement is enabled. Developed the core Go backend and React dashboard for monitoring high-risk API actions, audit logs, and rule-based governance across developer-built AI agents.',
+  },
+  {
     role: 'President & Founder',
     company: 'Western Agentic Development Club, Western University',
     location: 'London, ON',
@@ -148,10 +155,10 @@ export const experience: Experience[] = [
 ];
 
 export const skills: SkillCategory[] = [
-  { category: 'Languages', items: ['Python', 'Java', 'C', 'SQL (MySQL)', 'JavaScript', 'TypeScript', 'HTML/CSS', 'R', 'Go'] },
-  { category: 'Frameworks & Libraries', items: ['React', 'Flask', 'Next.js', 'Supabase', 'Tailwind CSS', 'Firebase', 'NumPy', 'Pandas', 'Matplotlib', 'TensorFlow', 'Scikit-learn', 'PyTorch', 'Seaborn'] },
+  { category: 'Languages', items: ['Python', 'Java', 'C', 'Go', 'TypeScript', 'JavaScript', 'SQL', 'HTML/CSS', 'R', 'Bash'] },
+  { category: 'Frameworks & Libraries', items: ['React', 'Flask', 'Next.js', 'FastAPI', 'Node.js', 'Tailwind CSS', 'NumPy', 'Pandas', 'Matplotlib', 'TensorFlow', 'Scikit-learn', 'PyTorch', 'Seaborn'] },
   { category: 'Databases', items: ['MySQL', 'PostgreSQL'] },
-  { category: 'AI / LLM', items: ['Codex', 'Claude Code', 'Gemini', 'OpenClaw', 'Nano Banana', 'LangGraph', 'CrewAI', 'AutoGen', 'MCP', 'OpenAI'] },
+  { category: 'AI / LLM', items: ['Codex', 'Claude Code', 'Gemini', 'OpenClaw', 'Nano Banana', 'LangGraph', 'CrewAI', 'AutoGen', 'MCP', 'prompt engineering', 'AI agent governance', 'model evaluation'] },
   { category: 'Platforms & Tools', items: ['Git', 'Linux', 'Docker', 'AWS', 'Supabase', 'Firebase', 'Postman', 'VS Code', 'Jupyter', 'IntelliJ', 'PyCharm'] },
 ];
 
