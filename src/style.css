@@ -363,35 +363,35 @@ html[data-theme="dark"] {
 }
 
 /* ── Scroll reveal system ───────────────────────────────────── */
-[data-animate] {
+.landing-page [data-animate] {
   opacity: 0;
   transition: opacity 500ms ease-out, transform 500ms ease-out;
 }
 
-[data-animate="fade-up"] {
+.landing-page [data-animate="fade-up"] {
   transform: translateY(24px);
 }
 
-[data-animate="fade-left"] {
+.landing-page [data-animate="fade-left"] {
   transform: translateX(-24px);
 }
 
-[data-animate="fade-right"] {
+.landing-page [data-animate="fade-right"] {
   transform: translateX(24px);
 }
 
-[data-animate="scale-in"] {
+.landing-page [data-animate="scale-in"] {
   transform: scale(0.95);
   transition-duration: 400ms;
 }
 
-[data-animate].visible {
+.landing-page [data-animate].visible {
   opacity: 1;
   transform: translateY(0) translateX(0) scale(1);
 }
 
 @media (prefers-reduced-motion: reduce) {
-  [data-animate] {
+  .landing-page [data-animate] {
     opacity: 1;
     transform: none;
     transition: none;
@@ -425,7 +425,7 @@ html[data-theme="dark"] {
 }
 
 /* ── Tag shared styles (used in projects + skills) ──────────── */
-.tag {
+.landing-page .tag {
   font-family: 'JetBrains Mono', 'Courier New', monospace;
   font-size: 11px;
   font-weight: 400;
@@ -438,7 +438,7 @@ html[data-theme="dark"] {
   white-space: nowrap;
 }
 
-.tag:hover {
+.landing-page .tag:hover {
   border-color: var(--accent);
   background: rgba(0, 255, 136, 0.05);
 }
