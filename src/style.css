@@ -24,7 +24,6 @@ html, body {
   font-family: 'JetBrains Mono', monospace;
   font-size: 14px;
   color: var(--text);
-  overflow: hidden;
 }
 
 /* Terminal window */
@@ -335,4 +334,111 @@ html, body {
 /* Selection styling */
 ::selection {
   background: rgba(86, 182, 194, 0.3);
+}
+
+/* =============================================================
+   LANDING PAGE STYLES
+   All rules below this line are for the landing page only.
+   Terminal styles above are untouched.
+   ============================================================= */
+
+/* ── Theme: Dark (default) ─────────────────────────────────── */
+html[data-theme="dark"] {
+  --surface: #111111;
+  --border: #1e1e1e;
+  --accent: #00ff88;
+  --text-landing: #ffffff;
+  --text-secondary: #a0a0a0;
+}
+
+/* ── Global landing page resets ────────────────────────────── */
+.landing-page {
+  font-family: 'Inter', system-ui, sans-serif;
+  color: var(--text-landing);
+}
+
+.landing-page *:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+/* ── Scroll reveal system ───────────────────────────────────── */
+[data-animate] {
+  opacity: 0;
+  transition: opacity 500ms ease-out, transform 500ms ease-out;
+}
+
+[data-animate="fade-up"] {
+  transform: translateY(24px);
+}
+
+[data-animate="fade-left"] {
+  transform: translateX(-24px);
+}
+
+[data-animate="fade-right"] {
+  transform: translateX(24px);
+}
+
+[data-animate="scale-in"] {
+  transform: scale(0.95);
+  transition-duration: 400ms;
+}
+
+[data-animate].visible {
+  opacity: 1;
+  transform: translateY(0) translateX(0) scale(1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-animate] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* ── Section shared styles ──────────────────────────────────── */
+.section {
+  padding: 120px 24px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.section-label {
+  font-family: 'JetBrains Mono', 'Courier New', monospace;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 12px;
+}
+
+.section-title {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: clamp(28px, 4vw, 40px);
+  font-weight: 800;
+  color: var(--text-landing);
+  margin-bottom: 56px;
+  line-height: 1.2;
+}
+
+/* ── Tag shared styles (used in projects + skills) ──────────── */
+.tag {
+  font-family: 'JetBrains Mono', 'Courier New', monospace;
+  font-size: 11px;
+  font-weight: 400;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  padding: 2px 8px;
+  border-radius: 4px;
+  transition: border-color 150ms ease, background 150ms ease;
+  white-space: nowrap;
+}
+
+.tag:hover {
+  border-color: var(--accent);
+  background: rgba(0, 255, 136, 0.05);
 }
