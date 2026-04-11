@@ -11,7 +11,7 @@ Transform the current CLI-only portfolio into a full, scrollable landing page wi
 
 Reference inspiration: https://www.itaisigler.com/
 
-**Dark mode only.** No light mode toggle. The dark palette is the sole palette.
+**Dark mode only for initial launch.** Light mode will be added in a future iteration. The CSS architecture must be built to support a theme toggle from day one — all colors use CSS custom properties scoped to `[data-theme="dark"]` and `[data-theme="light"]` on `<html>`. The CLI window always remains dark regardless of theme (isolated by `.cli-window` class which always applies dark surface/border values directly, never inheriting from the theme).
 
 ---
 
@@ -34,7 +34,7 @@ Option A — Extend the existing Vite + TypeScript stack. No new frameworks or d
 | `src/data.ts` | Untouched |
 | `src/autoplay.ts` | Untouched |
 | `src/easter-eggs.ts` | Untouched |
-| `public/headshot.png` | Already placed |
+| `public/headshot.jpg` | Already placed |
 | `public/fayzan-resume.pdf` | Already present — linked as `/fayzan-resume.pdf` with `download` attribute |
 
 ### Terminal Mount Point
@@ -52,27 +52,39 @@ The existing `src/style.css` is extended, not replaced. Key conflicts resolved:
 1. **`overflow: hidden` on `html, body`** — Remove this rule. The `#terminal` container gets its own `overflow: hidden` so the terminal does not overflow its fixed-height box.
 2. **`--text: #e0e0e0`** — Keep existing value unchanged. Terminal components depend on it.
 3. **`--text-muted: #888`** — Keep existing variable name and value. Terminal components depend on it.
-4. **New variables added for landing page** (no collisions):
+4. **Theme architecture** — All landing page color variables are declared on `html[data-theme="dark"]` (set by default in `index.html`). When light mode is implemented, `html[data-theme="light"]` overrides them. Terminal and `.cli-window` styles use hardcoded dark values directly and never inherit from the theme vars — ensuring the CLI is always dark.
+5. **New variables scoped to `[data-theme="dark"]`** (no collisions with terminal vars):
    - `--surface: #111111`
    - `--border: #1e1e1e`
    - `--accent: #00ff88`
-   - `--text-landing: #ffffff` (used for large headings and CTAs; distinct from `--text` used by terminal)
-5. Landing page CSS lives in a clearly commented block at the bottom of `style.css`, after all existing terminal styles.
+   - `--text-landing: #ffffff`
+   - `--text-secondary: #a0a0a0`
+6. Landing page CSS lives in a clearly commented block at the bottom of `style.css`, after all existing terminal styles.
 
 ---
 
 ## Visual Design System
 
 ### Color Tokens
+
+**Terminal (existing, never change):**
 | Token | Value | Usage |
 |---|---|---|
-| `--bg` | `#0a0a0a` | Page background (existing) |
-| `--text` | `#e0e0e0` | Terminal text (existing, unchanged) |
-| `--text-muted` | `#888` | Terminal muted text (existing, unchanged) |
-| `--text-landing` | `#ffffff` | Landing page headings and CTAs |
-| `--surface` | `#111111` | Cards, CLI container background |
-| `--border` | `#1e1e1e` | Subtle separators and card borders |
-| `--accent` | `#00ff88` | Primary accent (terminal green carried through) |
+| `--bg` | `#0a0a0a` | Page background |
+| `--text` | `#e0e0e0` | Terminal text |
+| `--text-muted` | `#888` | Terminal muted text |
+
+**Landing page (scoped to `[data-theme="dark"]`, future-proofed for light mode):**
+| Token | Value | Usage |
+|---|---|---|
+| `--text-landing` | `#ffffff` | Headings and CTAs |
+| `--text-secondary` | `#a0a0a0` | Subtitles, descriptions |
+| `--surface` | `#111111` | Cards, section backgrounds |
+| `--border` | `#1e1e1e` | Separators and card borders |
+| `--accent` | `#00ff88` | Primary accent (terminal green) |
+
+**CLI window (hardcoded dark, never inherits theme):**
+`.cli-window` always uses `background: #111111; border-color: #1e1e1e` directly — not via CSS vars — so it stays dark in any future light theme.
 
 **Contrast verification required at implementation:**
 - `--text (#e0e0e0)` on `--bg (#0a0a0a)`: ~14:1 ✓
@@ -98,22 +110,45 @@ Fallback stack: Inter → `system-ui, sans-serif`; JetBrains Mono → `'Courier 
 ### Spacing
 8px base unit. Section vertical padding: 120px. Card internal padding: 32px.
 
-### Scroll Reveal Animation
-```css
-[data-animate] {
-  opacity: 0;
-  transform: translateY(16px);
-  transition: opacity 400ms ease-out, transform 400ms ease-out;
-}
-[data-animate].visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-@media (prefers-reduced-motion: reduce) {
-  [data-animate] { opacity: 1; transform: none; transition: none; }
-}
-```
-`IntersectionObserver` threshold: 10%. Applied to: each `<section>`, each `.project-card`, each `.timeline-entry`.
+### Animation System
+
+All animations respect `prefers-reduced-motion: reduce` — when set, all transitions and keyframes are disabled.
+
+**1. Scroll Reveal (primary system)**
+Elements tagged `[data-animate]` are hidden until they enter the viewport. Variants via `data-animate` value:
+
+| Value | Effect |
+|---|---|
+| `fade-up` | `opacity 0→1` + `translateY(24px)→0`, 500ms ease-out |
+| `fade-left` | `opacity 0→1` + `translateX(-24px)→0`, 500ms ease-out |
+| `fade-right` | `opacity 0→1` + `translateX(24px)→0`, 500ms ease-out |
+| `scale-in` | `opacity 0→1` + `scale(0.95)→1`, 400ms ease-out |
+
+Stagger: `landing.ts` assigns `transition-delay` in 80ms increments to siblings within the same parent (e.g. project cards, timeline entries, skill groups). Max stagger: 400ms.
+
+`IntersectionObserver` threshold: 10%. Once visible, `[data-animate]` is not re-hidden on scroll back.
+
+Applied to: each `<section>` (fade-up), each `.project-card` (scale-in, staggered), each `.timeline-entry` (fade-left, staggered), each `.skill-group` (fade-up, staggered), hero left column children (fade-right, staggered), hero right column (fade-left).
+
+**2. Hero accent line**
+A thin `2px` horizontal line in `--accent` animates from `width: 0` to `width: 100%` under the `<h1>` on page load, 600ms ease-out, 300ms delay. Purely decorative, `aria-hidden`.
+
+**3. Navbar link underline**
+On hover: a `--accent` underline slides in from left to right (`scaleX(0)→scaleX(1)`, `transform-origin: left`, 200ms ease).
+
+**4. Project card hover lift**
+On hover: `translateY(-4px)` + `box-shadow: 0 8px 32px rgba(0,255,136,0.08)`, 200ms ease. Combined with the existing border-color transition.
+
+**5. CTA button pulse (primary only)**
+The `Download Resume` button has a subtle repeating glow pulse: `box-shadow` from `0 0 0 0 rgba(0,255,136,0.4)` to `0 0 0 12px rgba(0,255,136,0)`, 2s infinite. Stops on hover. Draws attention without being aggressive.
+
+**6. Timeline node entrance**
+Each `.timeline-entry` node marker (the circle on the line) scales from `scale(0)` to `scale(1)` as it enters viewport, 300ms ease-out, triggered independently from the entry text stagger.
+
+**7. Skill tag hover**
+On hover: `background` lightens slightly, `border-color` transitions to `--accent`, 150ms ease. Subtle — not a full lift.
+
+All animation tuning (easing curves, durations, hover choreography) is refined by `/animate` and `/delight` impeccable skills post-build.
 
 ---
 
@@ -141,7 +176,7 @@ Fallback stack: Inter → `system-ui, sans-serif`; JetBrains Mono → `'Courier 
 Full viewport height (`min-height: 100vh`). CSS Grid: `grid-template-columns: 1fr 1fr`, gap `64px`, `align-items: center`. Max-width container, centred.
 
 **Left column (in order):**
-1. Headshot: `<img src="/headshot.png" alt="Fayzan Malik" />` — 120px diameter, `border-radius: 50%`, `box-shadow: 0 0 0 2px var(--bg), 0 0 0 4px var(--accent)` (creates gap + accent ring)
+1. Headshot: `<img src="/headshot.jpg" alt="Fayzan Malik" />` — 120px diameter, `border-radius: 50%`, `box-shadow: 0 0 0 2px var(--bg), 0 0 0 4px var(--accent)` (creates gap + accent ring)
 2. `<h1>Fayzan Malik</h1>` — Inter 800, `--text-landing`
 3. Title: `<p>Co-Founder & CTO, Chox AI · CS @ Western</p>` — Inter 400, `--text-muted`
 4. Bio: `<p>` — text from `data.bio` (rendered as static text in HTML, matching data.ts value at build time)
@@ -286,7 +321,7 @@ All frontend implementation and refinement uses the **impeccable plugin** (https
 - **`main.ts` untouched** — terminal ID stays `#terminal`; `index.html` must provide `<div id="terminal">`
 - **Terminal files all untouched** — terminal.ts, handlers.ts, commands.ts, autoplay.ts, easter-eggs.ts unchanged
 - **`data.ts` untouched** — all content sourced from existing exports; HTML is static matching data at build time
-- **Dark mode only** — no light mode toggle
+- **Dark mode only for launch** — light mode planned; CSS vars scoped to `[data-theme]` on `<html>` from day one; CLI always dark via hardcoded values on `.cli-window`
 - **CSS variable strategy** — existing `--text` and `--text-muted` preserved; new variables added without collision
 - **`overflow: hidden` on body removed** — `#terminal` container gets its own `overflow: hidden`
 - **Fonts** — Google Fonts CDN, Inter (400,700,800) + JetBrains Mono (400,500), `font-display: swap`
