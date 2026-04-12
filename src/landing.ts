@@ -310,11 +310,42 @@ function initGrain(): void {
   io.observe(heroEl);
 }
 
+function initMobileNav(): void {
+  const btn = document.getElementById('nav-hamburger');
+  const nav = document.getElementById('nav');
+  const links = document.getElementById('nav-links');
+  if (!btn || !nav || !links) return;
+
+  function close(): void {
+    nav!.classList.remove('nav-open');
+    btn!.setAttribute('aria-expanded', 'false');
+  }
+
+  btn.addEventListener('click', () => {
+    const isOpen = nav.classList.toggle('nav-open');
+    btn.setAttribute('aria-expanded', String(isOpen));
+  });
+
+  // Close on any nav link click
+  links.querySelectorAll('a').forEach(a => a.addEventListener('click', close));
+
+  // Close on outside click
+  document.addEventListener('click', (e) => {
+    if (!nav.contains(e.target as Node)) close();
+  });
+
+  // Close on Escape
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') close();
+  });
+}
+
 // Module scripts are deferred - DOM is already parsed at this point.
 // Do NOT use DOMContentLoaded here; it may have already fired.
 initNavbar();
 initScrollReveal();
 initSmoothScroll();
 initProjectModal();
+initMobileNav();
 initCursorBloom();
 initGrain();
