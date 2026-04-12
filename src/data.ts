@@ -158,8 +158,8 @@ export const skills: SkillCategory[] = [
   { category: 'Languages', items: ['Python', 'Java', 'C', 'Go', 'TypeScript', 'JavaScript', 'SQL', 'HTML/CSS', 'R', 'Bash'] },
   { category: 'Frameworks & Libraries', items: ['React', 'Flask', 'Next.js', 'FastAPI', 'Node.js', 'Tailwind CSS', 'NumPy', 'Pandas', 'Matplotlib', 'TensorFlow', 'Scikit-learn', 'PyTorch', 'Seaborn'] },
   { category: 'Databases', items: ['MySQL', 'PostgreSQL'] },
-  { category: 'AI / LLM', items: ['Codex', 'Claude Code', 'Gemini', 'LangGraph', 'CrewAI', 'AutoGen', 'MCP', 'prompt engineering', 'AI agent governance', 'model evaluation'] },
-  { category: 'Platforms & Tools', items: ['Git', 'Linux', 'Docker', 'AWS', 'Supabase', 'Firebase', 'Postman', 'VS Code', 'Jupyter'] },
+  { category: 'AI / LLM', items: ['Codex', 'Claude Code', 'Gemini', 'OpenClaw', 'Nano Banana', 'LangGraph', 'CrewAI', 'AutoGen', 'MCP', 'prompt engineering', 'AI agent governance', 'model evaluation'] },
+  { category: 'Platforms & Tools', items: ['Git', 'Linux', 'Docker', 'AWS', 'Supabase', 'Firebase', 'Postman', 'VS Code', 'Jupyter', 'IntelliJ', 'PyCharm'] },
 ];
 
 export const education: Education = {
