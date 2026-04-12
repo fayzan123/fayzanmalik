@@ -67,7 +67,7 @@ ${escapeHtml(cert.issuer)} — ${escapeHtml(cert.date)}`;
 
   register('contact', () => {
     return `<span class="text-cyan">Email:</span>    <a href="mailto:${data.contact.email}">${escapeHtml(data.contact.email)}</a>
-<span class="text-cyan">Phone:</span>    <a href="tel:${data.contact.phone}">${escapeHtml(data.contact.phone)}</a>
+<span class="text-cyan">Phone:</span>    ${escapeHtml(data.contact.phone)}
 <span class="text-cyan">Status:</span>   ${escapeHtml(data.contact.citizenship)}`;
   });
 
