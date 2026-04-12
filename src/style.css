@@ -723,7 +723,14 @@ html[data-theme="dark"] {
   .hero-grain { display: none; }
 }
 
-/* CLI window — hardcoded dark, never inherits theme */
+/* CLI window — hardcoded dark, never inherits theme.
+   Reset font-family so Space Grotesk (.landing-page cascade) doesn't
+   bleed into the terminal — JetBrains Mono is set on html/body. */
+.cli-window,
+.cli-window * {
+  font-family: 'JetBrains Mono', 'Courier New', monospace;
+}
+
 .cli-window {
   background: #111111;
   border: 1px solid #1e1e1e;
