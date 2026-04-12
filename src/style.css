@@ -355,6 +355,9 @@ html[data-theme="dark"] {
 .landing-page {
   font-family: 'Inter', system-ui, sans-serif;
   color: var(--text-landing);
+  /* Transparent so .page-bloom (position:fixed; z-index:-1) shows through
+     the hero area. html retains background:#0a0a0a as the base canvas. */
+  background: transparent;
 }
 
 .landing-page *:focus-visible {
