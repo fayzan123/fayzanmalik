@@ -511,6 +511,17 @@ html[data-theme="dark"] {
 .nav-links a:hover { color: var(--text-landing); }
 .nav-links a:hover::after { transform: scaleX(1); }
 
+/* ── Page-wide cursor bloom (fixed, sits behind all content) */
+.page-bloom {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1;
+  --bloom-x: 20%;
+  --bloom-y: 40%;
+  background: radial-gradient(ellipse at var(--bloom-x) var(--bloom-y), rgba(0, 255, 136, 0.052) 0%, transparent 55%);
+}
+
 /* ── Hero ───────────────────────────────────────────────── */
 .hero {
   min-height: 100vh;
@@ -519,9 +530,6 @@ html[data-theme="dark"] {
   padding-top: 80px;
   position: relative;
   overflow: hidden;
-  --bloom-x: 15%;
-  --bloom-y: 55%;
-  background: radial-gradient(ellipse at var(--bloom-x) var(--bloom-y), rgba(0, 255, 136, 0.055) 0%, transparent 55%);
 }
 
 /* Film grain overlay — injected via JS */
@@ -707,6 +715,7 @@ html[data-theme="dark"] {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .page-bloom { display: none; }
   .cli-wrapper::before { animation: none; opacity: 0; }
   .hero-grain { display: none; }
 }

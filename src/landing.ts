@@ -212,45 +212,34 @@ function initProjectModal(): void {
 }
 
 function initCursorBloom(): void {
-  const hero = document.querySelector<HTMLElement>('.hero');
-  if (!hero) return;
+  const bloom = document.querySelector<HTMLElement>('.page-bloom');
+  if (!bloom) return;
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-  let targetX = 15;
-  let targetY = 55;
-  let currentX = 15;
-  let currentY = 55;
-  let rafId: number;
+  const bloomEl = bloom;
+  let targetX = 20;
+  let targetY = 40;
+  let currentX = 20;
+  let currentY = 40;
 
-  hero.addEventListener('mousemove', (e: MouseEvent) => {
-    const rect = hero.getBoundingClientRect();
-    targetX = ((e.clientX - rect.left) / rect.width) * 100;
-    targetY = ((e.clientY - rect.top) / rect.height) * 100;
-  }, { passive: true });
-
-  hero.addEventListener('mouseleave', () => {
-    targetX = 15;
-    targetY = 55;
+  document.addEventListener('mousemove', (e: MouseEvent) => {
+    targetX = (e.clientX / window.innerWidth) * 100;
+    targetY = (e.clientY / window.innerHeight) * 100;
   }, { passive: true });
 
   function lerp(a: number, b: number, t: number): number {
     return a + (b - a) * t;
   }
 
-  const heroEl = hero;
-
   function tick(): void {
     currentX = lerp(currentX, targetX, 0.04);
     currentY = lerp(currentY, targetY, 0.04);
-    heroEl.style.setProperty('--bloom-x', `${currentX.toFixed(2)}%`);
-    heroEl.style.setProperty('--bloom-y', `${currentY.toFixed(2)}%`);
-    rafId = requestAnimationFrame(tick);
+    bloomEl.style.setProperty('--bloom-x', `${currentX.toFixed(2)}%`);
+    bloomEl.style.setProperty('--bloom-y', `${currentY.toFixed(2)}%`);
+    requestAnimationFrame(tick);
   }
-  const io = new IntersectionObserver((entries) => {
-    if (entries[0].isIntersecting) { rafId = requestAnimationFrame(tick); }
-    else { cancelAnimationFrame(rafId); }
-  });
-  io.observe(heroEl);
+
+  requestAnimationFrame(tick);
 }
 
 function initGrain(): void {
