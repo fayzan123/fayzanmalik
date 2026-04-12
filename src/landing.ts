@@ -1,4 +1,4 @@
-// landing.ts — all non-terminal page behaviour
+// landing.ts - all non-terminal page behaviour
 // Navbar scroll, scroll reveal with stagger, smooth anchor scroll
 // Does NOT touch the terminal or #terminal element
 
@@ -69,7 +69,7 @@ const PROJECT_DETAILS: Record<string, ProjectDetail> = {
   'agency-agents': {
     label: 'Open Source Contribution',
     name: 'agency-agents',
-    body: `I contributed a LinkedIn Content Creator agent to agency-agents — the #1 trending repository on GitHub at the time, with over 65,000 stars. The agent automates LinkedIn content creation by analyzing a given topic, drafting an engaging post optimized for the LinkedIn algorithm, and outputting it in a format ready to publish.\n\nThe contribution involved writing a clean, composable Bash-based agent script that integrates with Claude via the Claude CLI, following the project's conventions for agent structure and prompt design. The PR was reviewed and merged by the maintainer.`,
+    body: `I contributed a LinkedIn Content Creator agent to agency-agents - the #1 trending repository on GitHub at the time, with over 65,000 stars. The agent automates LinkedIn content creation by analyzing a given topic, drafting an engaging post optimized for the LinkedIn algorithm, and outputting it in a format ready to publish.\n\nThe contribution involved writing a clean, composable Bash-based agent script that integrates with Claude via the Claude CLI, following the project's conventions for agent structure and prompt design. The PR was reviewed and merged by the maintainer.`,
     links: [
       { label: 'GitHub →', url: 'https://github.com/msitarzewski/agency-agents' },
     ],
@@ -86,7 +86,7 @@ const PROJECT_DETAILS: Record<string, ProjectDetail> = {
   'thisthenthat': {
     label: 'Full Stack · AI App',
     name: 'ThisThenThat',
-    body: `ThisThenThat is a web app for students who feel overwhelmed by complex assignments. You upload your assignment PDF and the app uses Claude to break it down into a clear, ordered sequence of steps — a game plan tailored to your specific task.\n\nEach step comes with its own AI chat interface, so you can ask questions, get clarification, or brainstorm ideas in the context of exactly where you are in the assignment. Built with Next.js, TypeScript, Supabase for auth and storage, and the Claude API for both the plan generation and per-step chat.`,
+    body: `ThisThenThat is a web app for students who feel overwhelmed by complex assignments. You upload your assignment PDF and the app uses Claude to break it down into a clear, ordered sequence of steps - a game plan tailored to your specific task.\n\nEach step comes with its own AI chat interface, so you can ask questions, get clarification, or brainstorm ideas in the context of exactly where you are in the assignment. Built with Next.js, TypeScript, Supabase for auth and storage, and the Claude API for both the plan generation and per-step chat.`,
     links: [
       { label: 'GitHub →', url: 'https://github.com/fayzan123/thisthenthat' },
       { label: 'Live →', url: 'https://thisthenthat.vercel.app' },
@@ -95,7 +95,7 @@ const PROJECT_DETAILS: Record<string, ProjectDetail> = {
   'clearcare': {
     label: 'Hackathon Project · Healthcare',
     name: 'ClearCare',
-    body: `ClearCare is a rural healthcare referral platform built at a hackathon to address one of the most expensive problems in Canadian healthcare: unnecessary medical airlifts. A single airlift can cost $15,000 or more — many of which could be avoided with better real-time coordination between rural clinics and regional hospitals.\n\nThe platform lets rural healthcare providers quickly assess patient transfer options, check specialist availability, and initiate referrals with AI-assisted triage support. It uses a React + TypeScript frontend, a FastAPI backend with PostgreSQL, Vapi for AI voice triage calls, and Twilio for SMS-based coordination. I led backend development and API integration.`,
+    body: `ClearCare is a rural healthcare referral platform built at a hackathon to address one of the most expensive problems in Canadian healthcare: unnecessary medical airlifts. A single airlift can cost $15,000 or more - many of which could be avoided with better real-time coordination between rural clinics and regional hospitals.\n\nThe platform lets rural healthcare providers quickly assess patient transfer options, check specialist availability, and initiate referrals with AI-assisted triage support. It uses a React + TypeScript frontend, a FastAPI backend with PostgreSQL, Vapi for AI voice triage calls, and Twilio for SMS-based coordination. I led backend development and API integration.`,
     links: [
       { label: 'GitHub →', url: 'https://github.com/Deogan7/ClearCare' },
     ],
@@ -103,7 +103,7 @@ const PROJECT_DETAILS: Record<string, ProjectDetail> = {
   'chox-ai': {
     label: 'AI Safety · Co-Founder & CTO',
     name: 'Chox AI',
-    body: `Chox AI is a governance layer for AI agents — an HTTP proxy that sits between your agents and the external APIs they call. Every outbound request is intercepted, classified, and risk-scored before being forwarded or blocked.\n\nThe core is a Go-based proxy that extracts action type and argument signals from each API call, then runs it through a classification pipeline: read, write, delete, or financial operation. High-risk actions are logged as shadow verdicts before enforcement is enabled, letting you audit agent behavior without disrupting workflows.\n\nI built the full Go backend, the proxy infrastructure, and the React dashboard for visualizing audit logs and configuring governance rules. The dashboard lets you set allow/block/escalate policies per action type and monitor agent activity in real time.`,
+    body: `Chox AI is a governance layer for AI agents - an HTTP proxy that sits between your agents and the external APIs they call. Every outbound request is intercepted, classified, and risk-scored before being forwarded or blocked.\n\nThe core is a Go-based proxy that extracts action type and argument signals from each API call, then runs it through a classification pipeline: read, write, delete, or financial operation. High-risk actions are logged as shadow verdicts before enforcement is enabled, letting you audit agent behavior without disrupting workflows.\n\nI built the full Go backend, the proxy infrastructure, and the React dashboard for visualizing audit logs and configuring governance rules. The dashboard lets you set allow/block/escalate policies per action type and monitor agent activity in real time.`,
     links: [
       { label: 'GitHub →', url: 'https://github.com/fayzan123/chox-ai' },
     ],
@@ -111,7 +111,7 @@ const PROJECT_DETAILS: Record<string, ProjectDetail> = {
   'claude-skills': {
     label: 'AI Tooling · Prompt Engineering',
     name: 'Claude Skills',
-    body: `I published a set of Claude skills — reusable prompt modules that can be invoked inside Claude Code sessions to provide structured, repeatable behavior. The two main skills I published are a context-transport skill for exporting and importing project context across repositories, and a brutal-product-analysis skill for evidence-backed evaluation of whether an idea is worth building.\n\nSkills are written in Markdown with frontmatter metadata and follow conventions for how Claude Code loads and executes them. They're designed to be composable, shareable, and easy to drop into any project.`,
+    body: `I published a set of Claude skills - reusable prompt modules that can be invoked inside Claude Code sessions to provide structured, repeatable behavior. The two main skills I published are a context-transport skill for exporting and importing project context across repositories, and a brutal-product-analysis skill for evidence-backed evaluation of whether an idea is worth building.\n\nSkills are written in Markdown with frontmatter metadata and follow conventions for how Claude Code loads and executes them. They're designed to be composable, shareable, and easy to drop into any project.`,
     links: [
       { label: 'GitHub →', url: 'https://github.com/fayzan123/claude-skills' },
     ],
@@ -119,7 +119,7 @@ const PROJECT_DETAILS: Record<string, ProjectDetail> = {
   'binary-tree': {
     label: 'EdTech · Web App',
     name: 'Binary Tree Traversal Practice Tool',
-    body: `A gamified platform for Computer Science students to practice binary tree traversals — inorder, preorder, and postorder. Students are shown a binary tree and have to correctly identify the traversal sequence, with immediate feedback and scoring.\n\nThe platform integrates Gemini and OpenAI to generate dynamic explanations when a student gets an answer wrong, explaining where their logic broke down. It uses Firebase for auth and real-time leaderboard data. Over 100 students have used it to prepare for DS&A exams and coding interviews.`,
+    body: `A gamified platform for Computer Science students to practice binary tree traversals - inorder, preorder, and postorder. Students are shown a binary tree and have to correctly identify the traversal sequence, with immediate feedback and scoring.\n\nThe platform integrates Gemini and OpenAI to generate dynamic explanations when a student gets an answer wrong, explaining where their logic broke down. It uses Firebase for auth and real-time leaderboard data. Over 100 students have used it to prepare for DS&A exams and coding interviews.`,
     links: [
       { label: 'Live →', url: 'https://binarytreelearner.net' },
     ],
@@ -127,7 +127,7 @@ const PROJECT_DETAILS: Record<string, ProjectDetail> = {
   'titanic': {
     label: 'Machine Learning · Data Science',
     name: 'Titanic Survival Prediction',
-    body: `A data science project that benchmarks multiple machine learning models against the classic Titanic survival dataset. The goal was to compare model architectures — Logistic Regression, Random Forest, Gradient Boosting, and a TensorFlow neural net — across accuracy, precision, recall, and AUC.\n\nThe project involved full EDA with Seaborn and Matplotlib, feature engineering (extracting title from name, encoding cabin class, handling missingness), and a clean evaluation pipeline built with Scikit-learn. It served as a rigorous introduction to the ML workflow and the tradeoffs between model complexity and interpretability.`,
+    body: `A data science project that benchmarks multiple machine learning models against the classic Titanic survival dataset. The goal was to compare model architectures - Logistic Regression, Random Forest, Gradient Boosting, and a TensorFlow neural net - across accuracy, precision, recall, and AUC.\n\nThe project involved full EDA with Seaborn and Matplotlib, feature engineering (extracting title from name, encoding cabin class, handling missingness), and a clean evaluation pipeline built with Scikit-learn. It served as a rigorous introduction to the ML workflow and the tradeoffs between model complexity and interpretability.`,
     links: [
       { label: 'GitHub →', url: 'https://github.com/fayzan123/Titanic-Survival-Prediction' },
     ],
@@ -287,7 +287,7 @@ function initGrain(): void {
   io.observe(heroEl);
 }
 
-// Module scripts are deferred — DOM is already parsed at this point.
+// Module scripts are deferred - DOM is already parsed at this point.
 // Do NOT use DOMContentLoaded here; it may have already fired.
 initNavbar();
 initScrollReveal();

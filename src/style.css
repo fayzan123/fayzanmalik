@@ -535,7 +535,7 @@ html[data-theme="dark"] {
   overflow: hidden;
 }
 
-/* Film grain overlay — injected via JS */
+/* Film grain overlay - injected via JS */
 .hero-grain {
   position: absolute;
   inset: 0;
@@ -681,13 +681,13 @@ html[data-theme="dark"] {
   transform: scale(0.97);
 }
 
-/* ── CLI wrapper — contains border trace ::before ─────── */
+/* ── CLI wrapper - contains border trace ::before ─────── */
 .cli-wrapper {
   position: relative;
   border-radius: 12px;
 }
 
-/* Animated border trace on load — draws itself around the CLI window */
+/* Animated border trace on load - draws itself around the CLI window */
 @property --border-progress {
   syntax: '<angle>';
   inherits: false;
@@ -723,9 +723,9 @@ html[data-theme="dark"] {
   .hero-grain { display: none; }
 }
 
-/* CLI window — hardcoded dark, never inherits theme.
+/* CLI window - hardcoded dark, never inherits theme.
    Reset font-family so Space Grotesk (.landing-page cascade) doesn't
-   bleed into the terminal — JetBrains Mono is set on html/body. */
+   bleed into the terminal - JetBrains Mono is set on html/body. */
 .cli-window,
 .cli-window * {
   font-family: 'JetBrains Mono', 'Courier New', monospace;
@@ -1126,7 +1126,7 @@ html[data-theme="dark"] {
 }
 .timeline-company-link:hover { color: var(--accent); }
 
-/* ── Project cards — clickable ──────────────────────────── */
+/* ── Project cards - clickable ──────────────────────────── */
 .project-card[data-project-id] {
   cursor: pointer;
   transition: transform 200ms ease, box-shadow 200ms ease, border-color 200ms ease;
