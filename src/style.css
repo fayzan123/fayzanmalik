@@ -353,7 +353,7 @@ html[data-theme="dark"] {
 
 /* ── Global landing page resets ────────────────────────────── */
 .landing-page {
-  font-family: 'Inter', system-ui, sans-serif;
+  font-family: 'Space Grotesk', system-ui, sans-serif;
   color: var(--text-landing);
   /* Transparent so .page-bloom (position:fixed; z-index:-1) shows through
      the hero area. html retains background:#0a0a0a as the base canvas. */
@@ -420,9 +420,9 @@ html[data-theme="dark"] {
 }
 
 .section-title {
-  font-family: 'Inter', system-ui, sans-serif;
+  font-family: 'Space Grotesk', system-ui, sans-serif;
   font-size: clamp(28px, 4vw, 40px);
-  font-weight: 800;
+  font-weight: 700;
   color: var(--text-landing);
   margin-bottom: 56px;
   line-height: 1.2;
@@ -490,7 +490,7 @@ html[data-theme="dark"] {
 }
 
 .nav-links a {
-  font-family: 'Inter', system-ui, sans-serif;
+  font-family: 'Space Grotesk', system-ui, sans-serif;
   font-size: 13px;
   color: var(--text-secondary);
   text-decoration: none;
@@ -552,8 +552,8 @@ html[data-theme="dark"] {
   margin: 0 auto;
   padding: 0 24px;
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 64px;
+  grid-template-columns: 5fr 7fr;
+  gap: 56px;
   align-items: center;
   width: 100%;
   position: relative;
@@ -576,9 +576,9 @@ html[data-theme="dark"] {
 }
 
 .hero-name {
-  font-family: 'Inter', system-ui, sans-serif;
+  font-family: 'Space Grotesk', system-ui, sans-serif;
   font-size: clamp(40px, 5vw, 64px);
-  font-weight: 800;
+  font-weight: 700;
   color: var(--text-landing);
   line-height: 1.1;
   letter-spacing: -0.02em;
@@ -600,7 +600,7 @@ html[data-theme="dark"] {
 }
 
 .hero-title {
-  font-family: 'Inter', system-ui, sans-serif;
+  font-family: 'Space Grotesk', system-ui, sans-serif;
   font-size: 16px;
   font-weight: 400;
   color: var(--text-muted);
@@ -608,7 +608,7 @@ html[data-theme="dark"] {
 }
 
 .hero-bio {
-  font-family: 'Inter', system-ui, sans-serif;
+  font-family: 'Space Grotesk', system-ui, sans-serif;
   font-size: 16px;
   color: var(--text-secondary);
   line-height: 1.75;
@@ -623,7 +623,7 @@ html[data-theme="dark"] {
 }
 
 .btn-primary {
-  font-family: 'Inter', system-ui, sans-serif;
+  font-family: 'Space Grotesk', system-ui, sans-serif;
   font-size: 14px;
   font-weight: 700;
   color: #0a0a0a;
@@ -657,7 +657,7 @@ html[data-theme="dark"] {
 }
 
 .btn-secondary {
-  font-family: 'Inter', system-ui, sans-serif;
+  font-family: 'Space Grotesk', system-ui, sans-serif;
   font-size: 14px;
   font-weight: 700;
   color: var(--text-landing);
@@ -811,7 +811,7 @@ html[data-theme="dark"] {
 }
 
 .timeline-role {
-  font-family: 'Inter', system-ui, sans-serif;
+  font-family: 'Space Grotesk', system-ui, sans-serif;
   font-size: 18px;
   font-weight: 700;
   color: var(--text-landing);
@@ -819,7 +819,7 @@ html[data-theme="dark"] {
 }
 
 .timeline-company {
-  font-family: 'Inter', system-ui, sans-serif;
+  font-family: 'Space Grotesk', system-ui, sans-serif;
   font-size: 14px;
   color: var(--text-secondary);
   margin-bottom: 4px;
@@ -833,7 +833,7 @@ html[data-theme="dark"] {
 }
 
 .timeline-desc {
-  font-family: 'Inter', system-ui, sans-serif;
+  font-family: 'Space Grotesk', system-ui, sans-serif;
   font-size: 15px;
   color: var(--text-secondary);
   line-height: 1.75;
@@ -867,7 +867,7 @@ html[data-theme="dark"] {
 }
 
 .project-name {
-  font-family: 'Inter', system-ui, sans-serif;
+  font-family: 'Space Grotesk', system-ui, sans-serif;
   font-size: 16px;
   font-weight: 700;
   color: var(--text-landing);
@@ -889,7 +889,7 @@ html[data-theme="dark"] {
 }
 
 .project-oneliner {
-  font-family: 'Inter', system-ui, sans-serif;
+  font-family: 'Space Grotesk', system-ui, sans-serif;
   font-size: 14px;
   color: var(--text-secondary);
   line-height: 1.65;
@@ -965,7 +965,7 @@ html[data-theme="dark"] {
 }
 
 .education-institution {
-  font-family: 'Inter', system-ui, sans-serif;
+  font-family: 'Space Grotesk', system-ui, sans-serif;
   font-size: 20px;
   font-weight: 700;
   color: var(--text-landing);
@@ -973,14 +973,14 @@ html[data-theme="dark"] {
 }
 
 .education-degree {
-  font-family: 'Inter', system-ui, sans-serif;
+  font-family: 'Space Grotesk', system-ui, sans-serif;
   font-size: 15px;
   color: var(--text-secondary);
   line-height: 1.4;
 }
 
 .education-meta {
-  font-family: 'Inter', system-ui, sans-serif;
+  font-family: 'Space Grotesk', system-ui, sans-serif;
   font-size: 14px;
   color: var(--text-secondary);
 }
@@ -1000,7 +1000,7 @@ html[data-theme="dark"] {
 
 .education-awards,
 .education-coursework {
-  font-family: 'Inter', system-ui, sans-serif;
+  font-family: 'Space Grotesk', system-ui, sans-serif;
   font-size: 14px;
   color: var(--text-secondary);
   line-height: 1.6;
@@ -1027,9 +1027,9 @@ html[data-theme="dark"] {
 }
 
 .footer-heading {
-  font-family: 'Inter', system-ui, sans-serif;
+  font-family: 'Space Grotesk', system-ui, sans-serif;
   font-size: 28px;
-  font-weight: 800;
+  font-weight: 700;
   color: var(--text-landing);
 }
 
@@ -1041,7 +1041,7 @@ html[data-theme="dark"] {
 }
 
 .footer-link {
-  font-family: 'Inter', system-ui, sans-serif;
+  font-family: 'Space Grotesk', system-ui, sans-serif;
   font-size: 14px;
   color: var(--text-secondary);
   text-decoration: none;
@@ -1213,9 +1213,9 @@ html[data-theme="dark"] {
 }
 
 .modal-title {
-  font-family: 'Inter', system-ui, sans-serif;
+  font-family: 'Space Grotesk', system-ui, sans-serif;
   font-size: 26px;
-  font-weight: 800;
+  font-weight: 700;
   color: var(--text-landing);
   line-height: 1.2;
 }
@@ -1228,7 +1228,7 @@ html[data-theme="dark"] {
 }
 
 .modal-body {
-  font-family: 'Inter', system-ui, sans-serif;
+  font-family: 'Space Grotesk', system-ui, sans-serif;
   font-size: 15px;
   line-height: 1.75;
   color: var(--text-secondary);
