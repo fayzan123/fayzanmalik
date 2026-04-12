@@ -113,7 +113,8 @@ const PROJECT_DETAILS: Record<string, ProjectDetail> = {
     name: 'Claude Skills',
     body: `I published a set of Claude skills - reusable prompt modules that can be invoked inside Claude Code sessions to provide structured, repeatable behavior. The two main skills I published are a context-transport skill for exporting and importing project context across repositories, and a brutal-product-analysis skill for evidence-backed evaluation of whether an idea is worth building.\n\nSkills are written in Markdown with frontmatter metadata and follow conventions for how Claude Code loads and executes them. They're designed to be composable, shareable, and easy to drop into any project.`,
     links: [
-      { label: 'GitHub →', url: 'https://github.com/fayzan123/claude-skills' },
+      { label: 'brutal-analysis →', url: 'https://github.com/fayzan123/brutal-analysis' },
+      { label: 'context-transport →', url: 'https://github.com/fayzan123/context-transport' },
     ],
   },
   'binary-tree': {
