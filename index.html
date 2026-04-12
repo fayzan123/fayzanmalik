@@ -50,16 +50,18 @@
         </div>
       </div>
       <div class="hero-right" data-animate="fade-left">
-        <div class="cli-window">
-          <div class="cli-chrome" aria-hidden="true">
-            <div class="cli-dots">
-              <span class="dot dot-red"></span>
-              <span class="dot dot-yellow"></span>
-              <span class="dot dot-green"></span>
+        <div class="cli-wrapper">
+          <div class="cli-window">
+            <div class="cli-chrome" aria-hidden="true">
+              <div class="cli-dots">
+                <span class="dot dot-red"></span>
+                <span class="dot dot-yellow"></span>
+                <span class="dot dot-green"></span>
+              </div>
+              <span class="cli-title-text">fayzan@portfolio ~ %</span>
             </div>
-            <span class="cli-title-text">fayzan@portfolio ~ %</span>
+            <div id="terminal" aria-label="Interactive terminal — type 'fayzan help' to get started"></div>
           </div>
-          <div id="terminal" aria-label="Interactive terminal — type 'fayzan help' to get started"></div>
         </div>
       </div>
     </div>
@@ -75,7 +77,7 @@
         <div class="timeline-marker" aria-hidden="true"></div>
         <div class="timeline-content">
           <h3 class="timeline-role">Co-Founder &amp; CTO</h3>
-          <p class="timeline-company">Chox AI &mdash; Remote</p>
+          <p class="timeline-company"><a href="https://chox.ai" target="_blank" rel="noopener noreferrer" class="timeline-company-link">Chox AI</a> &mdash; Remote</p>
           <p class="timeline-dates">January 2026 – Present</p>
           <p class="timeline-desc">Built a Go HTTP proxy that sits between AI agents and external APIs, intercepting requests to classify actions, extract structured signals, and enforce governance policies before forwarding traffic. Implemented an argument-aware risk scoring and shadow-verdict pipeline for agent tool calls, classifying actions such as read, write, delete, and financial operations before enforcement is enabled. Developed the core Go backend and React dashboard for monitoring high-risk API actions, audit logs, and rule-based governance across developer-built AI agents.</p>
         </div>
@@ -120,7 +122,7 @@
     <h2 class="section-title">Projects</h2>
     <div class="projects-grid">
 
-      <div class="project-card" data-animate="scale-in">
+      <div class="project-card" data-animate="scale-in" data-project-id="agency-agents">
         <h3 class="project-name">agency-agents <span class="project-badge">Open Source</span></h3>
         <p class="project-oneliner">Merged a LinkedIn Content Creator agent into the #1 trending GitHub repo (65,000+ stars).</p>
         <div class="project-tags">
@@ -133,7 +135,7 @@
         </div>
       </div>
 
-      <div class="project-card" data-animate="scale-in">
+      <div class="project-card" data-animate="scale-in" data-project-id="claude-check">
         <h3 class="project-name">claude-check</h3>
         <p class="project-oneliner">A CLI tool with 650+ downloads that scores your prompt before you send it to Claude.</p>
         <div class="project-tags">
@@ -148,7 +150,7 @@
         </div>
       </div>
 
-      <div class="project-card" data-animate="scale-in">
+      <div class="project-card" data-animate="scale-in" data-project-id="thisthenthat">
         <h3 class="project-name">ThisThenThat</h3>
         <p class="project-oneliner">Upload your assignment PDF and get a step-by-step game plan with AI chat per step.</p>
         <div class="project-tags">
@@ -164,7 +166,7 @@
         </div>
       </div>
 
-      <div class="project-card" data-animate="scale-in">
+      <div class="project-card" data-animate="scale-in" data-project-id="clearcare">
         <h3 class="project-name">ClearCare</h3>
         <p class="project-oneliner">A rural healthcare referral platform that could save $15,000+ per avoided airlift.</p>
         <div class="project-tags">
@@ -180,22 +182,7 @@
         </div>
       </div>
 
-      <div class="project-card" data-animate="scale-in">
-        <h3 class="project-name">Chox AI</h3>
-        <p class="project-oneliner">An AI agent governance layer that classifies and risk-scores tool calls in real time.</p>
-        <div class="project-tags">
-          <span class="tag">Go</span>
-          <span class="tag">React</span>
-          <span class="tag">TypeScript</span>
-          <span class="tag">PostgreSQL</span>
-          <span class="tag">Docker</span>
-        </div>
-        <div class="project-links">
-          <a href="https://github.com/fayzan123/chox-ai" target="_blank" rel="noopener noreferrer" class="project-link">GitHub →</a>
-        </div>
-      </div>
-
-      <div class="project-card" data-animate="scale-in">
+      <div class="project-card" data-animate="scale-in" data-project-id="claude-skills">
         <h3 class="project-name">Claude Skills</h3>
         <p class="project-oneliner">Published Claude skills for reusable context handoff and evidence-backed product analysis.</p>
         <div class="project-tags">
@@ -207,7 +194,7 @@
         </div>
       </div>
 
-      <div class="project-card" data-animate="scale-in">
+      <div class="project-card" data-animate="scale-in" data-project-id="binary-tree">
         <h3 class="project-name">Binary Tree Traversal Practice Tool</h3>
         <p class="project-oneliner">A gamified platform used by 100+ students for practicing binary tree traversals.</p>
         <div class="project-tags">
@@ -222,7 +209,7 @@
         </div>
       </div>
 
-      <div class="project-card" data-animate="scale-in">
+      <div class="project-card" data-animate="scale-in" data-project-id="titanic">
         <h3 class="project-name">Titanic Survival Prediction</h3>
         <p class="project-oneliner">ML model comparison for Titanic survival classification.</p>
         <div class="project-tags">
@@ -344,6 +331,20 @@
       <p class="footer-copy">&copy; 2026 Fayzan Malik</p>
     </div>
   </footer>
+
+  <!-- ── PROJECT MODAL ──────────────────────────────────── -->
+  <div class="project-modal-overlay" id="project-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" hidden>
+    <div class="project-modal">
+      <button class="modal-close" id="modal-close" aria-label="Close">&times;</button>
+      <div class="modal-header">
+        <p class="modal-label" id="modal-label"></p>
+        <h2 class="modal-title" id="modal-title"></h2>
+      </div>
+      <div class="modal-tags" id="modal-tags"></div>
+      <div class="modal-body" id="modal-body"></div>
+      <div class="modal-links" id="modal-links"></div>
+    </div>
+  </div>
 
   <script type="module" src="/src/main.ts"></script>
   <script type="module" src="/src/landing.ts"></script>

@@ -517,7 +517,23 @@ html[data-theme="dark"] {
   display: flex;
   align-items: center;
   padding-top: 80px;
-  background: radial-gradient(ellipse at 15% 55%, rgba(0, 255, 136, 0.055) 0%, transparent 55%);
+  position: relative;
+  overflow: hidden;
+  --bloom-x: 15%;
+  --bloom-y: 55%;
+  background: radial-gradient(ellipse at var(--bloom-x) var(--bloom-y), rgba(0, 255, 136, 0.055) 0%, transparent 55%);
+}
+
+/* Film grain overlay — injected via JS */
+.hero-grain {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  opacity: 0.032;
+  mix-blend-mode: overlay;
+  z-index: 0;
 }
 
 .hero-inner {
@@ -529,6 +545,8 @@ html[data-theme="dark"] {
   gap: 64px;
   align-items: center;
   width: 100%;
+  position: relative;
+  z-index: 1;
 }
 
 .hero-left {
@@ -652,6 +670,47 @@ html[data-theme="dark"] {
   transform: scale(0.97);
 }
 
+/* ── CLI wrapper — contains border trace ::before ─────── */
+.cli-wrapper {
+  position: relative;
+  border-radius: 12px;
+}
+
+/* Animated border trace on load — draws itself around the CLI window */
+@property --border-progress {
+  syntax: '<angle>';
+  inherits: false;
+  initial-value: 0deg;
+}
+
+.cli-wrapper::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: 13px;
+  padding: 1px;
+  background: conic-gradient(from -90deg, var(--accent) var(--border-progress), transparent var(--border-progress));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  z-index: 2;
+  opacity: 0;
+  animation: borderTrace 1.5s cubic-bezier(0.16, 1, 0.3, 1) 0.4s forwards;
+}
+
+@keyframes borderTrace {
+  0%   { --border-progress: 0deg;   opacity: 1; }
+  78%  { --border-progress: 360deg; opacity: 1; }
+  100% { --border-progress: 360deg; opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cli-wrapper::before { animation: none; opacity: 0; }
+  .hero-grain { display: none; }
+}
+
 /* CLI window — hardcoded dark, never inherits theme */
 .cli-window {
   background: #111111;
@@ -693,6 +752,10 @@ html[data-theme="dark"] {
   margin: 0;
   border: none;
   border-radius: 0;
+}
+
+.cli-window .terminal-window .title-bar {
+  display: none;
 }
 
 /* ── Experience timeline ────────────────────────────────── */
@@ -1033,4 +1096,159 @@ html[data-theme="dark"] {
   .section { padding: 80px 20px; }
   .hero-inner { padding: 0 20px; }
   .footer-inner { padding: 0 20px; }
+}
+
+/* ── Timeline company link ──────────────────────────────── */
+.timeline-company-link {
+  color: inherit;
+  text-decoration: none;
+  border-bottom: 1px solid var(--accent);
+  transition: color 150ms ease, border-color 150ms ease;
+}
+.timeline-company-link:hover { color: var(--accent); }
+
+/* ── Project cards — clickable ──────────────────────────── */
+.project-card[data-project-id] {
+  cursor: pointer;
+  transition: transform 200ms ease, box-shadow 200ms ease, border-color 200ms ease;
+}
+.project-card[data-project-id]:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+  border-color: var(--accent);
+}
+.project-card[data-project-id] .project-links a {
+  position: relative;
+  z-index: 2;
+}
+
+/* ── Project modal ──────────────────────────────────────── */
+.project-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  opacity: 0;
+  transition: opacity 250ms ease;
+}
+.project-modal-overlay[hidden] {
+  display: none;
+}
+.project-modal-overlay.modal-visible {
+  opacity: 1;
+}
+
+.project-modal {
+  background: #0f0f0f;
+  border: 1px solid #222;
+  border-radius: 16px;
+  max-width: 680px;
+  width: 100%;
+  max-height: 85vh;
+  overflow-y: auto;
+  padding: 40px;
+  position: relative;
+  transform: translateY(20px);
+  transition: transform 250ms ease;
+  scrollbar-width: thin;
+  scrollbar-color: #333 transparent;
+}
+.project-modal-overlay.modal-visible .project-modal {
+  transform: translateY(0);
+}
+
+.modal-close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: none;
+  border: 1px solid #333;
+  color: var(--text-secondary);
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  font-size: 18px;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color 150ms ease, color 150ms ease;
+}
+.modal-close:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.modal-header {
+  margin-bottom: 20px;
+}
+
+.modal-label {
+  font-family: 'JetBrains Mono', 'Courier New', monospace;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 8px;
+}
+
+.modal-title {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 26px;
+  font-weight: 800;
+  color: var(--text-landing);
+  line-height: 1.2;
+}
+
+.modal-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 24px;
+}
+
+.modal-body {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 15px;
+  line-height: 1.75;
+  color: var(--text-secondary);
+  margin-bottom: 28px;
+}
+
+.modal-body p + p {
+  margin-top: 12px;
+}
+
+.modal-links {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.modal-link {
+  font-family: 'JetBrains Mono', 'Courier New', monospace;
+  font-size: 13px;
+  color: var(--accent);
+  text-decoration: none;
+  border: 1px solid var(--accent);
+  padding: 8px 16px;
+  border-radius: 4px;
+  transition: background 150ms ease;
+}
+.modal-link:hover { background: rgba(0, 255, 136, 0.08); }
+
+@media (max-width: 600px) {
+  .project-modal {
+    padding: 28px 20px;
+    border-radius: 12px;
+  }
+  .modal-title { font-size: 22px; }
 }
