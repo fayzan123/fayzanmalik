@@ -145,14 +145,17 @@ function initProjectModal(): void {
   const linksEl = document.getElementById('modal-links')!;
   const closeBtn = document.getElementById('modal-close')!;
 
+  let lastFocused: HTMLElement | null = null;
+
   function openModal(projectId: string): void {
+    // store focus origin for restoration on close
+    lastFocused = document.activeElement as HTMLElement | null;
     const data = PROJECT_DETAILS[projectId];
     if (!data) return;
 
     labelEl.textContent = data.label;
     titleEl.textContent = data.name;
 
-    // Populate tags from the card
     const card = document.querySelector<HTMLElement>(`[data-project-id="${projectId}"]`);
     tagsEl.innerHTML = '';
     card?.querySelectorAll('.tag').forEach(tag => {
@@ -162,13 +165,11 @@ function initProjectModal(): void {
       tagsEl.appendChild(span);
     });
 
-    // Body
     bodyEl.innerHTML = data.body
       .split('\n\n')
       .map(p => `<p>${p.replace(/\n/g, '<br>')}</p>`)
       .join('');
 
-    // Links
     linksEl.innerHTML = '';
     data.links.forEach(({ label, url }) => {
       const a = document.createElement('a');
@@ -182,23 +183,36 @@ function initProjectModal(): void {
 
     overlay.hidden = false;
     document.body.style.overflow = 'hidden';
-    requestAnimationFrame(() => overlay.classList.add('modal-visible'));
+    requestAnimationFrame(() => {
+      overlay.classList.add('modal-visible');
+      closeBtn.focus();
+    });
   }
 
   function closeModal(): void {
     overlay.classList.remove('modal-visible');
     document.body.style.overflow = '';
-    overlay.addEventListener('transitionend', () => {
-      overlay.hidden = true;
+    overlay.addEventListener('transitionend', (e) => {
+      if (e.target === overlay) {
+        overlay.hidden = true;
+        lastFocused?.focus();
+      }
     }, { once: true });
   }
 
   document.querySelectorAll<HTMLElement>('.project-card[data-project-id]').forEach(card => {
-    card.addEventListener('click', (e) => {
-      // Don't open modal when clicking a link inside the card
+    card.setAttribute('tabindex', '0');
+    card.setAttribute('role', 'button');
+    const openCard = (e: Event) => {
       if ((e.target as HTMLElement).closest('a')) return;
-      const id = card.dataset.projectId!;
-      openModal(id);
+      openModal(card.dataset.projectId!);
+    };
+    card.addEventListener('click', openCard);
+    card.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        openCard(e);
+      }
     });
   });
 
@@ -212,15 +226,16 @@ function initProjectModal(): void {
 }
 
 function initCursorBloom(): void {
-  const bloom = document.querySelector<HTMLElement>('.page-bloom');
-  if (!bloom) return;
+  const bloomEl = document.querySelector<HTMLElement>('.page-bloom');
+  if (!bloomEl) return;
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-  const bloomEl = bloom;
+  const bloom = bloomEl;
   let targetX = 20;
   let targetY = 40;
   let currentX = 20;
   let currentY = 40;
+  let bloomRafId = 0;
 
   document.addEventListener('mousemove', (e: MouseEvent) => {
     targetX = (e.clientX / window.innerWidth) * 100;
@@ -234,12 +249,19 @@ function initCursorBloom(): void {
   function tick(): void {
     currentX = lerp(currentX, targetX, 0.04);
     currentY = lerp(currentY, targetY, 0.04);
-    bloomEl.style.setProperty('--bloom-x', `${currentX.toFixed(2)}%`);
-    bloomEl.style.setProperty('--bloom-y', `${currentY.toFixed(2)}%`);
-    requestAnimationFrame(tick);
+    bloom.style.setProperty('--bloom-x', `${Math.round(currentX)}%`);
+    bloom.style.setProperty('--bloom-y', `${Math.round(currentY)}%`);
+    bloomRafId = requestAnimationFrame(tick);
   }
 
-  requestAnimationFrame(tick);
+  function start(): void { if (!bloomRafId) bloomRafId = requestAnimationFrame(tick); }
+  function stop(): void { cancelAnimationFrame(bloomRafId); bloomRafId = 0; }
+
+  document.addEventListener('visibilitychange', () => {
+    document.hidden ? stop() : start();
+  });
+
+  start();
 }
 
 function initGrain(): void {
@@ -262,7 +284,7 @@ function initGrain(): void {
   const data = imageData.data;
 
   let frame = 0;
-  let rafId: number;
+  let rafId = 0;
 
   function drawGrain(): void {
     for (let i = 0; i < data.length; i += 4) {
