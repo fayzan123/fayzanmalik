@@ -1,5 +1,5 @@
 import { register } from './commands';
-import * as data from './data';
+import * as data from '../data';
 
 function escapeHtml(str: string): string {
   return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');

@@ -1,4 +1,4 @@
-import './style.css';
+import '../style.css';
 import { Terminal } from './terminal';
 import { execute, register } from './commands';
 import { registerAllHandlers } from './handlers';
