@@ -100,6 +100,14 @@ const PROJECT_DETAILS: Record<string, ProjectDetail> = {
       { label: 'GitHub →', url: 'https://github.com/Deogan7/ClearCare' },
     ],
   },
+  'chox-ai': {
+    label: 'AI Safety · Co-Founder & CTO',
+    name: 'Chox AI',
+    body: `Chox AI is a governance layer for AI agents — an HTTP proxy that sits between your agents and the external APIs they call. Every outbound request is intercepted, classified, and risk-scored before being forwarded or blocked.\n\nThe core is a Go-based proxy that extracts action type and argument signals from each API call, then runs it through a classification pipeline: read, write, delete, or financial operation. High-risk actions are logged as shadow verdicts before enforcement is enabled, letting you audit agent behavior without disrupting workflows.\n\nI built the full Go backend, the proxy infrastructure, and the React dashboard for visualizing audit logs and configuring governance rules. The dashboard lets you set allow/block/escalate policies per action type and monitor agent activity in real time.`,
+    links: [
+      { label: 'GitHub →', url: 'https://github.com/fayzan123/chox-ai' },
+    ],
+  },
   'claude-skills': {
     label: 'AI Tooling · Prompt Engineering',
     name: 'Claude Skills',
