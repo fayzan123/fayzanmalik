@@ -71,7 +71,7 @@ const PROJECT_DETAILS: Record<string, ProjectDetail> = {
     name: 'agency-agents',
     body: `I contributed a LinkedIn Content Creator agent to agency-agents - the #1 trending repository on GitHub at the time, with over 65,000 stars. The agent automates LinkedIn content creation by analyzing a given topic, drafting an engaging post optimized for the LinkedIn algorithm, and outputting it in a format ready to publish.\n\nThe contribution involved writing a clean, composable Bash-based agent script that integrates with Claude via the Claude CLI, following the project's conventions for agent structure and prompt design. The PR was reviewed and merged by the maintainer.`,
     links: [
-      { label: 'GitHub →', url: 'https://github.com/msitarzewski/agency-agents' },
+      { label: 'GitHub →', url: 'https://github.com/msitarzewski/agency-agents/pull/129' },
     ],
   },
   'claude-check': {

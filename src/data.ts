@@ -54,7 +54,7 @@ export const projects: Project[] = [
     description: 'Contributed a LinkedIn Content Creator agent to agency-agents (PR #129), the #1 trending repository on GitHub at the time with 65,000+ stars. Studied existing agents to match the format exactly, built the agent with real templates, tested it on a live use case, and navigated the full fork → branch → PR workflow. The agent handles LinkedIn thought leadership content strategy, post drafting, and audience engagement workflows.',
     stack: 'Bash, Claude, GitHub',
     role: 'Open source contributor',
-    github: 'https://github.com/msitarzewski/agency-agents',
+    github: 'https://github.com/msitarzewski/agency-agents/pull/129',
   },
   {
     slug: 'claude-check',
