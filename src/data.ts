@@ -8,6 +8,7 @@ export interface Project {
   github: string;
   npm?: string;
   live?: string;
+  devpost?: string;
 }
 
 export interface Experience {
@@ -47,6 +48,16 @@ export interface Social {
 export const bio = "Hey, I'm Fayzan \u2014 a Computer Science student at Western University, full stack developer, and builder. I'm into AI agents, CLI tools, and shipping things that actually work. Currently leading Western's Agentic Development Club and always working on something \u2014 whether it's a side project or something more serious.";
 
 export const projects: Project[] = [
+  {
+    slug: 'lazarus',
+    name: 'Lazarus',
+    oneLiner: 'Top 10 at HackPrinceton — an autonomous AI swarm that resurrects failed clinical trials into executive-ready drug repurposing plans.',
+    description: 'Built an autonomous multi-agent AI system that mines failed and terminated clinical trials from ClinicalTrials.gov, PubMed, and openFDA, then runs each candidate through a coordinated adversarial pipeline: an Advocate proposes an alternative disease indication, a Skeptic challenges it for safety conflicts, an Evidence Curator validates citations against real PubMed IDs, a Trial Strategist estimates feasibility and ROI, and a Judge synthesizes a final confidence-scored recommendation. The output is a full executive-ready R&D blueprint PDF with decision-maker notifications via iMessage. Placed Top 10 under the Regeneron AI & Tech for Clinical Trials track at HackPrinceton Spring 2026, competing against 400+ hackers and 100+ teams.',
+    stack: 'Python, FastAPI, PostgreSQL, Neo4j, Redis, React, GPT-4o, Gemini, Docker, WebSocket',
+    role: 'Co-builder (team of 4)',
+    github: 'https://github.com/farhanmir/lazarus',
+    devpost: 'https://devpost.com/software/lazarus-91k3tz',
+  },
   {
     slug: 'agency-agents',
     name: 'agency-agents (Open Source Contribution)',

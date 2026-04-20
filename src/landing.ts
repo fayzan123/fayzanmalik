@@ -66,6 +66,15 @@ interface ProjectDetail {
 }
 
 const PROJECT_DETAILS: Record<string, ProjectDetail> = {
+  'lazarus': {
+    label: 'Hackathon · Top 10 · HackPrinceton Spring 2026',
+    name: 'Lazarus',
+    body: `Most drugs that fail in clinical trials don't fail because the science is bad. They fail because of wrong patient targeting, funding cuts, or poor enrollment. Billions in promising research gets shelved — near-misses that could save lives if someone went back for them.\n\nLazarus is an autonomous AI swarm that mines those near-misses. It pulls failed and terminated trials from ClinicalTrials.gov, PubMed, and openFDA, then runs each candidate through a coordinated multi-agent adversarial pipeline.\n\nThe pipeline has five agents: an Advocate proposes the best alternative disease indication for a shelved asset. A Skeptic challenges it — checking for safety signals and mechanistic conflicts. An Evidence Curator validates every citation against real PubMed IDs and kills hallucinated references. A Trial Strategist estimates enrollment feasibility, site geography, and ROI priority. A Judge synthesizes the full debate into a final recommendation and confidence score.\n\nThe output is a full executive-ready R&D blueprint PDF, delivered with iMessage notifications via Photon/Spectrum integration. The frontend is a 9-tab live dashboard built in React with Cytoscape.js for interactive knowledge graph visualization, Framer Motion for animated agent progress, and WebSocket for real-time pipeline output streaming.\n\nThe backend runs on FastAPI with PostgreSQL for persistence, Neo4j as a biological knowledge graph (Drug → Target → Disease → Evidence), and Redis as a real-time pub/sub blackboard between agents.\n\nBuilt in 36 hours at HackPrinceton Spring 2026. Placed Top 10 under the Regeneron AI & Tech for Clinical Trials track, competing against 400+ hackers and 100+ teams.`,
+    links: [
+      { label: 'GitHub →', url: 'https://github.com/farhanmir/lazarus' },
+      { label: 'Devpost →', url: 'https://devpost.com/software/lazarus-91k3tz' },
+    ],
+  },
   'agency-agents': {
     label: 'Open Source Contribution',
     name: 'agency-agents',

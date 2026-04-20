@@ -86,10 +86,13 @@ function projectList(): string {
   return data.projects.map(p => {
     let links = `<span class="text-muted">GitHub:</span> <a href="${p.github}" target="_blank" rel="noopener">${p.github}</a>`;
     if (p.live) {
-      links += `\n    <span class="text-muted">Live:</span>   <a href="${p.live}" target="_blank" rel="noopener">${p.live}</a>`;
+      links += `\n    <span class="text-muted">Live:</span>    <a href="${p.live}" target="_blank" rel="noopener">${p.live}</a>`;
     }
     if (p.npm) {
-      links += `\n    <span class="text-muted">npm:</span>    <a href="${p.npm}" target="_blank" rel="noopener">${p.npm}</a>`;
+      links += `\n    <span class="text-muted">npm:</span>     <a href="${p.npm}" target="_blank" rel="noopener">${p.npm}</a>`;
+    }
+    if (p.devpost) {
+      links += `\n    <span class="text-muted">Devpost:</span> <a href="${p.devpost}" target="_blank" rel="noopener">${p.devpost}</a>`;
     }
 
     const details = `${escapeHtml(p.description)}
@@ -122,10 +125,13 @@ ${escapeHtml(project.description)}
 <span class="text-muted">GitHub:</span> <a href="${project.github}" target="_blank" rel="noopener">${project.github}</a>`;
 
   if (project.npm) {
-    output += `\n<span class="text-muted">npm:</span>    <a href="${project.npm}" target="_blank" rel="noopener">${project.npm}</a>`;
+    output += `\n<span class="text-muted">npm:</span>     <a href="${project.npm}" target="_blank" rel="noopener">${project.npm}</a>`;
   }
   if (project.live) {
-    output += `\n<span class="text-muted">Live:</span>   <a href="${project.live}" target="_blank" rel="noopener">${project.live}</a>`;
+    output += `\n<span class="text-muted">Live:</span>    <a href="${project.live}" target="_blank" rel="noopener">${project.live}</a>`;
+  }
+  if (project.devpost) {
+    output += `\n<span class="text-muted">Devpost:</span> <a href="${project.devpost}" target="_blank" rel="noopener">${project.devpost}</a>`;
   }
 
   return output;
