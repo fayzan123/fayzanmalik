@@ -83,6 +83,14 @@ const PROJECT_DETAILS: Record<string, ProjectDetail> = {
       { label: 'GitHub →', url: 'https://github.com/msitarzewski/agency-agents/pull/129' },
     ],
   },
+  'ghostline': {
+    label: 'Sales Infrastructure · Chox GTM Engine',
+    name: 'Ghostline',
+    body: `There's no directory of developers building production AI agents. They exist scattered across GitHub, quietly wiring LangGraph to Stripe, CrewAI to PostgreSQL, AutoGen to Twilio. Ghostline was built to find them.\n\nGhostline is an automated lead generation and outreach pipeline — Chox's go-to-market engine. It operates as two independent pipelines sharing a Google Sheet as their data layer.\n\nThe discovery pipeline runs daily via cron. It fires 16 targeted GitHub searches (langgraph stripe, langchain postgresql, crewai twilio, etc.), filters out forks, tutorials, and low-signal repos, then extracts developer emails through a 4-method fallback chain: GitHub profile, commit metadata, public events, and bio regex. Each lead is scored 0–100 across four dimensions: tool use signals (framework imports, risk API imports), production maturity (README quality, repo age, production keywords), social proof (stars, contributors), and developer profile (company affiliation, commit frequency, followers). Tier 1 leads (score ≥ 20) are written to Google Sheets for outreach.\n\nThe outreach pipeline is a LangGraph StateGraph with 8 nodes and a human-in-the-loop interrupt before any email is sent. It reads uncontacted leads, fetches each repo's README from GitHub, and calls Claude Sonnet to generate a personalized 150-word cold email per lead — grounded in their specific repo, detected frameworks, and risk APIs. Every draft is presented in a raw-mode terminal review UI where the founder approves, rejects, or edits before anything is sent. State is checkpointed to SQLite so runs are resumable if interrupted mid-review.\n\nThe pipeline achieves ~45 qualified leads per daily run, ~92% email extraction rate, and ~25% Tier 1 rate. No third-party data vendors. No scrapers. Built entirely on GitHub's public API and Claude.`,
+    links: [
+      { label: 'GitHub →', url: 'https://github.com/fayzan123/ghostline' },
+    ],
+  },
   'claude-check': {
     label: 'CLI Tool · npm Package',
     name: 'claude-check',

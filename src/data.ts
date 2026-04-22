@@ -68,6 +68,15 @@ export const projects: Project[] = [
     github: 'https://github.com/msitarzewski/agency-agents/pull/129',
   },
   {
+    slug: 'ghostline',
+    name: 'Ghostline',
+    oneLiner: 'Automated lead generation pipeline that discovers, scores, and outreaches AI agent developers on GitHub — Chox\'s go-to-market engine.',
+    description: 'Built an end-to-end sales pipeline for Chox that runs 16 targeted GitHub searches daily to find Python developers building production AI agents with LangChain, LangGraph, and CrewAI. Each repo is scored 0–100 across tool use, production maturity, social proof, and developer profile signals. Qualified leads are exported to Google Sheets with inferred pain points. A LangGraph-powered outreach agent then fetches each repo\'s README, generates a personalized 150-word cold email via Claude, and presents every draft in a terminal review UI — no email is sent without founder approval. Achieves ~92% email extraction rate and ~45 qualified leads per daily run.',
+    stack: 'Python, LangGraph, GitHub API, Google Sheets API, Anthropic Claude, SQLite, Gmail SMTP, cron',
+    role: 'Solo builder (co-founder)',
+    github: 'https://github.com/fayzan123/ghostline',
+  },
+  {
     slug: 'claude-check',
     name: 'claude-check',
     oneLiner: 'A CLI tool with 650+ downloads that scores your prompt before you send it to Claude.',
