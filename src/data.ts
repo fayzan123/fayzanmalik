@@ -159,7 +159,7 @@ export const experience: Experience[] = [
     description: 'Founded and currently lead a student-run agentic AI community for computer science students at Western University. Organize workshops, hackathons, and networking events on autonomous agent development using n8n, LangGraph, and MCP-based workflows. Oversee club-led projects where members collaborate across teams to build and ship practical AI agent solutions.',
   },
   {
-    role: 'Backend Development Intern',
+    role: 'Software Engineer Intern',
     company: 'ICARO Media Group',
     location: 'Thornhill, ON',
     dates: 'July 2025 \u2013 September 2025',
