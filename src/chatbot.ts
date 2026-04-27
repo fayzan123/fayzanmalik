@@ -70,15 +70,19 @@ async function sendMessage(): Promise<void> {
       body: JSON.stringify({ messages: chatHistory }),
     });
 
-    const data = await res.json() as { reply?: string };
     typing.remove();
 
-    if (res.ok && data.reply) {
-      appendMessage('bot', data.reply);
-      chatHistory.push({ role: 'assistant', content: data.reply });
-    } else {
-      appendMessage('bot', 'Sorry, something went wrong. Please try again.');
+    let reply = 'Sorry, something went wrong. Please try again.';
+    if (res.ok) {
+      try {
+        const data = await res.json() as { reply?: string };
+        if (data.reply) {
+          reply = data.reply;
+          chatHistory.push({ role: 'assistant', content: data.reply });
+        }
+      } catch { /* non-JSON response */ }
     }
+    appendMessage('bot', reply);
   } catch {
     typing.remove();
     appendMessage('bot', "Sorry, I'm having trouble connecting. Please try again.");
