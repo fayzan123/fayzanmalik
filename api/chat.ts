@@ -7,7 +7,7 @@ import {
   certification,
   contact,
   socials,
-} from '../src/data';
+} from '../src/data.js';
 
 function buildSystemPrompt(): string {
   const projectList = projects
