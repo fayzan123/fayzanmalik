@@ -112,7 +112,7 @@ export default async function handler(req: any, res: any) {
         Authorization: `Bearer ${apiKey}`,
       },
       body: JSON.stringify({
-        model: 'google/gemma-3-27b-it:free',
+        model: 'nvidia/llama-nemotron-embed-vl-1b-v2:free',
         messages: [
           { role: 'system', content: buildSystemPrompt() },
           ...body.messages,
