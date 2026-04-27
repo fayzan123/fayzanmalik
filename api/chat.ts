@@ -80,7 +80,7 @@ export default async function handler(req: any, res: any) {
         Authorization: `Bearer ${apiKey}`,
       },
       body: JSON.stringify({
-        model: 'meta-llama/llama-3.3-70b-instruct:free',
+        model: 'nvidia/nemotron-3-super-120b-a12b:free',
         messages: [
           { role: 'system', content: buildSystemPrompt() },
           ...body.messages,
