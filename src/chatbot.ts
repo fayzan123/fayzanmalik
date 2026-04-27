@@ -3,7 +3,7 @@ interface Message {
   content: string;
 }
 
-const history: Message[] = [];
+const chatHistory: Message[] = [];
 
 function getEl<T extends HTMLElement>(id: string): T {
   const el = document.getElementById(id);
@@ -59,7 +59,7 @@ async function sendMessage(): Promise<void> {
   input.disabled = true;
 
   appendMessage('user', text);
-  history.push({ role: 'user', content: text });
+  chatHistory.push({ role: 'user', content: text });
 
   const typing = appendTyping();
 
@@ -67,7 +67,7 @@ async function sendMessage(): Promise<void> {
     const res = await fetch('/api/chat', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ messages: history }),
+      body: JSON.stringify({ messages: chatHistory }),
     });
 
     const data = await res.json() as { reply?: string };
@@ -75,7 +75,7 @@ async function sendMessage(): Promise<void> {
 
     if (res.ok && data.reply) {
       appendMessage('bot', data.reply);
-      history.push({ role: 'assistant', content: data.reply });
+      chatHistory.push({ role: 'assistant', content: data.reply });
     } else {
       appendMessage('bot', 'Sorry, something went wrong. Please try again.');
     }
