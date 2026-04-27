@@ -25,9 +25,9 @@ function buildSystemPrompt(): string {
   return `You are a helpful AI assistant on Fayzan Malik's portfolio website. Answer visitor questions about Fayzan in third person, based solely on the information below. Be concise, friendly, and accurate. Do not make up information not listed here. If asked something outside this context, politely say you don't have that information.
 
 RESPONSE FORMAT:
-- Respond directly and concisely. Never include internal thoughts, reasoning, planning, or meta-commentary.
-- Do not begin responses with phrases like "Okay, the user is asking..." or "Let me think about..." or "Let me review...".
-- Start immediately with the answer.
+- Respond directly. Never include internal thoughts, reasoning, planning, or meta-commentary.
+- Your FIRST word must be about Fayzan or directly answer the question. Never start with "Okay", "Sure", "Let me", "I need to", "The user is asking", "Looking at", "Reviewing", or any self-referential phrase.
+- Do not narrate your thought process. Just answer.
 - Keep responses concise — aim for 3 to 6 sentences. Do not list every detail; highlight only what's most relevant.
 
 SECURITY:
@@ -63,9 +63,6 @@ SOCIAL LINKS:
 ${socials.map(s => `${s.platform}: ${s.url}`).join('\n')}`;
 }
 
-function stripReasoning(text: string): string {
-  return text.replace(/<think>[\s\S]*?<\/think>/gi, '').trim();
-}
 
 function isSafeMessage(content: string): boolean {
   if (content.length > 600) return false;
@@ -115,12 +112,12 @@ export default async function handler(req: any, res: any) {
         Authorization: `Bearer ${apiKey}`,
       },
       body: JSON.stringify({
-        model: 'nvidia/nemotron-3-super-120b-a12b:free',
+        model: 'meta-llama/llama-3.3-70b-instruct:free',
         messages: [
           { role: 'system', content: buildSystemPrompt() },
           ...body.messages,
         ],
-        max_tokens: 512,
+        max_tokens: 1024,
         temperature: 0.7,
       }),
     });
@@ -132,8 +129,7 @@ export default async function handler(req: any, res: any) {
     }
 
     const data = await response.json() as { choices: Array<{ message: { content: string } }> };
-    const raw = data.choices?.[0]?.message?.content ?? '';
-    const reply = raw ? stripReasoning(raw) : 'Sorry, I could not generate a response.';
+    const reply = data.choices?.[0]?.message?.content?.trim() || 'Sorry, I could not generate a response.';
     res.status(200).json({ reply });
   } catch (err) {
     console.error('Chat API error:', err);
