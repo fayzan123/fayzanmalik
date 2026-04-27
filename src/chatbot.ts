@@ -24,7 +24,21 @@ function toggleChat(): void {
   isOpen = !isOpen;
   panel.classList.toggle('is-open', isOpen);
   toggle.setAttribute('aria-expanded', String(isOpen));
-  if (isOpen) input.focus();
+  if (isOpen) {
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!reduced) {
+      panel.animate(
+        [
+          { transform: 'scale(0.93) translateY(12px)', opacity: '0', offset: 0 },
+          { transform: 'scale(1.015) translateY(-2px)', opacity: '1', offset: 0.55 },
+          { transform: 'scale(0.995) translateY(1px)', opacity: '1', offset: 0.75 },
+          { transform: 'scale(1) translateY(0)', opacity: '1', offset: 1 },
+        ],
+        { duration: 420, easing: 'ease-out', fill: 'forwards' }
+      );
+    }
+    input.focus();
+  }
 }
 
 toggle.addEventListener('click', toggleChat);

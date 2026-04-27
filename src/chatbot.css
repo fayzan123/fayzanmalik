@@ -1,5 +1,27 @@
 /* ── CHATBOT WIDGET ──────────────────────────────────── */
 
+/* ── Registered custom properties (animatable via @property) ── */
+
+@property --input-glow {
+  syntax: '<number>';
+  inherits: false;
+  initial-value: 0;
+}
+
+@property --dot-l {
+  syntax: '<number>';
+  inherits: false;
+  initial-value: 0.38;
+}
+
+@property --dot-c {
+  syntax: '<number>';
+  inherits: false;
+  initial-value: 0.035;
+}
+
+/* ─────────────────────────────────────────────────────── */
+
 .chatbot-container {
   position: fixed;
   bottom: 24px;
@@ -48,20 +70,9 @@
   transform-origin: bottom right;
 }
 
+/* Panel open: display toggled, spring handled by Web Animations API in JS */
 .chatbot-panel.is-open {
   display: flex;
-  animation: chatbot-open 0.22s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-@keyframes chatbot-open {
-  from {
-    opacity: 0;
-    transform: scale(0.96) translateY(6px);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1) translateY(0);
-  }
 }
 
 /* ── Header ─────────────────────────────────────────── */
@@ -162,6 +173,24 @@
 
 .chatbot-message {
   display: flex;
+  opacity: 1;
+  transform: translateY(0);
+  transition:
+    opacity 0.22s ease-out,
+    transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@starting-style {
+  .chatbot-message {
+    opacity: 0;
+    transform: translateY(9px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .chatbot-message {
+    transition: none;
+  }
 }
 
 .chatbot-message.user {
@@ -205,12 +234,16 @@
   padding: 13px 16px;
 }
 
+/* Each dot uses @property-registered --dot-l and --dot-c so CSS can
+   interpolate them inside oklch() — impossible without @property */
 .chatbot-typing .chatbot-bubble span {
+  --dot-l: 0.38;
+  --dot-c: 0.035;
   width: 5px;
   height: 5px;
   border-radius: 50%;
-  background: oklch(38% 0.035 152);
-  animation: chatbot-bounce 1.2s infinite ease-in-out;
+  background: oklch(var(--dot-l) var(--dot-c) 152);
+  animation: chatbot-dot 1.2s infinite ease-in-out;
 }
 
 .chatbot-typing .chatbot-bubble span:nth-child(2) {
@@ -221,9 +254,17 @@
   animation-delay: 0.4s;
 }
 
-@keyframes chatbot-bounce {
-  0%, 60%, 100% { transform: translateY(0); }
-  30%            { transform: translateY(-5px); }
+@keyframes chatbot-dot {
+  0%, 60%, 100% {
+    --dot-l: 0.38;
+    --dot-c: 0.035;
+    transform: translateY(0);
+  }
+  30% {
+    --dot-l: 0.82;
+    --dot-c: 0.22;
+    transform: translateY(-5px);
+  }
 }
 
 /* ── Input area ─────────────────────────────────────── */
@@ -238,7 +279,10 @@
   flex-shrink: 0;
 }
 
+/* --input-glow is a registered <number>, so it can be used in calc()
+   and interpolated by CSS transition — impossible without @property */
 .chatbot-input {
+  --input-glow: 0;
   flex: 1;
   background: oklch(9% 0.004 152);
   border: 1px solid oklch(22% 0.010 152);
@@ -248,7 +292,11 @@
   font-family: 'JetBrains Mono', monospace;
   color: oklch(80% 0.015 152);
   outline: none;
-  transition: border-color 0.15s;
+  box-shadow: 0 0 0 calc(var(--input-glow) * 3px)
+    oklch(89% 0.27 152 / calc(var(--input-glow) * 0.14));
+  transition:
+    border-color 0.15s,
+    --input-glow 0.38s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .chatbot-input::placeholder {
@@ -257,6 +305,7 @@
 
 .chatbot-input:focus {
   border-color: oklch(89% 0.27 152);
+  --input-glow: 1;
 }
 
 .chatbot-input:disabled {
