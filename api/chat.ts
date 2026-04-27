@@ -112,7 +112,7 @@ export default async function handler(req: any, res: any) {
         Authorization: `Bearer ${apiKey}`,
       },
       body: JSON.stringify({
-        model: 'meta-llama/llama-3.3-70b-instruct:free',
+        model: 'meta-llama/llama-3.1-8b-instruct:free',
         messages: [
           { role: 'system', content: buildSystemPrompt() },
           ...body.messages,
@@ -123,6 +123,10 @@ export default async function handler(req: any, res: any) {
     });
 
     if (!response.ok) {
+      if (response.status === 429) {
+        res.status(200).json({ reply: "I'm getting too many requests right now. Please try again in a moment." });
+        return;
+      }
       const error = await response.text();
       res.status(response.status).json({ error });
       return;
