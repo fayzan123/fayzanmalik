@@ -13,6 +13,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="/src/style.css" />
+  <link rel="stylesheet" href="/src/chatbot.css" />
 </head>
 <body class="landing-page">
 
@@ -393,5 +394,37 @@
 
   <script type="module" src="/src/terminal/main.ts"></script>
   <script type="module" src="/src/landing.ts"></script>
+
+  <!-- ── CHATBOT WIDGET ──────────────────────────────── -->
+  <div class="chatbot-container" id="chatbot-container">
+    <div class="chatbot-panel" id="chatbot-panel">
+      <div class="chatbot-header">
+        <div class="chatbot-header-info">
+          <span class="chatbot-avatar">FM</span>
+          <div>
+            <p class="chatbot-name">Ask about Fayzan</p>
+            <p class="chatbot-status">AI-powered</p>
+          </div>
+        </div>
+        <button class="chatbot-close" id="chatbot-close" aria-label="Close chat">✕</button>
+      </div>
+      <div class="chatbot-messages" id="chatbot-messages">
+        <div class="chatbot-message bot">
+          <div class="chatbot-bubble">Hey! Ask me anything about Fayzan — his projects, experience, skills, or background.</div>
+        </div>
+      </div>
+      <div class="chatbot-input-area">
+        <input type="text" id="chatbot-input" class="chatbot-input" placeholder="Ask a question..." autocomplete="off" />
+        <button id="chatbot-send" class="chatbot-send" aria-label="Send message">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg>
+        </button>
+      </div>
+    </div>
+    <button class="chatbot-toggle" id="chatbot-toggle" aria-label="Chat with AI about Fayzan" aria-expanded="false">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+    </button>
+  </div>
+
+  <script type="module" src="/src/chatbot.ts"></script>
 </body>
 </html>
