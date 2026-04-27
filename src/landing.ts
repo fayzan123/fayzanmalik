@@ -2,6 +2,9 @@
 // Navbar scroll, scroll reveal with stagger, smooth anchor scroll
 // Does NOT touch the terminal or #terminal element
 
+import { inject } from '@vercel/analytics';
+inject();
+
 function initNavbar(): void {
   const nav = document.getElementById('nav');
   if (!nav) return;
