@@ -11,7 +11,7 @@ import {
 
 function buildSystemPrompt(): string {
   const projectList = projects
-    .map(p => `- ${p.name}: ${p.description} Stack: ${p.stack}. Role: ${p.role}.`)
+    .map(p => `- ${p.name}: ${p.oneLiner} Stack: ${p.stack}. Role: ${p.role}.`)
     .join('\n');
 
   const experienceList = experience
@@ -117,7 +117,7 @@ export default async function handler(req: any, res: any) {
           { role: 'system', content: buildSystemPrompt() },
           ...body.messages,
         ],
-        max_tokens: 1024,
+        max_tokens: 450,
         temperature: 0.7,
       }),
     });
