@@ -120,7 +120,7 @@ export default async function handler(req: any, res: any) {
           { role: 'system', content: buildSystemPrompt() },
           ...body.messages,
         ],
-        max_tokens: 300,
+        max_tokens: 512,
         temperature: 0.7,
       }),
     });

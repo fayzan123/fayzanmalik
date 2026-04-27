@@ -198,7 +198,15 @@ export class Terminal {
   setInteractive(enabled: boolean): void {
     if (enabled) {
       this.promptEl.classList.remove('hidden');
-      this.inputEl.focus();
+      // Only focus terminal if the user isn't already typing somewhere else
+      const active = document.activeElement;
+      const userIsTypingElsewhere =
+        active instanceof HTMLInputElement ||
+        active instanceof HTMLTextAreaElement ||
+        (active instanceof HTMLElement && active.isContentEditable && active !== this.inputEl);
+      if (!userIsTypingElsewhere) {
+        this.inputEl.focus();
+      }
       this.attachKeyListeners();
     } else {
       this.promptEl.classList.add('hidden');
