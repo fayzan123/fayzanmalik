@@ -98,29 +98,36 @@ export default async function handler(req: any, res: any) {
     return;
   }
 
-  const apiKey = process.env.GROQ_API_KEY;
+  const apiKey = process.env.GEMINI_API_KEY;
   if (!apiKey) {
     res.status(500).json({ error: 'API key not configured' });
     return;
   }
 
   try {
-    const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${apiKey}`,
-      },
-      body: JSON.stringify({
-        model: 'llama-3.3-70b-versatile',
-        messages: [
-          { role: 'system', content: buildSystemPrompt() },
-          ...body.messages,
-        ],
-        max_tokens: 450,
-        temperature: 0.7,
-      }),
-    });
+    const geminiMessages = [
+      { role: 'user', parts: [{ text: buildSystemPrompt() }] },
+      { role: 'model', parts: [{ text: 'Understood. I will act as Fayzan Malik\'s portfolio assistant.' }] },
+      ...body.messages.map((m: { role: string; content: string }) => ({
+        role: m.role === 'assistant' ? 'model' : 'user',
+        parts: [{ text: m.content }],
+      })),
+    ];
+
+    const response = await fetch(
+      `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`,
+      {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          contents: geminiMessages,
+          generationConfig: {
+            maxOutputTokens: 450,
+            temperature: 0.7,
+          },
+        }),
+      }
+    );
 
     if (!response.ok) {
       if (response.status === 429) {
@@ -128,12 +135,15 @@ export default async function handler(req: any, res: any) {
         return;
       }
       const error = await response.text();
+      console.error('Gemini API error:', response.status, error);
       res.status(response.status).json({ error });
       return;
     }
 
-    const data = await response.json() as { choices: Array<{ message: { content: string } }> };
-    const reply = data.choices?.[0]?.message?.content?.trim() || 'Sorry, I could not generate a response.';
+    const data = await response.json() as {
+      candidates?: Array<{ content: { parts: Array<{ text: string }> } }>;
+    };
+    const reply = data.candidates?.[0]?.content?.parts?.[0]?.text?.trim() || 'Sorry, I could not generate a response.';
     res.status(200).json({ reply });
   } catch (err) {
     console.error('Chat API error:', err);
