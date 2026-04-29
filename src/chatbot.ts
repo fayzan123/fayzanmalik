@@ -3,7 +3,12 @@ interface Message {
   content: string;
 }
 
+const MAX_INPUT_LENGTH = 600;
+const MAX_HISTORY_MESSAGES = 20;
+const MIN_SEND_INTERVAL_MS = 800;
+
 const chatHistory: Message[] = [];
+let lastSendAt = 0;
 
 function getEl<T extends HTMLElement>(id: string): T {
   const el = document.getElementById(id);
@@ -65,42 +70,71 @@ function appendTyping(): HTMLDivElement {
 }
 
 async function sendMessage(): Promise<void> {
-  const text = input.value.trim();
-  if (!text) return;
+  if (sendBtn.disabled) return;
 
+  const now = Date.now();
+  if (now - lastSendAt < MIN_SEND_INTERVAL_MS) return;
+
+  const rawText = input.value.trim();
+  if (!rawText) return;
+  const text = rawText.slice(0, MAX_INPUT_LENGTH);
+
+  lastSendAt = now;
   input.value = '';
   sendBtn.disabled = true;
   input.disabled = true;
 
   appendMessage('user', text);
   chatHistory.push({ role: 'user', content: text });
+  if (chatHistory.length > MAX_HISTORY_MESSAGES) {
+    chatHistory.splice(0, chatHistory.length - MAX_HISTORY_MESSAGES);
+  }
 
   const typing = appendTyping();
+  const controller = new AbortController();
+  const timeout = window.setTimeout(() => controller.abort(), 25_000);
 
   try {
     const res = await fetch('/api/chat', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ messages: chatHistory }),
+      signal: controller.signal,
     });
 
     typing.remove();
 
-    let reply = 'Sorry, something went wrong. Please try again.';
-    if (res.ok) {
-      try {
-        const data = await res.json() as { reply?: string };
-        if (data.reply) {
-          reply = data.reply;
-          chatHistory.push({ role: 'assistant', content: data.reply });
-        }
-      } catch { /* non-JSON response */ }
+    let reply = '';
+    let parsed: { reply?: string; error?: string } | null = null;
+    try {
+      parsed = await res.json() as { reply?: string; error?: string };
+    } catch { /* non-JSON response */ }
+
+    if (parsed?.reply) {
+      reply = parsed.reply;
+      if (res.ok) {
+        chatHistory.push({ role: 'assistant', content: reply });
+      }
+    } else if (res.status === 429) {
+      reply = "You're sending messages too fast. Please slow down a moment.";
+    } else if (res.status === 400) {
+      reply = "I couldn't process that message. Try rephrasing it.";
+    } else {
+      reply = 'Sorry, something went wrong. Please try again.';
     }
+
     appendMessage('bot', reply);
-  } catch {
+  } catch (err) {
     typing.remove();
-    appendMessage('bot', "Sorry, I'm having trouble connecting. Please try again.");
+    const aborted = (err as { name?: string })?.name === 'AbortError';
+    appendMessage(
+      'bot',
+      aborted
+        ? 'That took too long. Please try again.'
+        : "Sorry, I'm having trouble connecting. Please try again.",
+    );
   } finally {
+    window.clearTimeout(timeout);
     sendBtn.disabled = false;
     input.disabled = false;
     input.focus();
