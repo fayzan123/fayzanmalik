@@ -13,18 +13,26 @@ const MAX_MESSAGE_LENGTH = 600;
 const MAX_HISTORY_MESSAGES = 12;
 const REQUEST_TIMEOUT_MS = 20_000;
 
-const PER_IP_BURST_LIMIT = 5;
+// Groq free tier (llama-3.3-70b-versatile): 30 RPM, 1000 RPD, 12000 TPM.
+// We sit well under those to avoid abuse flags / bans.
+const PER_IP_BURST_LIMIT = 4;
 const PER_IP_BURST_WINDOW_MS = 30_000;
-const PER_IP_HOURLY_LIMIT = 30;
+const PER_IP_HOURLY_LIMIT = 20;
 const PER_IP_HOURLY_WINDOW_MS = 60 * 60 * 1000;
+const PER_IP_DAILY_LIMIT = 60;
+const PER_IP_DAILY_WINDOW_MS = 24 * 60 * 60 * 1000;
 
-const GLOBAL_PER_MINUTE_LIMIT = 12;
+const GLOBAL_PER_MINUTE_LIMIT = 15;
 const GLOBAL_WINDOW_MS = 60_000;
+const GLOBAL_DAILY_LIMIT = 700;
+const GLOBAL_DAILY_WINDOW_MS = 24 * 60 * 60 * 1000;
 
 type RateBucket = { timestamps: number[] };
 const burstBuckets = new Map<string, RateBucket>();
 const hourlyBuckets = new Map<string, RateBucket>();
+const dailyBuckets = new Map<string, RateBucket>();
 const globalBucket: RateBucket = { timestamps: [] };
+const globalDailyBucket: RateBucket = { timestamps: [] };
 
 function pruneBucket(bucket: RateBucket, windowMs: number, now: number): void {
   const cutoff = now - windowMs;
@@ -189,6 +197,7 @@ export default async function handler(req: any, res: any) {
 
   sweepBuckets(burstBuckets, PER_IP_BURST_WINDOW_MS, now);
   sweepBuckets(hourlyBuckets, PER_IP_HOURLY_WINDOW_MS, now);
+  sweepBuckets(dailyBuckets, PER_IP_DAILY_WINDOW_MS, now);
 
   if (!checkAndRecord(burstBuckets, ip, PER_IP_BURST_WINDOW_MS, PER_IP_BURST_LIMIT, now)) {
     res.status(429).json({ reply: "You're sending messages too fast. Please slow down a moment." });
@@ -198,17 +207,27 @@ export default async function handler(req: any, res: any) {
     res.status(429).json({ reply: "You've hit the hourly chat limit. Try again later — or reach Fayzan directly via the contact links." });
     return;
   }
+  if (!checkAndRecord(dailyBuckets, ip, PER_IP_DAILY_WINDOW_MS, PER_IP_DAILY_LIMIT, now)) {
+    res.status(429).json({ reply: "You've hit the daily chat limit. Reach Fayzan directly via the contact links." });
+    return;
+  }
   pruneBucket(globalBucket, GLOBAL_WINDOW_MS, now);
   if (globalBucket.timestamps.length >= GLOBAL_PER_MINUTE_LIMIT) {
     res.status(200).json({ reply: "I'm getting too many requests right now. Please try again in a moment." });
     return;
   }
+  pruneBucket(globalDailyBucket, GLOBAL_DAILY_WINDOW_MS, now);
+  if (globalDailyBucket.timestamps.length >= GLOBAL_DAILY_LIMIT) {
+    res.status(200).json({ reply: "I've answered a lot of questions today and need to rest. Please try again tomorrow — or reach Fayzan directly via the contact links." });
+    return;
+  }
   globalBucket.timestamps.push(now);
+  globalDailyBucket.timestamps.push(now);
 
-  const apiKey = process.env.GEMINI_API_KEY;
+  const apiKey = process.env.GROQ_API_KEY;
   if (!apiKey) {
-    console.error('Chat API: GEMINI_API_KEY not configured');
-    res.status(500).json({ error: 'Chat is temporarily unavailable.' });
+    console.error('Chat API: GROQ_API_KEY not configured');
+    res.status(500).json({ reply: 'Chat is temporarily unavailable.' });
     return;
   }
 
@@ -216,36 +235,33 @@ export default async function handler(req: any, res: any) {
   const timeout = setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS);
 
   try {
-    const geminiMessages = [
-      { role: 'user', parts: [{ text: buildSystemPrompt() }] },
-      { role: 'model', parts: [{ text: 'Understood. I will act as Fayzan Malik\'s portfolio assistant.' }] },
-      ...history.map(m => ({
-        role: m.role === 'assistant' ? 'model' : 'user',
-        parts: [{ text: m.content }],
-      })),
-    ];
-
-    const response = await fetch(
-      `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`,
-      {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          contents: geminiMessages,
-          generationConfig: {
-            maxOutputTokens: 450,
-            temperature: 0.7,
-          },
-        }),
-        signal: controller.signal,
+    const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${apiKey}`,
       },
-    );
+      body: JSON.stringify({
+        model: 'llama-3.3-70b-versatile',
+        messages: [
+          { role: 'system', content: buildSystemPrompt() },
+          ...history,
+        ],
+        max_tokens: 450,
+        temperature: 0.7,
+      }),
+      signal: controller.signal,
+    });
 
     if (!response.ok) {
       const errText = await response.text().catch(() => '');
-      console.error('Gemini API error:', response.status, errText);
+      console.error('Groq API error:', response.status, errText);
       if (response.status === 429 || response.status === 503) {
         res.status(200).json({ reply: "I'm getting a lot of traffic right now. Please try again in a minute." });
+        return;
+      }
+      if (response.status === 400) {
+        res.status(200).json({ reply: "I couldn't process that one — try rephrasing." });
         return;
       }
       res.status(502).json({ reply: "I couldn't reach my brain just now. Please try again in a moment." });
@@ -253,24 +269,17 @@ export default async function handler(req: any, res: any) {
     }
 
     const data = await response.json() as {
-      candidates?: Array<{
-        content?: { parts?: Array<{ text?: string }> };
-        finishReason?: string;
+      choices?: Array<{
+        message?: { content?: string };
+        finish_reason?: string;
       }>;
-      promptFeedback?: { blockReason?: string };
     };
 
-    if (data.promptFeedback?.blockReason) {
-      res.status(200).json({ reply: "I can't answer that one — try asking something about Fayzan's work, projects, or background." });
-      return;
-    }
-
-    const candidate = data.candidates?.[0];
-    const reply = candidate?.content?.parts?.map(p => p.text).filter(Boolean).join('').trim();
+    const choice = data.choices?.[0];
+    const reply = choice?.message?.content?.trim();
 
     if (!reply) {
-      const finish = candidate?.finishReason;
-      if (finish === 'SAFETY' || finish === 'RECITATION') {
+      if (choice?.finish_reason === 'content_filter') {
         res.status(200).json({ reply: "I can't answer that one — try asking something about Fayzan's work, projects, or background." });
         return;
       }
