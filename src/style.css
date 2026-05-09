@@ -1114,9 +1114,8 @@ html[data-theme="dark"] {
     width: 100%;
   }
 
-  /* Terminal: shorter on mobile, clear section break above it */
-  .hero-right { border-top: 1px solid var(--border); padding-top: 24px; }
-  #terminal { height: 240px; }
+  /* Hide CLI on mobile — too many iOS focus/zoom issues, bio is the priority */
+  .hero-right { display: none; }
 
   /* Nav: compress gap */
   .nav-links { gap: 20px; }
@@ -1242,10 +1241,6 @@ html[data-theme="dark"] {
   .hero-bio { font-size: 15px; line-height: 1.7; }
   .hero-ctas { margin-top: 4px; gap: 10px; }
 
-  /* Terminal: compact on small phones */
-  .hero-right { padding-top: 20px; }
-  #terminal { height: 200px; }
-
   /* Project cards: tighter */
   .project-card { padding: 20px; gap: 12px; }
   .projects-grid { gap: 14px; }
@@ -1291,7 +1286,6 @@ html[data-theme="dark"] {
 @media (max-width: 360px) {
   .hero-name { font-size: 30px; }
   .btn-primary, .btn-secondary { font-size: 13px; padding: 13px 20px; }
-  #terminal { height: 180px; }
 }
 
 /* ── Timeline company link ──────────────────────────────── */
