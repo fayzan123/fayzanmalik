@@ -198,15 +198,6 @@ export class Terminal {
   setInteractive(enabled: boolean): void {
     if (enabled) {
       this.promptEl.classList.remove('hidden');
-      // Only focus terminal if the user isn't already typing somewhere else
-      const active = document.activeElement;
-      const userIsTypingElsewhere =
-        active instanceof HTMLInputElement ||
-        active instanceof HTMLTextAreaElement ||
-        (active instanceof HTMLElement && active.isContentEditable && active !== this.inputEl);
-      if (!userIsTypingElsewhere) {
-        this.inputEl.focus();
-      }
       this.attachKeyListeners();
     } else {
       this.promptEl.classList.add('hidden');
@@ -314,11 +305,13 @@ export class Terminal {
 
     // Keep focus on input when clicking anywhere in the terminal, except links
     // Skip if user has selected text (so copy works)
+    // Skip on mobile — programmatic focus triggers iOS Safari zoom
     document.querySelector('.terminal-window')?.addEventListener('click', (e: Event) => {
       const target = e.target as HTMLElement;
       if (target.closest('a') || target.closest('.confirm-prompt')) return;
       const selection = window.getSelection();
       if (selection && selection.toString().length > 0) return;
+      if (window.matchMedia('(max-width: 768px)').matches) return;
       this.inputEl.focus();
     });
   }
