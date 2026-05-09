@@ -1093,24 +1093,27 @@ html[data-theme="dark"] {
 @media (max-width: 768px) {
   .hero-inner {
     grid-template-columns: 1fr;
-    gap: 32px;
-    padding-top: 16px;
+    gap: 24px;
+    padding-top: 8px;
   }
-  .hero { min-height: auto; padding-top: 100px; padding-bottom: 60px; }
-  .hero-headshot { width: 88px; height: 88px; }
-  .hero-name { font-size: clamp(36px, 9vw, 52px); }
-  .hero-ctas { flex-direction: column; }
+  .hero { min-height: auto; padding-top: 96px; padding-bottom: 56px; }
+  .hero-headshot { width: 84px; height: 84px; }
+  .hero-name { font-size: clamp(34px, 9vw, 52px); }
+  .hero-bio { max-width: none; }
+  .hero-ctas { flex-direction: column; gap: 12px; }
   .btn-primary, .btn-secondary {
     text-align: center;
-    padding: 14px 24px; /* 44px touch target */
+    padding: 14px 24px;
     width: 100%;
   }
-  #terminal { height: 300px; }
+
+  /* Terminal: shorter on mobile, clear section break above it */
+  .hero-right { border-top: 1px solid var(--border); padding-top: 24px; }
+  #terminal { height: 240px; }
 
   /* Nav: compress gap */
   .nav-links { gap: 20px; }
   .nav-links a { font-size: 13px; }
-  /* 44px touch target for nav links */
   .nav-links a { padding: 12px 0; display: block; }
 
   /* Timeline: clean flat list */
@@ -1129,6 +1132,10 @@ html[data-theme="dark"] {
 
   /* Education: stack */
   .education-grid { grid-template-columns: 1fr; gap: 32px; }
+
+  /* Sections: less vertical padding on tablet */
+  .section { padding: 88px 24px; }
+  .section-title { margin-bottom: 44px; }
 
   /* Footer: tighter column */
   .footer-links { gap: 16px; }
@@ -1212,37 +1219,49 @@ html[data-theme="dark"] {
 
 /* -- 480px: small phones -------------------------------- */
 @media (max-width: 480px) {
-  .section { padding: 72px 20px; }
+  .section { padding: 64px 20px; }
   .hero-inner { padding: 0 20px; }
   .footer-inner { padding: 0 20px; }
-  .nav-inner { padding: 16px 20px; }
+  .nav-inner { padding: 14px 20px; }
 
-  /* Hero tightening */
-  .hero { padding-top: 80px; padding-bottom: 48px; }
-  .hero-headshot { width: 76px; height: 76px; }
-  .hero-left { gap: 10px; }
-  #terminal { height: 260px; }
+  /* Hero: tight, bio-first */
+  .hero { padding-top: 76px; padding-bottom: 40px; }
+  .hero-inner { gap: 20px; }
+  .hero-headshot { width: 72px; height: 72px; }
+  .hero-left { gap: 8px; }
+  .hero-name { font-size: clamp(32px, 10vw, 44px); }
+  .hero-title { font-size: 14px; line-height: 1.6; }
+  .hero-bio { font-size: 15px; line-height: 1.7; }
+  .hero-ctas { margin-top: 4px; gap: 10px; }
+
+  /* Terminal: compact on small phones */
+  .hero-right { padding-top: 20px; }
+  #terminal { height: 200px; }
 
   /* Project cards: tighter */
-  .project-card { padding: 20px; }
-  .projects-grid { gap: 16px; }
+  .project-card { padding: 20px; gap: 12px; }
+  .projects-grid { gap: 14px; }
 
   /* Skills: tighter */
   .skills-grid { gap: 28px; }
 
-  /* Section title smaller on tiny screens */
-  .section-title { margin-bottom: 36px; }
+  /* Section title spacing */
+  .section-title { margin-bottom: 32px; }
+  .section-label { margin-bottom: 8px; }
 
   /* Footer: stack everything as column */
-  .footer { padding: 60px 0; }
+  .footer { padding: 56px 0; }
   .footer-links {
     flex-direction: column;
     align-items: flex-start;
-    gap: 12px;
+    gap: 4px;
   }
   .footer-link, .footer-social {
-    padding: 4px 0; /* 44px effective with line-height */
+    padding: 10px 0;
     font-size: 15px;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
   }
 
   /* Modal bottom sheet on mobile */
@@ -1258,6 +1277,13 @@ html[data-theme="dark"] {
     max-width: 100%;
   }
   .modal-title { font-size: 20px; }
+}
+
+/* -- 360px: smallest common phones ---------------------- */
+@media (max-width: 360px) {
+  .hero-name { font-size: 30px; }
+  .btn-primary, .btn-secondary { font-size: 13px; padding: 13px 20px; }
+  #terminal { height: 180px; }
 }
 
 /* ── Timeline company link ──────────────────────────────── */
