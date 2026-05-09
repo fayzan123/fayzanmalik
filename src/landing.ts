@@ -168,8 +168,25 @@ function initProjectModal(): void {
 
   let lastFocused: HTMLElement | null = null;
 
+  let savedScrollY = 0;
+
+  function lockScroll(): void {
+    savedScrollY = window.scrollY;
+    document.body.style.position = 'fixed';
+    document.body.style.top = `-${savedScrollY}px`;
+    document.body.style.width = '100%';
+    document.body.style.overflow = 'hidden';
+  }
+
+  function unlockScroll(): void {
+    document.body.style.position = '';
+    document.body.style.top = '';
+    document.body.style.width = '';
+    document.body.style.overflow = '';
+    window.scrollTo(0, savedScrollY);
+  }
+
   function openModal(projectId: string): void {
-    // store focus origin for restoration on close
     lastFocused = document.activeElement as HTMLElement | null;
     const data = PROJECT_DETAILS[projectId];
     if (!data) return;
@@ -203,7 +220,7 @@ function initProjectModal(): void {
     });
 
     overlay.hidden = false;
-    document.body.style.overflow = 'hidden';
+    lockScroll();
     requestAnimationFrame(() => {
       overlay.classList.add('modal-visible');
       closeBtn.focus();
@@ -212,7 +229,7 @@ function initProjectModal(): void {
 
   function closeModal(): void {
     overlay.classList.remove('modal-visible');
-    document.body.style.overflow = '';
+    unlockScroll();
     overlay.addEventListener('transitionend', (e) => {
       if (e.target === overlay) {
         overlay.hidden = true;
