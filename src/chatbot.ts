@@ -12,7 +12,10 @@ let lastSendAt = 0;
 
 function getEl<T extends HTMLElement>(id: string): T {
   const el = document.getElementById(id);
-  if (!el) throw new Error(`Element #${id} not found`);
+  if (!el) {
+    console.warn(`Chatbot: element #${id} missing, disabling.`);
+    throw new Error(`chatbot-init-skipped:${id}`);
+  }
   return el as T;
 }
 
@@ -110,7 +113,7 @@ async function sendMessage(): Promise<void> {
       parsed = await res.json() as { reply?: string; error?: string };
     } catch { /* non-JSON response */ }
 
-    if (parsed?.reply) {
+    if (parsed?.reply && typeof parsed.reply === 'string') {
       reply = parsed.reply;
       if (res.ok) {
         chatHistory.push({ role: 'assistant', content: reply });

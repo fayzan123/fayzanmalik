@@ -156,35 +156,23 @@ const PROJECT_DETAILS: Record<string, ProjectDetail> = {
 };
 
 function initProjectModal(): void {
-  const overlay = document.getElementById('project-modal') as HTMLElement;
-  if (!overlay) return;
-
-  const titleEl = document.getElementById('modal-title')!;
-  const labelEl = document.getElementById('modal-label')!;
-  const tagsEl = document.getElementById('modal-tags')!;
-  const bodyEl = document.getElementById('modal-body')!;
-  const linksEl = document.getElementById('modal-links')!;
-  const closeBtn = document.getElementById('modal-close')!;
+  const overlayMaybe = document.getElementById('project-modal');
+  const titleMaybe = document.getElementById('modal-title');
+  const labelMaybe = document.getElementById('modal-label');
+  const tagsMaybe = document.getElementById('modal-tags');
+  const bodyMaybe = document.getElementById('modal-body');
+  const linksMaybe = document.getElementById('modal-links');
+  const closeMaybe = document.getElementById('modal-close');
+  if (!overlayMaybe || !titleMaybe || !labelMaybe || !tagsMaybe || !bodyMaybe || !linksMaybe || !closeMaybe) return;
+  const overlay = overlayMaybe;
+  const titleEl = titleMaybe;
+  const labelEl = labelMaybe;
+  const tagsEl = tagsMaybe;
+  const bodyEl = bodyMaybe;
+  const linksEl = linksMaybe;
+  const closeBtn = closeMaybe;
 
   let lastFocused: HTMLElement | null = null;
-
-  let savedScrollY = 0;
-
-  function lockScroll(): void {
-    savedScrollY = window.scrollY;
-    document.body.style.position = 'fixed';
-    document.body.style.top = `-${savedScrollY}px`;
-    document.body.style.width = '100%';
-    document.body.style.overflow = 'hidden';
-  }
-
-  function unlockScroll(): void {
-    document.body.style.position = '';
-    document.body.style.top = '';
-    document.body.style.width = '';
-    document.body.style.overflow = '';
-    window.scrollTo(0, savedScrollY);
-  }
 
   function openModal(projectId: string): void {
     lastFocused = document.activeElement as HTMLElement | null;
@@ -220,22 +208,24 @@ function initProjectModal(): void {
     });
 
     overlay.hidden = false;
-    lockScroll();
+    document.body.style.overflow = 'hidden';
     requestAnimationFrame(() => {
       overlay.classList.add('modal-visible');
-      closeBtn.focus();
+      closeBtn.focus({ preventScroll: true });
     });
   }
 
   function closeModal(): void {
     overlay.classList.remove('modal-visible');
-    unlockScroll();
-    overlay.addEventListener('transitionend', (e) => {
-      if (e.target === overlay) {
-        overlay.hidden = true;
-        lastFocused?.focus();
-      }
-    }, { once: true });
+    document.body.style.overflow = '';
+    // Use a timeout instead of transitionend: both overlay (opacity) and the
+    // inner modal (transform) have 250ms transitions, so { once:true } on
+    // transitionend is consumed by whichever child fires first, leaving the
+    // overlay's display:flex intact and blocking all pointer/touch events.
+    setTimeout(() => {
+      overlay.hidden = true;
+      lastFocused?.focus();
+    }, 260);
   }
 
   document.querySelectorAll<HTMLElement>('.project-card[data-project-id]').forEach(card => {
@@ -243,7 +233,9 @@ function initProjectModal(): void {
     card.setAttribute('role', 'button');
     const openCard = (e: Event) => {
       if ((e.target as HTMLElement).closest('a')) return;
-      openModal(card.dataset.projectId!);
+      const id = card.dataset.projectId;
+      if (!id) return;
+      openModal(id);
     };
     card.addEventListener('click', openCard);
     card.addEventListener('keydown', (e) => {

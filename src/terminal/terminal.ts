@@ -150,7 +150,7 @@ export class Terminal {
         } else if (e.key === 'y' || e.key === 'Y') {
           e.preventDefault();
           finish(true);
-        } else if (e.key === 'n' || e.key === 'N') {
+        } else if (e.key === 'n' || e.key === 'N' || e.key === 'Escape') {
           e.preventDefault();
           finish(false);
         }
