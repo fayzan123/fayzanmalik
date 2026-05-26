@@ -175,13 +175,6 @@ export const experience: Experience[] = [
     dates: 'July 2025 \u2013 September 2025',
     description: 'Refactored and upgraded LAMP-based web applications, reducing production friction across internal workflows. Standardized AWS EC2 development environments for 5+ developers, improving release reliability and test consistency. Built Flask REST APIs and resolved latency bottlenecks via profiling, improving median API response time by 15% under peak load.',
   },
-  {
-    role: 'Data Analyst Intern',
-    company: 'Elite Life Financial',
-    location: 'Toronto, ON',
-    dates: 'June 2024 \u2013 September 2024',
-    description: 'Analyzed 500+ client records with SQL and Python, improving recommendation logic and advisor-client personalization. Automated repetitive workflows with optimized SQL queries and scripts, reducing manual processing time by 30%.',
-  },
 ];
 
 export const skills: SkillCategory[] = [
