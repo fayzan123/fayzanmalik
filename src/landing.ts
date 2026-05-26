@@ -103,6 +103,14 @@ const PROJECT_DETAILS: Record<string, ProjectDetail> = {
       { label: 'npm →', url: 'https://www.npmjs.com/package/claude-check' },
     ],
   },
+  'claude-workflow-composer': {
+    label: 'Developer Tooling · Open Source',
+    name: 'Claude Workflow Composer',
+    body: `Building multi-agent workflows in Claude Code today means hand-writing agent .md files with YAML frontmatter, manually authoring orchestrator skills, and having no visual representation of the pipeline before running it. There's no way to see what you're building, no way to share it, and no way to discover what good pipelines look like.\n\nClaude Workflow Composer is a visual desktop app that fixes this. Run npx claude-cwc and a canvas opens in your browser. Drag agents from the sidebar onto the canvas — either existing agents from ~/.claude/agents/ as reference nodes, or blank new agents as bespoke nodes. Connect them by dragging between handles. Each connection becomes a handoff with a trigger description and optional context artifacts passed between agents.\n\nEdit each node's system prompt, tools, skills, and completion criteria in the right panel. Mark terminal nodes with end states: Complete, Escalated, or Aborted. Real-time validation surfaces duplicate slugs, disconnected nodes, and missing criteria in the top bar before you export anything.\n\nThe exporter BFS-traverses the node/edge graph into natural-language orchestrator steps and writes everything at once: bespoke nodes become new agent .md files with frontmatter, and a workflow skill is generated at .claude/skills/<slug>/SKILL.md with disable-model-invocation: true so Claude Code delegates every step via the Agent tool. Reference nodes write nothing — the orchestrator routes to the existing agent by slug directly.\n\nEvery exported file carries an ownership comment. Before overwriting or deleting, the exporter verifies ownership — it never touches files created by other workflows or written by hand. Workflows auto-save every 500ms to ~/.cwc/workflows/. The full stack is TypeScript end-to-end with 89 tests across 16 files.`,
+    links: [
+      { label: 'GitHub →', url: 'https://github.com/fayzan123/claude-workflow-composer' },
+    ],
+  },
   'thisthenthat': {
     label: 'Full Stack · AI App',
     name: 'ThisThenThat',

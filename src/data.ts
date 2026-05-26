@@ -87,6 +87,16 @@ export const projects: Project[] = [
     npm: 'https://www.npmjs.com/package/claude-check',
   },
   {
+    slug: 'claude-workflow-composer',
+    name: 'Claude Workflow Composer',
+    oneLiner: 'n8n for Claude Code — a visual desktop app for composing multi-agent workflows without touching a single YAML file.',
+    description: 'Built a visual workflow composer for Claude Code multi-agent pipelines. Drag agents onto a canvas, wire handoffs with trigger conditions, attach skills, and export a fully working orchestrator skill directly into your Claude installation. The exporter writes agent .md files and a skill with disable-model-invocation: true via BFS traversal of the node graph into natural-language steps. Includes conflict detection via ownership comments, reference vs bespoke node distinction, full file preview before writing anything, and 89 tests across 16 files. Run with npx claude-cwc — no code signing, no friction.',
+    stack: 'TypeScript, React, React Flow, Express, Vite, Vitest',
+    role: 'Solo developer',
+    github: 'https://github.com/fayzan123/claude-workflow-composer',
+    npm: 'https://www.npmjs.com/package/claude-cwc',
+  },
+  {
     slug: 'thisthenthat',
     name: 'ThisThenThat',
     oneLiner: 'Upload your assignment PDF and get a step-by-step game plan with AI chat per step.',
