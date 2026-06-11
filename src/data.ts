@@ -45,7 +45,7 @@ export interface Social {
   url: string;
 }
 
-export const bio = "Hey, I'm Fayzan \u2014 a Computer Science student at Western University, full stack developer, and builder. I'm into AI agents, CLI tools, and shipping things that actually work. Currently leading Western's Agentic Development Club and always working on something \u2014 whether it's a side project or something more serious.";
+export const bio = "Hey, I'm Fayzan \u2014 a Computer Science student at Western University, full stack developer, and builder. I'm into AI agents, CLI tools, and shipping things that actually work. Currently leading Western's Agentic Development Club, accepted into Y Combinator's Startup School, and always working on the next thing.";
 
 export const projects: Project[] = [
   {
