@@ -52,7 +52,7 @@ export interface Social {
   url: string;
 }
 
-export const bio = "Hey, I'm Fayzan — a Computer Science student at Western University who builds open-source AI developer tooling. My CLIs (Claude Workflow Composer, rungraph, context-audit) have passed 12,000+ npm downloads combined. This fall I'm joining Dayforce as a Product Engineer Intern on the Strategic Workforce Planning team (formerly Agentnoon, YC W22). I also co-founded Chox, lead Western's Agentic Development Club, and attended Y Combinator's Startup School in San Francisco.";
+export const bio = "Hey, I'm Fayzan — a Computer Science student at Western University who builds open-source AI developer tooling. My CLIs (Claude Workflow Composer, rungraph, context-audit) have passed 12,000+ npm downloads combined. I'm a Product Engineer Intern at Dayforce on the Strategic Workforce Planning team (formerly Agentnoon, YC W22). I also co-founded Chox, lead Western's Agentic Development Club, and attended Y Combinator's Startup School in San Francisco.";
 
 export const projects: Project[] = [
   {
@@ -193,11 +193,11 @@ export const projects: Project[] = [
 
 export const experience: Experience[] = [
   {
-    role: 'Product Engineer Intern (Incoming)',
+    role: 'Product Engineer Intern',
     company: 'Dayforce — Strategic Workforce Planning (formerly Agentnoon, YC W22)',
     location: 'Toronto, ON (Hybrid)',
     dates: 'September 2026 – April 2027',
-    description: 'Incoming 8-month product engineering co-op on Dayforce’s workforce planning and org design product, built by the team formed from Dayforce’s 2025 acquisition of Agentnoon (YC W22), inside its enterprise HCM platform serving 6M+ users.',
+    description: '8-month product engineering co-op on Dayforce’s workforce planning and org design product, built by the team formed from Dayforce’s 2025 acquisition of Agentnoon (YC W22), inside its enterprise HCM platform serving 6M+ users.',
   },
   {
     role: 'Co-Founder & CTO',
