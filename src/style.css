@@ -971,8 +971,8 @@ html[data-theme="dark"] {
 /* ── Education ──────────────────────────────────────────── */
 .education-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 48px;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 40px;
 }
 
 .education-card {

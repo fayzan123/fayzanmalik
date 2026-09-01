@@ -4,9 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Fayzan Malik - Portfolio</title>
-  <meta name="description" content="Fayzan Malik - CS student, full stack developer, and AI builder. Co-Founder &amp; CTO at Chox AI. Founder &amp; President of the Western Agentic Development Club. Y Combinator Startup School." />
+  <meta name="description" content="Fayzan Malik - CS student at Western and builder of open-source AI developer tooling (12,000+ npm downloads). Incoming Product Engineer Intern at Dayforce. Co-Founder &amp; CTO at Chox. Founder &amp; President of the Western Agentic Development Club. YC Startup School 2026." />
   <meta property="og:title" content="Fayzan Malik - Portfolio" />
-  <meta property="og:description" content="CS student, full stack developer, and AI builder. Co-Founder &amp; CTO at Chox AI. Founder &amp; President of the Western Agentic Development Club. Y Combinator Startup School." />
+  <meta property="og:description" content="CS student at Western and builder of open-source AI developer tooling (12,000+ npm downloads). Incoming Product Engineer Intern at Dayforce. Co-Founder &amp; CTO at Chox. Founder &amp; President of the Western Agentic Development Club. YC Startup School 2026." />
   <meta property="og:type" content="website" />
   <meta name="theme-color" content="#0a0a0a" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -53,8 +53,8 @@
         />
         <h1 class="hero-name" data-animate="fade-right">Fayzan Malik</h1>
         <div class="hero-accent-line" aria-hidden="true"></div>
-        <p class="hero-title" data-animate="fade-right">Co-Founder &amp; CTO, Chox AI &middot; Founder &amp; President, Western Agentic Development Club &middot; YC Startup School &middot; CS @ Western</p>
-        <p class="hero-bio" data-animate="fade-right">Hey, I'm Fayzan - a Computer Science student at Western University, full stack developer, and builder. I'm into AI agents, CLI tools, and shipping things that actually work. Currently leading Western's Agentic Development Club, accepted into Y Combinator's Startup School, and always working on the next thing.</p>
+        <p class="hero-title" data-animate="fade-right">Incoming Product Engineer Intern @ Dayforce &middot; Co-Founder &amp; CTO, Chox &middot; Founder &amp; President, Western Agentic Development Club &middot; YC Startup School &middot; CS @ Western</p>
+        <p class="hero-bio" data-animate="fade-right">Hey, I'm Fayzan - a Computer Science student at Western University who builds open-source AI developer tooling. My CLIs (Claude Workflow Composer, rungraph, context-audit) have passed 12,000+ npm downloads combined. This fall I'm joining Dayforce as a Product Engineer Intern on the Strategic Workforce Planning team (formerly Agentnoon, YC W22). I also co-founded Chox, lead Western's Agentic Development Club, and attended Y Combinator's Startup School in San Francisco.</p>
         <div class="hero-ctas" data-animate="fade-right">
           <a href="/fayzan-resume.pdf" download="fayzan-resume.pdf" class="btn-primary">Download Resume</a>
           <a href="#experience" class="btn-secondary">View Experience</a>
@@ -87,10 +87,20 @@
       <div class="timeline-entry" data-animate="fade-left">
         <div class="timeline-marker" aria-hidden="true"></div>
         <div class="timeline-content">
+          <h3 class="timeline-role">Product Engineer Intern <span class="project-badge">Incoming</span></h3>
+          <p class="timeline-company"><a href="https://www.dayforce.com" target="_blank" rel="noopener noreferrer" class="timeline-company-link">Dayforce</a> - Strategic Workforce Planning (formerly Agentnoon, YC W22) - Toronto, ON (Hybrid)</p>
+          <p class="timeline-dates">September 2026 – April 2027</p>
+          <p class="timeline-desc">Incoming 8-month product engineering co-op on Dayforce's workforce planning and org design product, built by the team formed from Dayforce's 2025 acquisition of Agentnoon (YC W22), inside its enterprise HCM platform serving 6M+ users.</p>
+        </div>
+      </div>
+
+      <div class="timeline-entry" data-animate="fade-left">
+        <div class="timeline-marker" aria-hidden="true"></div>
+        <div class="timeline-content">
           <h3 class="timeline-role">Co-Founder &amp; CTO</h3>
-          <p class="timeline-company"><a href="https://chox.ai" target="_blank" rel="noopener noreferrer" class="timeline-company-link">Chox AI</a> - Remote</p>
+          <p class="timeline-company"><a href="https://chox.ai" target="_blank" rel="noopener noreferrer" class="timeline-company-link">Chox</a> - Remote</p>
           <p class="timeline-dates">January 2026 – Present</p>
-          <p class="timeline-desc">Built a Go HTTP proxy that sits between AI agents and external APIs, intercepting requests to classify actions, extract structured signals, and enforce governance policies before forwarding traffic. Implemented an argument-aware risk scoring and shadow-verdict pipeline for agent tool calls, classifying actions such as read, write, delete, and financial operations before enforcement is enabled. Developed the core Go backend and React dashboard for monitoring high-risk API actions, audit logs, and rule-based governance across developer-built AI agents.</p>
+          <p class="timeline-desc">Built a Go HTTP proxy that intercepts AI agent tool calls to external APIs, enforcing rule-based governance policies with argument-aware risk scoring across read, write, delete, and financial actions, surfaced through a React dashboard with audit logs and shadow verdicts. Evolved the product into chox-cli, a local-first TypeScript CLI and MCP server that mines Claude Code and Codex session history to detect recurring cross-agent handoffs and run gated context relays between agents; published to npm with 500+ downloads.</p>
         </div>
       </div>
 
@@ -100,7 +110,7 @@
           <h3 class="timeline-role">President &amp; Founder</h3>
           <p class="timeline-company">Western Agentic Development Club, Western University - London, ON</p>
           <p class="timeline-dates">March 2026 – Present</p>
-          <p class="timeline-desc">Founded and currently lead a student-run agentic AI community for computer science students at Western University. Organize workshops, hackathons, and networking events on autonomous agent development using n8n, LangGraph, and MCP-based workflows. Oversee club-led projects where members collaborate across teams to build and ship practical AI agent solutions.</p>
+          <p class="timeline-desc">Founded and lead Western's first student community for agentic AI development, running workshops, hackathons, and networking events on Claude, MCP servers, RAG, and multi-agent orchestration, and directing club-led teams that ship AI agent tools end to end.</p>
         </div>
       </div>
 
@@ -123,6 +133,54 @@
     <h2 class="section-title">Projects</h2>
     <div class="projects-grid">
 
+      <div class="project-card" data-animate="scale-in" data-project-id="claude-workflow-composer">
+        <h3 class="project-name">Claude Workflow Composer <span class="project-badge">5,700+ downloads · 35 stars</span></h3>
+        <p class="project-oneliner">n8n for Claude Code — a visual desktop app for composing multi-agent workflows without touching a single YAML file.</p>
+        <div class="project-tags">
+          <span class="tag">TypeScript</span>
+          <span class="tag">React</span>
+          <span class="tag">React Flow</span>
+          <span class="tag">Express</span>
+          <span class="tag">Vitest</span>
+        </div>
+        <div class="project-links">
+          <a href="https://github.com/fayzan123/claude-workflow-composer" target="_blank" rel="noopener noreferrer" class="project-link">GitHub →</a>
+          <a href="https://www.npmjs.com/package/claude-cwc" target="_blank" rel="noopener noreferrer" class="project-link">npm →</a>
+        </div>
+      </div>
+
+      <div class="project-card" data-animate="scale-in" data-project-id="rungraph">
+        <h3 class="project-name">rungraph <span class="project-badge">3,300+ downloads · 25 stars</span></h3>
+        <p class="project-oneliner">Ask your agent what happened, watch the graph answer. Turns Claude Code, Codex, Cursor, Hermes, and opencode transcripts into an interactive run graph your agent can query over MCP.</p>
+        <div class="project-tags">
+          <span class="tag">TypeScript</span>
+          <span class="tag">Node.js</span>
+          <span class="tag">MCP</span>
+          <span class="tag">SQLite</span>
+          <span class="tag">Data Viz</span>
+        </div>
+        <div class="project-links">
+          <a href="https://github.com/fayzan123/rungraph" target="_blank" rel="noopener noreferrer" class="project-link">GitHub →</a>
+          <a href="https://www.npmjs.com/package/rungraph" target="_blank" rel="noopener noreferrer" class="project-link">npm →</a>
+          <a href="https://fayzan123.github.io/rungraph/" target="_blank" rel="noopener noreferrer" class="project-link">Live demo →</a>
+        </div>
+      </div>
+
+      <div class="project-card" data-animate="scale-in" data-project-id="context-audit">
+        <h3 class="project-name">context-audit <span class="project-badge">1,700+ downloads</span></h3>
+        <p class="project-oneliner">The dashboard for your AI coding agent's skills: what they cost per session, what actually fires, what's dead weight, and what's dangerous. Claude Code, Codex, Cursor, and AGENTS.md.</p>
+        <div class="project-tags">
+          <span class="tag">TypeScript</span>
+          <span class="tag">Node.js</span>
+          <span class="tag">CLI Tooling</span>
+          <span class="tag">Security</span>
+        </div>
+        <div class="project-links">
+          <a href="https://github.com/fayzan123/context-audit" target="_blank" rel="noopener noreferrer" class="project-link">GitHub →</a>
+          <a href="https://www.npmjs.com/package/context-audit" target="_blank" rel="noopener noreferrer" class="project-link">npm →</a>
+        </div>
+      </div>
+
       <div class="project-card" data-animate="scale-in" data-project-id="lazarus">
         <h3 class="project-name">Lazarus <span class="project-badge">Top 10 · HackPrinceton</span></h3>
         <p class="project-oneliner">Autonomous AI swarm that resurrects failed clinical trials into executive-ready drug repurposing plans.</p>
@@ -142,7 +200,7 @@
 
       <div class="project-card" data-animate="scale-in" data-project-id="agency-agents">
         <h3 class="project-name">agency-agents <span class="project-badge">Open Source</span></h3>
-        <p class="project-oneliner">Merged a LinkedIn Content Creator agent into the #1 trending GitHub repo (100,000+ stars).</p>
+        <p class="project-oneliner">Merged a LinkedIn Content Creator agent into agency-agents, formerly the #1 trending repo on GitHub (149,000+ stars).</p>
         <div class="project-tags">
           <span class="tag">Bash</span>
           <span class="tag">Claude</span>
@@ -150,6 +208,35 @@
         </div>
         <div class="project-links">
           <a href="https://github.com/msitarzewski/agency-agents/pull/129" target="_blank" rel="noopener noreferrer" class="project-link">GitHub →</a>
+        </div>
+      </div>
+
+      <div class="project-card" data-animate="scale-in" data-project-id="skillet">
+        <h3 class="project-name">skillet <span class="project-badge">16 lines</span></h3>
+        <p class="project-oneliner">Your skills are making your model dumber. A 16-line Claude Code skill that finds over-specified skills and reduces them to intent.</p>
+        <div class="project-tags">
+          <span class="tag">Claude Code</span>
+          <span class="tag">Markdown</span>
+        </div>
+        <div class="project-links">
+          <a href="https://github.com/fayzan123/skillet" target="_blank" rel="noopener noreferrer" class="project-link">GitHub →</a>
+        </div>
+      </div>
+
+      <div class="project-card" data-animate="scale-in" data-project-id="chox">
+        <h3 class="project-name">Chox <span class="project-badge">Co-Founder &amp; CTO</span></h3>
+        <p class="project-oneliner">Infrastructure for autonomous AI agents — a Go governance proxy that risk-scores agent tool calls, evolved into chox-cli, a local-first context relay between Claude Code and Codex.</p>
+        <div class="project-tags">
+          <span class="tag">Go</span>
+          <span class="tag">TypeScript</span>
+          <span class="tag">React</span>
+          <span class="tag">PostgreSQL</span>
+          <span class="tag">MCP</span>
+        </div>
+        <div class="project-links">
+          <a href="https://github.com/fayzan123/chox" target="_blank" rel="noopener noreferrer" class="project-link">GitHub →</a>
+          <a href="https://www.npmjs.com/package/chox-cli" target="_blank" rel="noopener noreferrer" class="project-link">npm →</a>
+          <a href="https://chox.ai" target="_blank" rel="noopener noreferrer" class="project-link">chox.ai →</a>
         </div>
       </div>
 
@@ -169,8 +256,8 @@
       </div>
 
       <div class="project-card" data-animate="scale-in" data-project-id="claude-check">
-        <h3 class="project-name">claude-check</h3>
-        <p class="project-oneliner">A CLI tool with 780+ users that scores your prompt before you send it to Claude.</p>
+        <h3 class="project-name">claude-check <span class="project-badge">850+ downloads</span></h3>
+        <p class="project-oneliner">A CLI tool that scores your prompt before you send it to Claude.</p>
         <div class="project-tags">
           <span class="tag">Node.js</span>
           <span class="tag">TypeScript</span>
@@ -180,20 +267,6 @@
         <div class="project-links">
           <a href="https://github.com/fayzan123/claude-check" target="_blank" rel="noopener noreferrer" class="project-link">GitHub →</a>
           <a href="https://www.npmjs.com/package/claude-check" target="_blank" rel="noopener noreferrer" class="project-link">npm →</a>
-        </div>
-      </div>
-
-      <div class="project-card" data-animate="scale-in" data-project-id="claude-workflow-composer">
-        <h3 class="project-name">Claude Workflow Composer</h3>
-        <p class="project-oneliner">n8n for Claude Code — a visual desktop app with 3,200+ users and 20+ GitHub stars for composing multi-agent workflows without touching a single YAML file.</p>
-        <div class="project-tags">
-          <span class="tag">TypeScript</span>
-          <span class="tag">React</span>
-          <span class="tag">React Flow</span>
-          <span class="tag">Express</span>
-        </div>
-        <div class="project-links">
-          <a href="https://github.com/fayzan123/claude-workflow-composer" target="_blank" rel="noopener noreferrer" class="project-link">GitHub →</a>
         </div>
       </div>
 
@@ -252,9 +325,6 @@
           <span class="tag">Gemini</span>
           <span class="tag">OpenAI</span>
         </div>
-        <div class="project-links">
-          <a href="https://binarytreelearner.net" target="_blank" rel="noopener noreferrer" class="project-link">Live →</a>
-        </div>
       </div>
 
       <div class="project-card" data-animate="scale-in" data-project-id="titanic">
@@ -284,47 +354,52 @@
       <div class="skill-group" data-animate="fade-up">
         <h3 class="skill-category">Languages</h3>
         <div class="skill-tags">
-          <span class="tag">Python</span><span class="tag">Java</span><span class="tag">C</span>
-          <span class="tag">Go</span><span class="tag">TypeScript</span><span class="tag">JavaScript</span>
-          <span class="tag">SQL</span><span class="tag">HTML/CSS</span><span class="tag">R</span><span class="tag">Bash</span>
+          <span class="tag">TypeScript</span><span class="tag">Python</span><span class="tag">Go</span>
+          <span class="tag">Java</span><span class="tag">C</span><span class="tag">JavaScript</span>
+          <span class="tag">SQL</span><span class="tag">Bash</span><span class="tag">HTML/CSS</span><span class="tag">R</span>
+        </div>
+      </div>
+
+      <div class="skill-group" data-animate="fade-up">
+        <h3 class="skill-category">AI Agents &amp; Harnesses</h3>
+        <div class="skill-tags">
+          <span class="tag">Claude Code</span><span class="tag">OpenAI Codex</span><span class="tag">Gemini</span>
+          <span class="tag">Hermes Agent</span><span class="tag">OpenClaw</span><span class="tag">OpenCode</span>
+          <span class="tag">Qwen Code</span><span class="tag">Command Code</span><span class="tag">n8n</span>
+        </div>
+      </div>
+
+      <div class="skill-group" data-animate="fade-up">
+        <h3 class="skill-category">AI Frameworks &amp; Models</h3>
+        <div class="skill-tags">
+          <span class="tag">MCP</span><span class="tag">LangGraph</span><span class="tag">LangChain</span>
+          <span class="tag">Langfuse</span><span class="tag">CrewAI</span><span class="tag">AutoGen</span>
+          <span class="tag">Claude API</span><span class="tag">DeepSeek</span><span class="tag">Kimi</span>
+          <span class="tag">GLM</span><span class="tag">Nano Banana</span><span class="tag">LLMs</span>
+          <span class="tag">embeddings</span><span class="tag">RAG</span><span class="tag">model evaluation</span>
+          <span class="tag">multi-agent systems</span><span class="tag">prompt engineering</span>
+        </div>
+      </div>
+
+      <div class="skill-group" data-animate="fade-up">
+        <h3 class="skill-category">Infrastructure</h3>
+        <div class="skill-tags">
+          <span class="tag">Node.js</span><span class="tag">Docker</span><span class="tag">Linux</span>
+          <span class="tag">PostgreSQL</span><span class="tag">MySQL</span><span class="tag">Redis</span>
+          <span class="tag">Neo4j</span><span class="tag">SQLite</span><span class="tag">AWS</span>
+          <span class="tag">Firebase</span><span class="tag">Supabase</span><span class="tag">Git</span>
+          <span class="tag">GitHub Actions</span><span class="tag">WebSockets</span>
         </div>
       </div>
 
       <div class="skill-group" data-animate="fade-up">
         <h3 class="skill-category">Frameworks &amp; Libraries</h3>
         <div class="skill-tags">
-          <span class="tag">React</span><span class="tag">Flask</span><span class="tag">Next.js</span>
-          <span class="tag">FastAPI</span><span class="tag">Node.js</span><span class="tag">Tailwind CSS</span>
-          <span class="tag">NumPy</span><span class="tag">Pandas</span><span class="tag">Matplotlib</span>
-          <span class="tag">TensorFlow</span><span class="tag">Scikit-learn</span><span class="tag">PyTorch</span><span class="tag">Seaborn</span>
-        </div>
-      </div>
-
-      <div class="skill-group" data-animate="fade-up">
-        <h3 class="skill-category">Databases</h3>
-        <div class="skill-tags">
-          <span class="tag">MySQL</span><span class="tag">PostgreSQL</span>
-        </div>
-      </div>
-
-      <div class="skill-group" data-animate="fade-up">
-        <h3 class="skill-category">AI / LLM</h3>
-        <div class="skill-tags">
-          <span class="tag">Codex</span><span class="tag">Claude Code</span><span class="tag">Gemini</span>
-          <span class="tag">LangGraph</span><span class="tag">CrewAI</span><span class="tag">AutoGen</span>
-          <span class="tag">MCP</span><span class="tag">prompt engineering</span>
-          <span class="tag">AI agent governance</span><span class="tag">model evaluation</span>
-          <span class="tag">OpenClaw</span><span class="tag">Nano Banana</span>
-        </div>
-      </div>
-
-      <div class="skill-group" data-animate="fade-up">
-        <h3 class="skill-category">Platforms &amp; Tools</h3>
-        <div class="skill-tags">
-          <span class="tag">Git</span><span class="tag">Linux</span><span class="tag">Docker</span>
-          <span class="tag">AWS</span><span class="tag">Supabase</span><span class="tag">Firebase</span>
-          <span class="tag">Postman</span><span class="tag">VS Code</span><span class="tag">Jupyter</span>
-          <span class="tag">IntelliJ</span><span class="tag">PyCharm</span>
+          <span class="tag">React</span><span class="tag">Next.js</span><span class="tag">Vue</span>
+          <span class="tag">FastAPI</span><span class="tag">Flask</span><span class="tag">Tailwind CSS</span>
+          <span class="tag">Vite</span><span class="tag">Vitest</span><span class="tag">NumPy</span>
+          <span class="tag">Pandas</span><span class="tag">PyTorch</span><span class="tag">TensorFlow</span>
+          <span class="tag">Scikit-learn</span><span class="tag">Matplotlib</span><span class="tag">Seaborn</span>
         </div>
       </div>
 
@@ -339,12 +414,19 @@
 
       <div class="education-card" data-animate="fade-left">
         <h3 class="education-institution">Western University</h3>
-        <p class="education-degree">Honours Specialization in Computer Science (HBSc)</p>
+        <p class="education-degree">Honours Specialization in Computer Science (HBSc), Co-op</p>
         <p class="education-meta">London, ON</p>
-        <p class="education-dates">Expected May 2027</p>
+        <p class="education-dates">Expected April 2028</p>
         <p class="education-gpa">GPA: 3.8</p>
-        <p class="education-awards">Western Admission Scholarship; Dean's Honor List 2023, 2024</p>
+        <p class="education-awards">Western Admission Scholarship; Dean's Honor List 2023, 2024, 2025</p>
         <p class="education-coursework"><span class="coursework-label">Coursework:</span> Data Structures and Algorithms, Machine Learning, Databases, Statistics, Operating Systems, Software Engineering</p>
+      </div>
+
+      <div class="education-card" data-animate="fade-up">
+        <h3 class="education-institution">Y Combinator Startup School</h3>
+        <p class="education-degree">Attendee - in-person founder program, as co-founder of Chox</p>
+        <p class="education-meta">San Francisco, CA</p>
+        <p class="education-dates">July 2026</p>
       </div>
 
       <div class="education-card" data-animate="fade-right">

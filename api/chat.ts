@@ -4,6 +4,7 @@ import {
   experience,
   skills,
   education,
+  program,
   certification,
   contact,
   socials,
@@ -119,6 +120,9 @@ ${education.degree} at ${education.institution}, ${education.location}
 Expected: ${education.expected} | GPA: ${education.gpa}
 Awards: ${education.awards}
 Coursework: ${education.coursework}
+
+PROGRAMS:
+${program.name} — ${program.detail}, ${program.location} (${program.date})
 
 CERTIFICATION:
 ${certification.name} — ${certification.issuer} (${certification.date})

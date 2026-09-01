@@ -53,6 +53,7 @@ ${escapeHtml(exp.description)}
 
   register('education', () => {
     const edu = data.education;
+    const prog = data.program;
     const cert = data.certification;
     return `<span class="text-cyan">${escapeHtml(edu.degree)}</span>
 ${escapeHtml(edu.institution)} — ${escapeHtml(edu.location)}
@@ -60,6 +61,10 @@ Expected Graduation: ${escapeHtml(edu.expected)}
 GPA: ${escapeHtml(edu.gpa)}
 Awards: ${escapeHtml(edu.awards)}
 Coursework: ${escapeHtml(edu.coursework)}
+
+<span class="text-cyan">${escapeHtml(prog.name)}</span>
+${escapeHtml(prog.detail)}
+${escapeHtml(prog.location)} — ${escapeHtml(prog.date)}
 
 <span class="text-cyan">${escapeHtml(cert.name)}</span>
 ${escapeHtml(cert.issuer)} — ${escapeHtml(cert.date)}`;
@@ -84,10 +89,14 @@ ${escapeHtml(cert.issuer)} — ${escapeHtml(cert.date)}`;
 
 function projectList(): string {
   return data.projects.map(p => {
-    let links = `<span class="text-muted">GitHub:</span> <a href="${p.github}" target="_blank" rel="noopener">${p.github}</a>`;
-    if (p.live) {
-      links += `\n    <span class="text-muted">Live:</span>    <a href="${p.live}" target="_blank" rel="noopener">${p.live}</a>`;
+    const linkParts: string[] = [];
+    if (p.github) {
+      linkParts.push(`<span class="text-muted">GitHub:</span> <a href="${p.github}" target="_blank" rel="noopener">${p.github}</a>`);
     }
+    if (p.live) {
+      linkParts.push(`<span class="text-muted">Live:</span>    <a href="${p.live}" target="_blank" rel="noopener">${p.live}</a>`);
+    }
+    let links = linkParts.join('\n    ');
     if (p.npm) {
       links += `\n    <span class="text-muted">npm:</span>     <a href="${p.npm}" target="_blank" rel="noopener">${p.npm}</a>`;
     }
@@ -121,9 +130,11 @@ function projectDetail(slug: string): string {
 ${escapeHtml(project.description)}
 
 <span class="text-muted">Stack:</span>  ${escapeHtml(project.stack)}
-<span class="text-muted">Role:</span>   ${escapeHtml(project.role)}
-<span class="text-muted">GitHub:</span> <a href="${project.github}" target="_blank" rel="noopener">${project.github}</a>`;
+<span class="text-muted">Role:</span>   ${escapeHtml(project.role)}`;
 
+  if (project.github) {
+    output += `\n<span class="text-muted">GitHub:</span> <a href="${project.github}" target="_blank" rel="noopener">${project.github}</a>`;
+  }
   if (project.npm) {
     output += `\n<span class="text-muted">npm:</span>     <a href="${project.npm}" target="_blank" rel="noopener">${project.npm}</a>`;
   }

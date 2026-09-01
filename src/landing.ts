@@ -69,6 +69,34 @@ interface ProjectDetail {
 }
 
 const PROJECT_DETAILS: Record<string, ProjectDetail> = {
+  'claude-workflow-composer': {
+    label: 'Developer Tooling · Open Source · 5,700+ npm downloads · 35 stars',
+    name: 'Claude Workflow Composer',
+    body: `Building multi-agent workflows in Claude Code today means hand-writing agent .md files with YAML frontmatter, manually authoring orchestrator skills, and having no visual representation of the pipeline before running it. There's no way to see what you're building, no way to share it, and no way to discover what good pipelines look like.\n\nClaude Workflow Composer is a visual desktop app that fixes this. Run npx claude-cwc and a canvas opens in your browser. Drag agents from the sidebar onto the canvas — either existing agents from ~/.claude/agents/ as reference nodes, or blank new agents as bespoke nodes. Connect them by dragging between handles. Each connection becomes a handoff with a trigger description and optional context artifacts passed between agents.\n\nEdit each node's system prompt, tools, skills, model, and completion criteria in the right panel. Mark terminal nodes with end states: Complete, Escalated, or Aborted. Real-time validation surfaces duplicate slugs, disconnected nodes, and missing criteria in the top bar before you export anything. Repeated-action detection mines your real Claude Code usage history and proposes workflows from the patterns it finds, so the canvas starts from what you already do by hand.\n\nThe exporter BFS-traverses the node/edge graph into natural-language orchestrator steps and writes everything at once: bespoke nodes become new agent .md files with frontmatter, and a workflow skill is generated at .claude/skills/<slug>/SKILL.md with disable-model-invocation: true so Claude Code delegates every step via the Agent tool. Reference nodes write nothing — the orchestrator routes to the existing agent by slug directly.\n\nEvery exported file carries an ownership comment. Before overwriting or deleting, the exporter verifies ownership — it never touches files created by other workflows or written by hand. Workflows auto-save every 500ms to ~/.cwc/workflows/. The full stack is TypeScript end-to-end with 97 Vitest test files and GitHub Actions CI. 5,700+ npm downloads and 35 GitHub stars.`,
+    links: [
+      { label: 'GitHub →', url: 'https://github.com/fayzan123/claude-workflow-composer' },
+      { label: 'npm →', url: 'https://www.npmjs.com/package/claude-cwc' },
+    ],
+  },
+  'rungraph': {
+    label: 'Developer Tooling · Open Source · 3,300+ npm downloads · 25 stars',
+    name: 'rungraph',
+    body: `Your agent already wrote down everything it did. Every Claude Code session, every Codex run, every subagent it spawned is sitting in a transcript on your disk — and nobody reads them, because a 200-turn JSONL file is not something a human can read.\n\nrungraph turns those transcripts into an interactive graph. Run npx rungraph and it finds every Claude Code, Codex, Hermes Agent, opencode, and Cursor run still on your machine, starts a local server, and opens your browser. Time flows down: your prompts are the backbone, parallel agents fan out into lanes and return to the turn that collected their result, tool nodes say what ran (Bash · npm test ×12, Edit · canvas.jsx), and the moments a human said no are marked on the path. No hooks, no wrappers, no telemetry — it works retroactively, and a run that is happening right now grows live as the agent works.\n\nThe part no comparable tool has is the agent-first surface. rungraph emits a JSON intermediate representation and ships an MCP server with seven tools (list_runs, find_nodes, focus_nodes, get_graph, get_detail, get_current_view, open_visualization) that it installs into every agent it can read. Ask "why did the Edit on token.js keep failing?" in your terminal: the answer arrives from your own model, and the graph you have open lights up the exact nodes the answer is about. A coverage field on every read separates "nothing went wrong" from "I couldn't parse this," and secrets are redacted on every tool result.\n\nFive adapters, about 16,000 lines of TypeScript, 32 test files with GitHub Actions CI, listed on Glama's MCP directory. Published to npm in August 2026: 3,300+ downloads and 25 GitHub stars since.`,
+    links: [
+      { label: 'GitHub →', url: 'https://github.com/fayzan123/rungraph' },
+      { label: 'npm →', url: 'https://www.npmjs.com/package/rungraph' },
+      { label: 'Live demo →', url: 'https://fayzan123.github.io/rungraph/' },
+    ],
+  },
+  'context-audit': {
+    label: 'Developer Tooling · Open Source · 1,700+ npm downloads',
+    name: 'context-audit',
+    body: `Claude Code skills, agents, commands, and CLAUDE.md. Codex prompts and AGENTS.md. Cursor rules. You accumulate these over months, mostly in bulk from packs someone else wrote, and nobody reads them again. Two things are true of that pile and neither is visible from the inside: some of it is loaded into every session whether you use it or not, and most of it is dead.\n\ncontext-audit measures it. The principle the whole project is held to: the tool never judges, it measures. Every finding is one of three evidence classes — content facts (token cost per skill, duplicate descriptions, payload patterns), behavioral facts, or history facts aggregated from your own transcripts: which skills actually fired, which never did, and how many tokens are injected per invocation. The first real run on my own machine found that 70 of 75 skills had never fired in five weeks and roughly 7,100 tokens were being injected into every session for nothing.\n\nThe security engine is a 25-check scanner that normalizes Unicode and strips zero-width characters before matching, then catches hidden instructions, exfiltration sinks, download-and-execute patterns, reverse shells, SessionStart hook abuse, and permission weakening. It is validated against a regression corpus of nine documented real-world attack shapes plus benign controls that pin the false-positive floor. It runs outside the agent on purpose: a skill-based scanner makes the model read the malicious content in-session, so the detection step becomes the attack surface.\n\nThe dashboard (npx context-audit ui) boots to an overview of cost, dead weight, listing budget, activity, security, and inventory, and answers the question most people arrive with: why has Claude stopped firing my skill? Past Claude Code's ~8,000-character listing budget, descriptions get dropped and those skills stop auto-triggering; the listing view names exactly which ones. Zero runtime dependencies, a single-file vanilla frontend over node:http, everything local. 1,700+ npm downloads in its first month.`,
+    links: [
+      { label: 'GitHub →', url: 'https://github.com/fayzan123/context-audit' },
+      { label: 'npm →', url: 'https://www.npmjs.com/package/context-audit' },
+    ],
+  },
   'lazarus': {
     label: 'Hackathon · Top 10 · HackPrinceton Spring 2026',
     name: 'Lazarus',
@@ -81,9 +109,27 @@ const PROJECT_DETAILS: Record<string, ProjectDetail> = {
   'agency-agents': {
     label: 'Open Source Contribution',
     name: 'agency-agents',
-    body: `I contributed a LinkedIn Content Creator agent to agency-agents - the #1 trending repository on GitHub at the time, with over 100,000 stars. The agent automates LinkedIn content creation by analyzing a given topic, drafting an engaging post optimized for the LinkedIn algorithm, and outputting it in a format ready to publish.\n\nThe contribution involved writing a clean, composable Bash-based agent script that integrates with Claude via the Claude CLI, following the project's conventions for agent structure and prompt design. The PR was reviewed and merged by the maintainer.`,
+    body: `I contributed a LinkedIn Content Creator agent to agency-agents - the #1 trending repository on GitHub at the time, now at over 149,000 stars. The agent automates LinkedIn content creation by analyzing a given topic, drafting an engaging post optimized for the LinkedIn algorithm, and outputting it in a format ready to publish.\n\nThe contribution involved writing a clean, composable Bash-based agent script that integrates with Claude via the Claude CLI, following the project's conventions for agent structure and prompt design. The PR was reviewed and merged by the maintainer.`,
     links: [
       { label: 'GitHub →', url: 'https://github.com/msitarzewski/agency-agents/pull/129' },
+    ],
+  },
+  'skillet': {
+    label: 'AI Tooling · Open Source · 16 lines',
+    name: 'skillet',
+    body: `Over-specified skills — thousand-line process scripts, rigid checklists, MUST/NEVER theater, "if you think X, you're rationalizing" tables — are an attempt to make a model's behavior deterministic. On frontier models this backfires. The model already knows how to explore a codebase, structure a review, and sequence a workflow; a skill that scripts those steps replaces strong reasoning with mediocre procedure, and every rigid instruction is a place where the skill fights the model instead of informing it.\n\nskillet finds those skills in your Claude Code setup and reduces them: it boils off the process scaffolding and keeps the intent and the few constraints that actually matter. The whole tool is about 16 lines of markdown. That's the point.\n\nIt came from a real scan of my own machine: 76 installed skills, roughly 569,000 tokens of instructions waiting to be injected into sessions, with single skills weighing in at 20,000 to 32,000 tokens. The reduction that started the project was a 371-line market-discovery skill with ten "Iron Rules," a Graphviz flowchart, a 20-row failure-mode table, and a 15-item "Red Flags — STOP" list, cut to 16 lines that state the intent, the real constraints, and nothing else. Every invariant survived.\n\nThe thesis — determinism below the model, autonomy above it — echoes a line from Boris Cherny at YC Startup School 2026. skillet is the fixer; context-audit is the sibling that measures.`,
+    links: [
+      { label: 'GitHub →', url: 'https://github.com/fayzan123/skillet' },
+    ],
+  },
+  'chox': {
+    label: 'AI Infrastructure · Co-Founder & CTO',
+    name: 'Chox',
+    body: `Chox is infrastructure for autonomous AI agents, and it has had two lives.\n\nThe first was a governance layer: a Go HTTP proxy that sits between your agents and the external APIs they call. Every outbound request is intercepted, classified as a read, write, delete, or financial operation, and risk-scored from its actual arguments before being forwarded or blocked. High-risk actions are logged as shadow verdicts (allow, block, escalate) before enforcement is switched on, so you can audit agent behavior without disrupting workflows. I built the Go backend, the proxy, and the React dashboard for audit logs and rule-based policies.\n\nThe second is chox-cli, a local-first TypeScript CLI and MCP server for people who run more than one coding agent. It runs gated Claude Code → Codex → Claude Code relays in isolated Git worktrees without copy-pasting prompts between terminals, and chox detect mines your local Claude Code and Codex session history to find the cross-agent handoffs you already do by hand and proposes relays for them. The thesis is a vendor-neutral context layer between agents; persistent cross-agent project memory is where it is headed. Published to npm with 500+ downloads.\n\nCo-founded in January 2026; I'm the CTO. We took it to Y Combinator Startup School 2026 in San Francisco.`,
+    links: [
+      { label: 'GitHub →', url: 'https://github.com/fayzan123/chox' },
+      { label: 'npm →', url: 'https://www.npmjs.com/package/chox-cli' },
+      { label: 'chox.ai →', url: 'https://chox.ai' },
     ],
   },
   'ghostline': {
@@ -95,20 +141,12 @@ const PROJECT_DETAILS: Record<string, ProjectDetail> = {
     ],
   },
   'claude-check': {
-    label: 'CLI Tool · npm Package',
+    label: 'CLI Tool · npm Package · 850+ downloads',
     name: 'claude-check',
-    body: `claude-check is a command-line tool that evaluates your prompt before you send it to Claude. It scores the prompt across dimensions like clarity, specificity, and context richness, then gives actionable feedback on how to improve it.\n\nBuilt with Node.js and TypeScript, it calls the Anthropic API using a meta-prompt to assess the input prompt, then returns a structured score and suggestions. It has 780+ users on npm and is used by developers who want to get better results from Claude without trial-and-error iteration.`,
+    body: `claude-check is a command-line tool that evaluates your prompt before you send it to Claude. It scores the prompt across dimensions like clarity, specificity, and context richness, then gives actionable feedback on how to improve it.\n\nBuilt with Node.js and TypeScript, it calls the Anthropic API using a meta-prompt to assess the input prompt, then returns a structured score and suggestions. It has 850+ downloads on npm and is used by developers who want to get better results from Claude without trial-and-error iteration.`,
     links: [
       { label: 'GitHub →', url: 'https://github.com/fayzan123/claude-check' },
       { label: 'npm →', url: 'https://www.npmjs.com/package/claude-check' },
-    ],
-  },
-  'claude-workflow-composer': {
-    label: 'Developer Tooling · Open Source',
-    name: 'Claude Workflow Composer',
-    body: `Building multi-agent workflows in Claude Code today means hand-writing agent .md files with YAML frontmatter, manually authoring orchestrator skills, and having no visual representation of the pipeline before running it. There's no way to see what you're building, no way to share it, and no way to discover what good pipelines look like.\n\nClaude Workflow Composer is a visual desktop app that fixes this. Run npx claude-cwc and a canvas opens in your browser. Drag agents from the sidebar onto the canvas — either existing agents from ~/.claude/agents/ as reference nodes, or blank new agents as bespoke nodes. Connect them by dragging between handles. Each connection becomes a handoff with a trigger description and optional context artifacts passed between agents.\n\nEdit each node's system prompt, tools, skills, and completion criteria in the right panel. Mark terminal nodes with end states: Complete, Escalated, or Aborted. Real-time validation surfaces duplicate slugs, disconnected nodes, and missing criteria in the top bar before you export anything.\n\nThe exporter BFS-traverses the node/edge graph into natural-language orchestrator steps and writes everything at once: bespoke nodes become new agent .md files with frontmatter, and a workflow skill is generated at .claude/skills/<slug>/SKILL.md with disable-model-invocation: true so Claude Code delegates every step via the Agent tool. Reference nodes write nothing — the orchestrator routes to the existing agent by slug directly.\n\nEvery exported file carries an ownership comment. Before overwriting or deleting, the exporter verifies ownership — it never touches files created by other workflows or written by hand. Workflows auto-save every 500ms to ~/.cwc/workflows/. The full stack is TypeScript end-to-end with 89 tests across 16 files.`,
-    links: [
-      { label: 'GitHub →', url: 'https://github.com/fayzan123/claude-workflow-composer' },
     ],
   },
   'thisthenthat': {
@@ -128,14 +166,6 @@ const PROJECT_DETAILS: Record<string, ProjectDetail> = {
       { label: 'GitHub →', url: 'https://github.com/Deogan7/ClearCare' },
     ],
   },
-  'chox-ai': {
-    label: 'AI Safety · Co-Founder & CTO',
-    name: 'Chox AI',
-    body: `Chox AI is a governance layer for AI agents - an HTTP proxy that sits between your agents and the external APIs they call. Every outbound request is intercepted, classified, and risk-scored before being forwarded or blocked.\n\nThe core is a Go-based proxy that extracts action type and argument signals from each API call, then runs it through a classification pipeline: read, write, delete, or financial operation. High-risk actions are logged as shadow verdicts before enforcement is enabled, letting you audit agent behavior without disrupting workflows.\n\nI built the full Go backend, the proxy infrastructure, and the React dashboard for visualizing audit logs and configuring governance rules. The dashboard lets you set allow/block/escalate policies per action type and monitor agent activity in real time.`,
-    links: [
-      { label: 'GitHub →', url: 'https://github.com/fayzan123/chox-ai' },
-    ],
-  },
   'claude-skills': {
     label: 'AI Tooling · Prompt Engineering',
     name: 'Claude Skills',
@@ -149,9 +179,7 @@ const PROJECT_DETAILS: Record<string, ProjectDetail> = {
     label: 'EdTech · Web App',
     name: 'Binary Tree Traversal Practice Tool',
     body: `A gamified platform for Computer Science students to practice binary tree traversals - inorder, preorder, and postorder. Students are shown a binary tree and have to correctly identify the traversal sequence, with immediate feedback and scoring.\n\nThe platform integrates Gemini and OpenAI to generate dynamic explanations when a student gets an answer wrong, explaining where their logic broke down. It uses Firebase for auth and real-time leaderboard data. Over 100 students have used it to prepare for DS&A exams and coding interviews.`,
-    links: [
-      { label: 'Live →', url: 'https://binarytreelearner.net' },
-    ],
+    links: [],
   },
   'titanic': {
     label: 'Machine Learning · Data Science',
