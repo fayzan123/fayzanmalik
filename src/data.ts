@@ -58,8 +58,8 @@ export const projects: Project[] = [
   {
     slug: 'claude-workflow-composer',
     name: 'Claude Workflow Composer',
-    oneLiner: 'n8n for Claude Code — a visual desktop app for composing multi-agent workflows without touching a single YAML file. 5,700+ npm downloads and 35 GitHub stars.',
-    description: 'Built a visual workflow composer for Claude Code multi-agent pipelines. Run npx claude-cwc and a canvas opens in your browser: drag agents onto it, wire handoffs with trigger conditions, assign skills and a model per agent, and export a fully working orchestrator skill directly into your Claude installation. Repeated-action detection mines your real Claude Code usage history and proposes workflows from the patterns it finds. The exporter writes agent .md files and a skill with disable-model-invocation: true via BFS traversal of the node graph into natural-language steps, with conflict detection via ownership comments and a full file preview before writing anything. TypeScript end to end with 97 Vitest test files and GitHub Actions CI. 5,700+ npm downloads and 35 GitHub stars.',
+    oneLiner: 'n8n for Claude Code — a visual desktop app for composing multi-agent workflows without touching a single YAML file. 5,700+ npm downloads and 36 GitHub stars.',
+    description: 'Built a visual workflow composer for Claude Code multi-agent pipelines. Run npx claude-cwc and a canvas opens in your browser: drag agents onto it, wire handoffs with trigger conditions, assign skills and a model per agent, and export a fully working orchestrator skill directly into your Claude installation. Repeated-action detection mines your real Claude Code usage history and proposes workflows from the patterns it finds. The exporter writes agent .md files and a skill with disable-model-invocation: true via BFS traversal of the node graph into natural-language steps, with conflict detection via ownership comments and a full file preview before writing anything. TypeScript end to end with 97 Vitest test files and GitHub Actions CI. 5,700+ npm downloads and 36 GitHub stars.',
     stack: 'TypeScript, React, React Flow, Express, Vite, Vitest',
     role: 'Solo developer',
     github: 'https://github.com/fayzan123/claude-workflow-composer',
@@ -99,7 +99,7 @@ export const projects: Project[] = [
   {
     slug: 'agency-agents',
     name: 'agency-agents (Open Source Contribution)',
-    oneLiner: 'Merged a LinkedIn Content Creator agent into agency-agents, formerly the #1 trending repo on GitHub (149,000+ stars).',
+    oneLiner: 'Merged a LinkedIn Content Creator agent into agency-agents, formerly the #1 trending repo on GitHub (150,000+ stars).',
     description: 'Contributed a LinkedIn Content Creator agent to agency-agents (PR #129), the #1 trending repository on GitHub at the time and now at 149,000+ stars. Studied existing agents to match the format exactly, built the agent with real templates, tested it on a live use case, and navigated the full fork → branch → PR workflow. The agent handles LinkedIn thought leadership content strategy, post drafting, and audience engagement workflows.',
     stack: 'Bash, Claude, GitHub',
     role: 'Open source contributor',
