@@ -205,14 +205,14 @@ export const experience: Experience[] = [
     company: 'Dayforce',
     location: 'Toronto, ON (Hybrid)',
     dates: 'September 2026 – April 2027',
-    description: 'Build full-stack features across the Vue.js, Node.js, and Python stack of Dayforce Strategic Workforce Planning (formerly Agentnoon, YC W22), the org-design and headcount planning product in Dayforce’s HCM suite. Engineer for enterprise scale, testing against org models of up to 250,000 employee records on a platform serving 7,000+ enterprises and 7.6M+ employees.',
+    description: 'Built full-stack features across the Vue.js, Node.js, and Python stack of Dayforce Strategic Workforce Planning (formerly Agentnoon, YC W22), the org-design and headcount planning product in Dayforce’s HCM suite. Engineered for enterprise scale, testing against org models of up to 250,000 employee records on a platform serving 7,000+ enterprises and 7.6M+ employees.',
   },
   {
     role: 'Vice President, Head of Agentic AI',
     company: 'Western AI, Western University',
     location: 'London, ON',
     dates: 'September 2026 – Present',
-    description: 'Lead agentic AI workshops (Claude, MCP servers, RAG, multi-agent systems), hackathons, and networking events for Western AI’s 2,000+ student community. Founded the Western Agentic Development Club in March 2026, since merged into Western AI.',
+    description: 'Led agentic AI workshops (Claude, MCP servers, RAG, multi-agent systems), hackathons, and networking events for Western AI’s 2,000+ student community. Founded the Western Agentic Development Club in March 2026, since merged into Western AI.',
   },
   {
     role: 'Software Engineer Intern',
