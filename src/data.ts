@@ -52,14 +52,14 @@ export interface Social {
   url: string;
 }
 
-export const bio = "Hey, I'm Fayzan — a Computer Science student at Western University who builds open-source AI developer tooling. My CLIs (Claude Workflow Composer, rungraph, context-audit) have passed 12,000+ npm downloads combined. I'm a Product Engineer Intern at Dayforce on the Strategic Workforce Planning team (formerly Agentnoon, YC W22). I also co-founded Chox, lead Western's Agentic Development Club, and attended Y Combinator's Startup School in San Francisco.";
+export const bio = "Hey, I'm Fayzan — a Computer Science student at Western University who builds open-source AI developer tooling. My CLIs (Claude Workflow Composer, rungraph, context-audit) have passed 13,000+ npm downloads combined. I'm a Product Engineer Intern at Dayforce on the Strategic Workforce Planning team (formerly Agentnoon, YC W22), I lead agentic AI at Western AI, and I attended Y Combinator's Startup School in San Francisco.";
 
 export const projects: Project[] = [
   {
     slug: 'claude-workflow-composer',
     name: 'Claude Workflow Composer',
-    oneLiner: 'n8n for Claude Code — a visual desktop app for composing multi-agent workflows without touching a single YAML file. 5,700+ npm downloads and 36 GitHub stars.',
-    description: 'Built a visual workflow composer for Claude Code multi-agent pipelines. Run npx claude-cwc and a canvas opens in your browser: drag agents onto it, wire handoffs with trigger conditions, assign skills and a model per agent, and export a fully working orchestrator skill directly into your Claude installation. Repeated-action detection mines your real Claude Code usage history and proposes workflows from the patterns it finds. The exporter writes agent .md files and a skill with disable-model-invocation: true via BFS traversal of the node graph into natural-language steps, with conflict detection via ownership comments and a full file preview before writing anything. TypeScript end to end with 97 Vitest test files and GitHub Actions CI. 5,700+ npm downloads and 36 GitHub stars.',
+    oneLiner: 'n8n for Claude Code — a visual desktop app for composing multi-agent workflows without touching a single YAML file. 5,800+ npm downloads and 37 GitHub stars.',
+    description: 'Built a visual workflow composer for Claude Code multi-agent pipelines. Run npx claude-cwc and a canvas opens in your browser: drag agents onto it, wire handoffs with trigger conditions, assign skills and a model per agent, and export a fully working orchestrator skill directly into your Claude installation. Repeated-action detection mines your real Claude Code usage history and proposes workflows from the patterns it finds. The exporter writes agent .md files and a skill with disable-model-invocation: true via BFS traversal of the node graph into natural-language steps, with conflict detection via ownership comments and a full file preview before writing anything. TypeScript end to end with 97 Vitest test files and GitHub Actions CI. 5,800+ npm downloads and 37 GitHub stars.',
     stack: 'TypeScript, React, React Flow, Express, Vite, Vitest',
     role: 'Solo developer',
     github: 'https://github.com/fayzan123/claude-workflow-composer',
@@ -68,9 +68,9 @@ export const projects: Project[] = [
   {
     slug: 'rungraph',
     name: 'rungraph',
-    oneLiner: 'Ask your agent what happened, watch the graph answer. A zero-setup visualizer that turns Claude Code, Codex, Cursor, Hermes, and opencode transcripts into an interactive run graph your agent can query over MCP. 3,300+ npm downloads and 25 GitHub stars.',
-    description: 'npx rungraph reconstructs Claude Code sessions and multi-agent workflow runs from the transcripts already on your disk into an interactive directed graph: orchestrator, subagents, and tools as nodes, spawn/return edges, decision lineage, and the moments a human said no marked on the path. Runs in progress grow live via file watching. Five adapters cover Claude Code, Codex, Hermes Agent, opencode, and Cursor. It also ships an agent-first surface: a --json intermediate representation and an MCP server with seven tools, so your agent can query the same graph and light up the exact nodes its answer is about. No hooks, no wrappers, no telemetry. About 16,000 lines of TypeScript with 32 test files. 3,300+ npm downloads and 25 GitHub stars since launching in August 2026.',
-    stack: 'TypeScript, Node.js, MCP, SQLite, Data Visualization',
+    oneLiner: 'Ask your agent what happened, watch the graph answer. A zero-setup visualizer that turns Claude Code, Codex, Cursor, Hermes, and OpenCode transcripts into an interactive run graph your agent can query over an 8-tool MCP server. 3,900+ npm downloads and 26 GitHub stars.',
+    description: 'npx rungraph reconstructs Claude Code sessions and multi-agent workflow runs from the transcripts already on your disk into an interactive directed graph: orchestrator, subagents, and tools as nodes, spawn/return edges, decision lineage, and the moments a human said no marked on the path. Runs in progress grow live via file watching. Five adapters cover Claude Code, Codex, Hermes Agent, opencode, and Cursor. It also ships an agent-first surface: a --json intermediate representation and an MCP server with eight tools, so your agent can query the same graph and light up the exact nodes its answer is about. No hooks, no wrappers, no telemetry. About 20,000 lines of JavaScript with a Vitest suite and GitHub Actions CI. 3,900+ npm downloads and 26 GitHub stars since launching in August 2026.',
+    stack: 'JavaScript, Node.js, Preact, ELK.js, MCP',
     role: 'Solo developer',
     github: 'https://github.com/fayzan123/rungraph',
     npm: 'https://www.npmjs.com/package/rungraph',
@@ -79,28 +79,47 @@ export const projects: Project[] = [
   {
     slug: 'context-audit',
     name: 'context-audit',
-    oneLiner: 'The dashboard for your AI coding agent’s skills: what they cost per session, what actually fires, what’s dead weight, and what’s dangerous. Works across Claude Code, Codex, Cursor, and AGENTS.md. 1,700+ npm downloads.',
-    description: 'A zero-dependency TypeScript CLI and local dashboard that audits AI coding agents’ instruction files across Claude Code, Codex, Cursor, and the cross-tool AGENTS.md standard. It measures token cost per session, which skills have never fired according to your own transcript history, which ones Claude Code silently drops from its listing budget, and which are dangerous. The rule the whole project is held to: it never judges, it measures. A 25-check security engine normalizes Unicode and zero-width characters before matching and catches hidden instructions, exfiltration sinks, download-and-execute patterns, and permission weakening, validated against a regression corpus of nine documented real-world attack shapes. Ships with a companion skill so you can just ask your agent “what is my context costing?”. 1,700+ npm downloads in its first month.',
+    oneLiner: 'The dashboard for your AI coding agent’s skills: what they cost per session, what actually fires, what’s dead weight, and what’s dangerous. Works across Claude Code, Codex, Cursor, and AGENTS.md. 2,000+ npm downloads.',
+    description: 'A zero-dependency TypeScript CLI and local dashboard that audits AI coding agents’ instruction files across Claude Code, Codex, Cursor, and the cross-tool AGENTS.md standard. It measures token cost per session, which skills have never fired according to your own transcript history, which ones Claude Code silently drops from its listing budget, and which are dangerous. The rule the whole project is held to: it never judges, it measures. A 26-check security engine normalizes Unicode and zero-width characters before matching and catches hidden instructions, exfiltration sinks, download-and-execute patterns, and permission weakening, validated against a regression corpus of nine documented real-world attack shapes. Ships with a companion skill so you can just ask your agent “what is my context costing?”. 2,000+ npm downloads.',
     stack: 'TypeScript, Node.js, CLI Tooling, node:http',
     role: 'Solo developer',
     github: 'https://github.com/fayzan123/context-audit',
     npm: 'https://www.npmjs.com/package/context-audit',
   },
   {
+    slug: 'annotake',
+    name: 'Annotake',
+    oneLiner: 'Show your coding agent exactly what happened. A macOS menu-bar app: double-tap a key, click through the bug in any app, and drag one captioned screenshot per step into Claude Code, Cursor, or ChatGPT.',
+    description: 'A notarized macOS menu-bar app for handing UI bugs to AI coding agents. Double-tap a hotkey (Right Command by default), click through the flow in any app, and double-tap again. Annotake keeps one frame per step by pixel diffing, captions each click from the macOS Accessibility tree (for example, Clicked button "Save"), and shows a floating card you drag straight into Claude Code, Cursor, or ChatGPT. Native Swift on ScreenCaptureKit and the Accessibility API. Built for my own bug reproductions at work; free during the beta at annotake.app.',
+    stack: 'Swift, ScreenCaptureKit, macOS Accessibility API',
+    role: 'Solo developer',
+    live: 'https://annotake.app',
+  },
+  {
     slug: 'lazarus',
     name: 'Lazarus',
-    oneLiner: 'Top 10 at HackPrinceton — an autonomous AI swarm that resurrects failed clinical trials into executive-ready drug repurposing plans.',
-    description: 'Built an autonomous multi-agent AI system that mines failed and terminated clinical trials from ClinicalTrials.gov, PubMed, and openFDA, then runs each candidate through a coordinated adversarial pipeline: an Advocate proposes an alternative disease indication, a Skeptic challenges it for safety conflicts, an Evidence Curator validates citations against real PubMed IDs, a Trial Strategist estimates feasibility and ROI, and a Judge synthesizes a final confidence-scored recommendation. The output is a full executive-ready R&D blueprint PDF with decision-maker notifications via iMessage. Placed Top 10 under the Regeneron AI & Tech for Clinical Trials track at HackPrinceton Spring 2026, competing against 400+ hackers and 100+ teams.',
+    oneLiner: 'Winner at HackPrinceton — an autonomous AI swarm that resurrects failed clinical trials into executive-ready drug repurposing plans.',
+    description: 'Built an autonomous multi-agent AI system that mines failed and terminated clinical trials from ClinicalTrials.gov, PubMed, and openFDA, then runs each candidate through a coordinated adversarial pipeline: an Advocate proposes an alternative disease indication, a Skeptic challenges it for safety conflicts, an Evidence Curator validates citations against real PubMed IDs, a Trial Strategist estimates feasibility and ROI, and a Judge synthesizes a final confidence-scored recommendation. The output is a full executive-ready R&D blueprint PDF with decision-maker notifications via iMessage. Won the Regeneron AI & Tech for Clinical Trials track at HackPrinceton Spring 2026, competing against 400+ hackers and 100+ teams.',
     stack: 'Python, FastAPI, PostgreSQL, Neo4j, Redis, React, GPT-4o, Gemini, Docker, WebSocket',
     role: 'Co-builder (team of 4)',
     github: 'https://github.com/farhanmir/lazarus',
     devpost: 'https://devpost.com/software/lazarus-91k3tz',
   },
   {
+    slug: 'flash-flood',
+    name: 'Flash Flood',
+    oneLiner: 'Browserbase track finalist at Hack the North 2026 — AI personas stress-test a website in parallel cloud browsers and file evidence-backed bug reports.',
+    description: 'Built at Hack the North 2026 (University of Waterloo) with a team of 3. Flash Flood launches a crowd of AI personas against a website, each driving its own Browserbase cloud browser in parallel, and turns what they hit into evidence-backed bug reports with screenshots and steps. I built the session engine that orchestrates the parallel browser sessions and the live agent wall that streams every persona as it works. Made the final pitching round of the Browserbase track.',
+    stack: 'TypeScript, Next.js, Node.js, SQLite, Browserbase',
+    role: 'Co-builder (team of 3)',
+    github: 'https://github.com/xsachax/flash-flood_hack-the-north-2026',
+    devpost: 'https://devpost.com/software/flashflood',
+  },
+  {
     slug: 'agency-agents',
     name: 'agency-agents (Open Source Contribution)',
-    oneLiner: 'Merged a LinkedIn Content Creator agent into agency-agents, formerly the #1 trending repo on GitHub (150,000+ stars).',
-    description: 'Contributed a LinkedIn Content Creator agent to agency-agents (PR #129), the #1 trending repository on GitHub at the time and now at 149,000+ stars. Studied existing agents to match the format exactly, built the agent with real templates, tested it on a live use case, and navigated the full fork → branch → PR workflow. The agent handles LinkedIn thought leadership content strategy, post drafting, and audience engagement workflows.',
+    oneLiner: 'Merged a LinkedIn Content Creator agent into agency-agents, formerly the #1 trending repo on GitHub (155,000+ stars).',
+    description: 'Contributed a LinkedIn Content Creator agent to agency-agents (PR #129), the #1 trending repository on GitHub at the time and now at 155,000+ stars. Studied existing agents to match the format exactly, built the agent with real templates, tested it on a live use case, and navigated the full fork → branch → PR workflow. The agent handles LinkedIn thought leadership content strategy, post drafting, and audience engagement workflows.',
     stack: 'Bash, Claude, GitHub',
     role: 'Open source contributor',
     github: 'https://github.com/msitarzewski/agency-agents/pull/129',
@@ -115,30 +134,19 @@ export const projects: Project[] = [
     github: 'https://github.com/fayzan123/skillet',
   },
   {
-    slug: 'chox',
-    name: 'Chox',
-    oneLiner: 'Infrastructure for autonomous AI agents — a Go governance proxy that risk-scores agent tool calls, evolved into chox-cli, a local-first context relay between Claude Code and Codex (500+ npm downloads).',
-    description: 'Chox started as an AI agent governance layer: a Go HTTP proxy between agents and the external APIs they call that classifies every tool call (read, write, delete, financial), scores its risk from the actual arguments, and logs shadow verdicts (allow, block, escalate) to a React dashboard with audit logs and rule-based policies. It then evolved into chox-cli, a local-first TypeScript CLI and MCP server that mines Claude Code and Codex session history to detect recurring cross-agent handoffs and runs gated context relays between agents in isolated Git worktrees, so you never copy-paste a prompt between two CLIs again. Co-founded in January 2026 as CTO; represented Chox at Y Combinator Startup School 2026 in San Francisco.',
-    stack: 'Go, TypeScript, React, PostgreSQL, MCP, Docker',
-    role: 'Co-Founder & CTO',
-    github: 'https://github.com/fayzan123/chox',
-    npm: 'https://www.npmjs.com/package/chox-cli',
-    live: 'https://chox.ai',
-  },
-  {
     slug: 'ghostline',
     name: 'Ghostline',
-    oneLiner: 'Automated lead generation pipeline that discovers, scores, and outreaches AI agent developers on GitHub — Chox\'s go-to-market engine.',
-    description: 'Built an end-to-end sales pipeline for Chox that runs 16 targeted GitHub searches daily to find Python developers building production AI agents with LangChain, LangGraph, and CrewAI. Each repo is scored 0–100 across tool use, production maturity, social proof, and developer profile signals. Qualified leads are exported to Google Sheets with inferred pain points. A LangGraph-powered outreach agent then fetches each repo\'s README, generates a personalized 150-word cold email via Claude, and presents every draft in a terminal review UI — no email is sent without founder approval. Achieves ~92% email extraction rate and ~45 qualified leads per daily run, generating 100+ high-intent leads for Chox.',
+    oneLiner: 'Automated lead generation pipeline that discovers, scores, and outreaches AI agent developers on GitHub, generating 100+ high-intent leads.',
+    description: 'Built an end-to-end sales pipeline for an early-stage AI infrastructure startup that runs 16 targeted GitHub searches daily to find Python developers building production AI agents with LangChain, LangGraph, and CrewAI. Each repo is scored 0–100 across tool use, production maturity, social proof, and developer profile signals. Qualified leads are exported to Google Sheets with inferred pain points. A LangGraph-powered outreach agent then fetches each repo\'s README, generates a personalized 150-word cold email via Claude, and presents every draft in a terminal review UI — no email is sent without founder approval. Achieves ~92% email extraction rate and ~45 qualified leads per daily run, generating 100+ high-intent leads.',
     stack: 'Python, LangGraph, GitHub API, Google Sheets API, Anthropic Claude, SQLite, Gmail SMTP, cron',
-    role: 'Solo builder (co-founder)',
+    role: 'Solo builder',
     github: 'https://github.com/fayzan123/ghostline',
   },
   {
     slug: 'claude-check',
     name: 'claude-check',
-    oneLiner: 'A CLI tool with 850+ downloads that scores your prompt before you send it to Claude.',
-    description: "An npm CLI with 850+ downloads that analyses any Claude prompt for complexity, estimates how many messages it'll take, assesses interrupt risk, and returns a safe/caution/do-not-start verdict. It checks your real-time claude.ai usage so you don't burn your limit on a task that'll get cut off halfway.",
+    oneLiner: 'A CLI tool with 900+ downloads that scores your prompt before you send it to Claude.',
+    description: "An npm CLI with 900+ downloads that analyses any Claude prompt for complexity, estimates how many messages it'll take, assesses interrupt risk, and returns a safe/caution/do-not-start verdict. It checks your real-time claude.ai usage so you don't burn your limit on a task that'll get cut off halfway.",
     stack: 'Node.js, TypeScript, Anthropic API, CLI Tooling',
     role: 'Solo developer',
     github: 'https://github.com/fayzan123/claude-check',
@@ -194,24 +202,17 @@ export const projects: Project[] = [
 export const experience: Experience[] = [
   {
     role: 'Product Engineer Intern',
-    company: 'Dayforce — Strategic Workforce Planning (formerly Agentnoon, YC W22)',
+    company: 'Dayforce',
     location: 'Toronto, ON (Hybrid)',
     dates: 'September 2026 – April 2027',
-    description: '8-month product engineering co-op on Dayforce’s workforce planning and org design product, built by the team formed from Dayforce’s 2025 acquisition of Agentnoon (YC W22), inside its enterprise HCM platform serving 6M+ users.',
+    description: 'Build full-stack features across the Vue.js, Node.js, and Python stack of Dayforce Strategic Workforce Planning (formerly Agentnoon, YC W22), the org-design and headcount planning product in Dayforce’s HCM suite. Engineer for enterprise scale, testing against org models of up to 250,000 employee records on a platform serving 7,000+ enterprises and 7.6M+ employees.',
   },
   {
-    role: 'Co-Founder & CTO',
-    company: 'Chox',
-    location: 'Remote',
-    dates: 'January 2026 – Present',
-    description: 'Built a Go HTTP proxy that intercepts AI agent tool calls to external APIs, enforcing rule-based governance policies with argument-aware risk scoring across read, write, delete, and financial actions, surfaced through a React dashboard with audit logs and shadow verdicts. Evolved the product into chox-cli, a local-first TypeScript CLI and MCP server that mines Claude Code and Codex session history to detect recurring cross-agent handoffs and run gated context relays between agents; published to npm with 500+ downloads.',
-  },
-  {
-    role: 'President & Founder',
-    company: 'Western Agentic Development Club, Western University',
+    role: 'Vice President, Head of Agentic AI',
+    company: 'Western AI, Western University',
     location: 'London, ON',
-    dates: 'March 2026 – Present',
-    description: 'Founded and lead Western’s first student community for agentic AI development, running workshops, hackathons, and networking events on Claude, MCP servers, RAG, and multi-agent orchestration, and directing club-led teams that ship AI agent tools end to end.',
+    dates: 'September 2026 – Present',
+    description: 'Lead agentic AI workshops (Claude, MCP servers, RAG, multi-agent systems), hackathons, and networking events for Western AI’s 2,000+ student community. Founded the Western Agentic Development Club in March 2026, since merged into Western AI.',
   },
   {
     role: 'Software Engineer Intern',
@@ -242,7 +243,7 @@ export const education: Education = {
 
 export const program: Program = {
   name: 'Y Combinator Startup School 2026',
-  detail: 'Attendee — in-person founder program, as co-founder of Chox',
+  detail: 'Attendee — in-person founder program, selected from 30,000+ applicants',
   location: 'San Francisco, CA',
   date: 'July 2026',
 };
@@ -265,4 +266,4 @@ export const socials: Social[] = [
   { platform: 'Twitter', url: 'https://x.com/fayzanm05' },
 ];
 
-export const version = 'fayzan-portfolio v4.0.0';
+export const version = 'fayzan-portfolio v4.1.0';
