@@ -219,7 +219,7 @@ export const experience: Experience[] = [
     company: 'ICARO Media Group',
     location: 'Thornhill, ON',
     dates: 'July 2025 – September 2025',
-    description: 'Built Flask REST APIs for ICARO’s multiscreen media platform, which serves telcos and media companies with 240M+ subscribers across the Americas and Europe, cutting median response time by 15% under peak load. Modernized legacy PHP web apps and standardized AWS EC2 development environments for 5+ developers.',
+    description: 'Provisioned an AWS EC2 Linux server and deployed a PHP web app on Apache backed by a MySQL database. Built a Flask employee management app with GET and POST endpoints to create, read, and update MySQL records, debugging HTTP requests and responses with Postman, curl, and browser DevTools.',
   },
 ];
 
