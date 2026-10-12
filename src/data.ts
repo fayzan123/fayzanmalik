@@ -205,7 +205,7 @@ export const experience: Experience[] = [
     company: 'Dayforce',
     location: 'Toronto, ON (Hybrid)',
     dates: 'September 2026 – April 2027',
-    description: 'Built a multi-line formula editor for Dayforce’s workforce planning product (formerly Agentnoon, YC W22) with nested IF/THEN logic, so one formula assigns different values to multiple employee groups. Added field autocomplete and a Functions & Fields panel with 18 functions across 4 categories. Tested against 250,000-employee org models on a platform serving 7,000+ enterprises and 7.6M+ employees.',
+    description: 'Strategic Workforce Planning team, formerly Agentnoon (YC W22). Built a formula editor with nested IF/THEN logic so one formula assigns values across employee groups. Tested against 250,000-employee org models on a platform serving 7,000+ enterprises and 7.6M+ employees.',
   },
   {
     role: 'Vice President, Head of Agentic AI',
