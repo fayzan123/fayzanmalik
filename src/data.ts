@@ -237,7 +237,7 @@ export const education: Education = {
   location: 'London, ON',
   expected: 'April 2028',
   gpa: '3.8',
-  awards: 'Western Admission Scholarship; Dean’s Honor List 2023, 2024, 2025',
+  awards: 'Western Admission Scholarship; Dean’s Honor List 2023, 2024, 2025, 2026',
   coursework: 'Data Structures and Algorithms, Machine Learning, Databases, Statistics, Operating Systems, Software Engineering',
 };
 
