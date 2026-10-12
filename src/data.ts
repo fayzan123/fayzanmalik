@@ -212,7 +212,7 @@ export const experience: Experience[] = [
     company: 'Western AI, Western University',
     location: 'London, ON',
     dates: 'September 2026 – Present',
-    description: 'Founded Western’s Agentic Development Club, since merged into Western AI; ran AI workshops and hackathons for 2,000+ students.',
+    description: 'Led agentic AI for Western AI’s 2,000+ student community. Founded the Western Agentic Development Club in March 2026, which merged into Western AI.',
   },
   {
     role: 'Software Engineer Intern',
