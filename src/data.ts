@@ -205,21 +205,21 @@ export const experience: Experience[] = [
     company: 'Dayforce',
     location: 'Toronto, ON (Hybrid)',
     dates: 'September 2026 – April 2027',
-    description: 'Built full-stack features across the Vue.js, Node.js, and Python stack of Dayforce Strategic Workforce Planning (formerly Agentnoon, YC W22), the org-design and headcount planning product in Dayforce’s HCM suite. Engineered for enterprise scale, testing against org models of up to 250,000 employee records on a platform serving 7,000+ enterprises and 7.6M+ employees.',
+    description: 'Built a multi-line formula editor for Dayforce’s workforce planning product (formerly Agentnoon, YC W22) with nested IF/THEN logic, so one formula assigns different values to multiple employee groups. Added field autocomplete and a Functions & Fields panel with 18 functions across 4 categories. Tested against 250,000-employee org models on a platform serving 7,000+ enterprises and 7.6M+ employees.',
   },
   {
     role: 'Vice President, Head of Agentic AI',
     company: 'Western AI, Western University',
     location: 'London, ON',
     dates: 'September 2026 – Present',
-    description: 'Led agentic AI workshops (Claude, MCP servers, RAG, multi-agent systems), hackathons, and networking events for Western AI’s 2,000+ student community. Founded the Western Agentic Development Club in March 2026, since merged into Western AI.',
+    description: 'Founded Western’s Agentic Development Club, since merged into Western AI; ran AI workshops and hackathons for 2,000+ students.',
   },
   {
     role: 'Software Engineer Intern',
     company: 'ICARO Media Group',
     location: 'Thornhill, ON',
     dates: 'July 2025 – September 2025',
-    description: 'Refactored and upgraded LAMP-based web applications, reducing production friction across internal workflows. Standardized AWS EC2 development environments for 5+ developers, improving release reliability and test consistency. Built Flask REST APIs and resolved latency bottlenecks via profiling, improving median API response time by 15% under peak load.',
+    description: 'Built Flask REST APIs for ICARO’s multiscreen media platform, which serves telcos and media companies with 240M+ subscribers across the Americas and Europe, cutting median response time by 15% under peak load. Modernized legacy PHP web apps and standardized AWS EC2 development environments for 5+ developers.',
   },
 ];
 
