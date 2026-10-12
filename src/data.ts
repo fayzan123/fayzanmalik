@@ -225,9 +225,9 @@ export const experience: Experience[] = [
 
 export const skills: SkillCategory[] = [
   { category: 'Languages', items: ['TypeScript', 'Python', 'Go', 'Java', 'C', 'JavaScript', 'SQL', 'Bash', 'HTML/CSS', 'R'] },
-  { category: 'AI Agents & Harnesses', items: ['Claude Code', 'OpenAI Codex', 'Gemini', 'Hermes Agent', 'OpenClaw', 'OpenCode', 'Qwen Code', 'Command Code', 'n8n'] },
+  { category: 'AI Agents & Harnesses', items: ['Claude Code', 'OpenAI Codex', 'Gemini', 'Hermes Agent', 'OpenClaw', 'OpenCode', 'Qwen Code', 'Command Code', 'Cursor', 'n8n'] },
   { category: 'AI Frameworks & Models', items: ['MCP (Model Context Protocol)', 'LangGraph', 'LangChain', 'Langfuse', 'CrewAI', 'AutoGen', 'Claude API', 'DeepSeek', 'Kimi', 'GLM', 'Nano Banana', 'LLMs', 'embeddings', 'RAG', 'model evaluation', 'multi-agent systems', 'prompt engineering'] },
-  { category: 'Infrastructure', items: ['Node.js', 'Docker', 'Linux', 'PostgreSQL', 'MySQL', 'Redis', 'Neo4j', 'SQLite', 'AWS', 'Firebase', 'Supabase', 'Git', 'GitHub Actions', 'WebSockets'] },
+  { category: 'Infrastructure', items: ['Node.js', 'Docker', 'Linux', 'PostgreSQL', 'MySQL', 'Redis', 'Neo4j', 'SQLite', 'AWS', 'Firebase', 'Supabase', 'Git', 'GitHub Actions', 'WebSockets', 'Sentry', 'Grafana', 'SonarQube'] },
   { category: 'Frameworks & Libraries', items: ['React', 'Next.js', 'Vue', 'FastAPI', 'Flask', 'Tailwind CSS', 'Vite', 'Vitest', 'NumPy', 'Pandas', 'PyTorch', 'TensorFlow', 'Scikit-learn', 'Matplotlib', 'Seaborn'] },
 ];
 
